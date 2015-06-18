@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "---> Config nginx ..."
+echo "---> Cambiando permisos /logs a www-data..:"
+
+chown www-data.www-data /logs -R
+envtpl /etc/circus.d/nginx.ini.tpl --keep-template --allow-missing

@@ -1,0 +1,7 @@
+#!/bin/sh
+
+echo "---> Config circusd thumbor ..."
+envtpl /etc/circus.d/thumbor.ini.tpl --keep-template --allow-missing
+
+echo "---> Config circusd remotecv ..."
+envtpl /etc/circus.d/remotecv.ini.tpl --keep-template --allow-missing
