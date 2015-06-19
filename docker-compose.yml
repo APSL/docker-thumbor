@@ -1,0 +1,10 @@
+thumbor:
+  build: .
+  ports:
+    - "8000:8000"
+    - "8001:80"
+  links:
+    - redis:redis
+
+redis:
+  image: redis:latest

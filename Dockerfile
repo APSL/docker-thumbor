@@ -17,20 +17,24 @@ VOLUME /logs
 # Things required for a python/pip environment
 RUN  \
     apt-get update && \
-    apt-get -y -q install  && \
+    apt-get -y upgrade && \
+    apt-get -y -q install python-numpy python-opencv git \
+    mercurial curl build-essential libcurl4-openssl-dev \
+    python python-dev python-distribute python-pip && \
+    apt-get -y -q install libdc1394-22 libdc1394-22-dev libjpeg-dev \
+    libpng12-dev libtiff4-dev libjasper-dev && \
     apt-get clean
 
 # thumbor user and dirs
 RUN \
     addgroup --system --gid 500 thumbor;\
     adduser --system --shell /bin/bash --gecos 'Thumbor app user' --uid 500 --gid 500 --disabled-password --home /code thumbor ;\
-    mkdir -p /data;\                             
-    chown thumbor.thumbor /data -R 
-    
+    mkdir -p /data;\
+    chown thumbor.thumbor /data -R
+
 # thumbor conf
 ADD setup.d/thumbor /etc/setup.d/40-thumbor
 ADD circus.d/thumbor.ini.tpl /etc/circus.d/
-ADD circus.d/remotecv.ini.tpl /etc/circus.d/
 
 # virtualenv
 RUN \
@@ -44,7 +48,12 @@ ENV HOME /code
 ENV SHELL bash
 ENV WORKON_HOME /code
 WORKDIR /code/src
+
 RUN su -c "pew-new env -i ipython" thumbor
 
+COPY thumbor.conf /tmp/thumbor.conf
+COPY requirements.txt /tmp/requirements.txt
+RUN su -c "pew-in env pip install -r /tmp/requirements.txt" thumbor
+
 # nginx thumbor
-EXPOSE 8000 80
+EXPOSE 8001 80

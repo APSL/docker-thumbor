@@ -4,4 +4,4 @@ numprocesses = 1
 use_sockets = False
 copy_env = True
 singleton = True
-autostart = {{ RUN_WEB | default('True') }}
+autostart = {{ RUN_NGINX | default('True') }}
