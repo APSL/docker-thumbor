@@ -21,9 +21,10 @@ RUN  \
     apt-get -y upgrade && \
     apt-get -y -q install python-numpy python-opencv git \
     mercurial curl build-essential libcurl4-openssl-dev \
-    python python-dev python-distribute python-pip && \
-    apt-get -y -q install libdc1394-22 libdc1394-22-dev libjpeg-dev \
-    libpng12-dev libtiff4-dev libjasper-dev && \
+    python python-dev python-distribute python-pip \
+    libdc1394-22 libdc1394-22-dev libjpeg-dev \
+    libpng12-dev libtiff4-dev libjasper-dev \
+    libjpeg-turbo-progs && \
     apt-get clean
 
 # thumbor user and dirs

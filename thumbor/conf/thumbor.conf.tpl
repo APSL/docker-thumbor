@@ -37,57 +37,57 @@ ALLOWED_SOURCES =  {{ ALLOWED_SOURCES | default([]) }}
 
 ## Quality index used for generated JPEG images
 ## Defaults to: 80
-QUALITY = 80
+QUALITY = {{ QUALITY | default(80) }}
 
 ## Quality index used for generated WebP images. If not set (None) the same level
 ## of JPEG quality will be used.
 ## Defaults to: None
-WEBP_QUALITY = None
+WEBP_QUALITY = {{ WEBP_QUALITY | default(None) }}
 
 ## Specifies whether WebP format should be used automatically if the request
 ## accepts it (via Accept header)
 ## Defaults to: False
-AUTO_WEBP = False
+AUTO_WEBP = {{ AUTO_WEBP | default(False) }}
 
 ## Max AGE sent as a header for the image served by thumbor in seconds
 ## Defaults to: 86400
-#MAX_AGE = 86400
+MAX_AGE = {{ MAX_AGE | default(86400) }}
 
 ## Indicates the Max AGE header in seconds for temporary images (images with
 ## failed smart detection)
 ## Defaults to: 0
-MAX_AGE_TEMP_IMAGE = 0
+MAX_AGE_TEMP_IMAGE = {{ MAX_AGE_TEMP_IMAGE | default(0) }}
 
 ## Indicates whether thumbor should rotate images that have an Orientation EXIF
 ## header
 ## Defaults to: False
-RESPECT_ORIENTATION = False
+RESPECT_ORIENTATION = {{ RESPECT_ORIENTATION | default(False) }}
 
 ## Ignore errors during smart detections and return image as a temp image (not
 ## saved in result storage and with MAX_AGE_TEMP_IMAGE age)
 ## Defaults to: False
-IGNORE_SMART_ERRORS = False
+IGNORE_SMART_ERRORS = {{ IGNORE_SMART_ERRORS | default(False) }}
 
 ## Preserves exif information in generated images. Increases image size in
 ## kbytes, use with caution.
 ## Defaults to: False
-PRESERVE_EXIF_INFO = False
+PRESERVE_EXIF_INFO = {{ PRESERVE_EXIF_INFO | default(False) }}
 
 ## Indicates whether thumbor should enable the EXPERIMENTAL support for animated
 ## gifs.
 ## Defaults to: True
-ALLOW_ANIMATED_GIFS = True
+ALLOW_ANIMATED_GIFS = {{ ALLOW_ANIMATED_GIFS | default(True) }}
 
 ## Indicates whether thumbor should use gifsicle engine. Please note that smart
 ## cropping and filters are not supported for gifs using gifsicle (but won't
 ## give an error).
 ## Defaults to: False
-USE_GIFSICLE_ENGINE = False
+USE_GIFSICLE_ENGINE = {{ USE_GIFSICLE_ENGINE | default(False) }}
 
 ## Indicates whether thumbor should enable blacklist functionality to prevent
 ## processing certain images.
 ## Defaults to: False
-USE_BLACKLIST = False
+USE_BLACKLIST = {{ USE_BLACKLIST | default(False) }}
 
 ################################################################################
 
@@ -97,27 +97,27 @@ USE_BLACKLIST = False
 ## The loader thumbor should use to load the original image. This must be the
 ## full name of a python module (python must be able to import it)
 ## Defaults to: thumbor.loaders.http_loader
-LOADER = 'thumbor.loaders.http_loader'
+LOADER = {{ LOADER | default("'thumbor.loaders.http_loader'") }}
 
 ## The file storage thumbor should use to store original images. This must be the
 ## full name of a python module (python must be able to import it)
 ## Defaults to: thumbor.storages.file_storage
 #STORAGE = 'thumbor.storages.mixed_storage'
-STORAGE = 'thumbor.storages.file_storage'
-STORAGE_BUCKET = ''
+STORAGE = {{ STORAGE | default("'thumbor.storages.file_storage'") }}
+STORAGE_BUCKET = {{ STORAGE_BUCKET | default("''") }}
 
 
 ## The result storage thumbor should use to store generated images. This must be
 ## the full name of a python module (python must be able to import it)
 ## Defaults to: None
 
-RESULT_STORAGE = 'thumbor.result_storages.file_storage'
+RESULT_STORAGE = {{ RESULT_STORAGE | default("'thumbor.result_storages.file_storage'") }}
 
 
 ## The imaging engine thumbor should use to perform image operations. This must
 ## be the full name of a python module (python must be able to import it)
 ## Defaults to: thumbor.engines.pil
-ENGINE = 'thumbor.engines.pil'
+ENGINE = {{ ENGINE | default("'thumbor.engines.pil'") }}
 
 ################################################################################
 
@@ -126,19 +126,19 @@ ENGINE = 'thumbor.engines.pil'
 
 ## The security key thumbor uses to sign image URLs
 ## Defaults to: MY_SECURE_KEY
-SECURITY_KEY = ''
+SECURITY_KEY = {{ SECURITY_KEY | default("'MY_SECURE_KEY'") }}
 
 ## Indicates if the /unsafe URL should be available
 ## Defaults to: True
-ALLOW_UNSAFE_URL = True
+ALLOW_UNSAFE_URL = {{ ALLOW_UNSAFE_URL | default(True) }}
 
 ## Indicates if encrypted (old style) URLs should be allowed
 ## Defaults to: True
-ALLOW_OLD_URLS = True
+ALLOW_UNSAFE_URL = {{ ALLOW_UNSAFE_URL | default(True) }}
 
 ## AWS access keys - used in thumbor_aws storage
-AWS_ACCESS_KEY = ''
-AWS_SECRET_KEY = ''
+AWS_ACCESS_KEY = {{ AWS_ACCESS_KEY | default("''") }}
+AWS_SECRET_KEY = {{ AWS_SECRET_KEY | default("''") }}
 
 
 ################################################################################
@@ -148,7 +148,7 @@ AWS_SECRET_KEY = ''
 
 ## The root path where the File Loader will try to find images
 ## Defaults to: /tmp
-FILE_LOADER_ROOT_PATH = '/tmp/loader'
+FILE_LOADER_ROOT_PATH = {{ FILE_LOADER_ROOT_PATH | default("'/data/loader'") }}
 
 ################################################################################
 
@@ -158,44 +158,44 @@ FILE_LOADER_ROOT_PATH = '/tmp/loader'
 ## The maximum number of seconds libcurl can take to connect to an image being
 ## loaded
 ## Defaults to: 5
-HTTP_LOADER_CONNECT_TIMEOUT = 5
+HTTP_LOADER_CONNECT_TIMEOUT = {{ HTTP_LOADER_CONNECT_TIMEOUT | default(5) }}
 
 ## The maximum number of seconds libcurl can take to download an image
 ## Defaults to: 20
-HTTP_LOADER_REQUEST_TIMEOUT = 20
+HTTP_LOADER_REQUEST_TIMEOUT = {{ HTTP_LOADER_REQUEST_TIMEOUT | default(20) }}
 
 ## Indicates whether libcurl should follow redirects when downloading an image
 ## Defaults to: True
-HTTP_LOADER_FOLLOW_REDIRECTS = True
+HTTP_LOADER_FOLLOW_REDIRECTS = {{ HTTP_LOADER_FOLLOW_REDIRECTS | default(True) }}
 
 ## Indicates the number of redirects libcurl should follow when downloading an
 ## image
 ## Defaults to: 5
-HTTP_LOADER_MAX_REDIRECTS = 5
+HTTP_LOADER_MAX_REDIRECTS = {{ HTTP_LOADER_MAX_REDIRECTS | default(5) }}
 
 ## Indicates whether thumbor should forward the user agent of the requesting user
 ## Defaults to: False
-HTTP_LOADER_FORWARD_USER_AGENT = 'False'
+HTTP_LOADER_FORWARD_USER_AGENT = {{ HTTP_LOADER_FORWARD_USER_AGENT | default("'False'") }}
 
 ## Default user agent for thumbor http loader requests
-## Defaults to: Thumbor/4.5.3
-HTTP_LOADER_DEFAULT_USER_AGENT = 'Thumbor/4.5.3'
+## Defaults to: Thumbor/5.0.3
+HTTP_LOADER_DEFAULT_USER_AGENT = {{ HTTP_LOADER_DEFAULT_USER_AGENT | default("'Thumbor/5.0.3'") }}
 
 ## The proxy host needed to load images through
 ## Defaults to: None
-HTTP_LOADER_PROXY_HOST = None
+HTTP_LOADER_PROXY_HOST = {{ HTTP_LOADER_PROXY_HOST | default(None) }}
 
 ## The proxy port for the proxy host
 ## Defaults to: None
-HTTP_LOADER_PROXY_PORT = None
+HTTP_LOADER_PROXY_PORT = {{ HTTP_LOADER_PROXY_PORT | default(None) }}
 
 ## The proxy username for the proxy host
 ## Defaults to: None
-HTTP_LOADER_PROXY_USERNAME = None
+HTTP_LOADER_PROXY_USERNAME = {{ HTTP_LOADER_PROXY_USERNAME | default(None) }}
 
 ## The proxy password for the proxy host
 ## Defaults to: None
-HTTP_LOADER_PROXY_PASSWORD = None
+HTTP_LOADER_PROXY_PASSWORD = {{ HTTP_LOADER_PROXY_PASSWORD | default(None) }}
 
 ################################################################################
 
@@ -205,17 +205,17 @@ HTTP_LOADER_PROXY_PASSWORD = None
 ## Expiration in seconds for the images in the File Storage. Defaults to one
 ## month
 ## Defaults to: 2592000
-STORAGE_EXPIRATION_SECONDS = 2592000
+STORAGE_EXPIRATION_SECONDS = {{ STORAGE_EXPIRATION_SECONDS | default(2592000) }}
 
 ## Indicates whether thumbor should store the signing key for each image in the
 ## file storage. This allows the key to be changed and old images to still be
 ## properly found
 ## Defaults to: False
-STORES_CRYPTO_KEY_FOR_EACH_IMAGE = False
+STORES_CRYPTO_KEY_FOR_EACH_IMAGE = {{ STORES_CRYPTO_KEY_FOR_EACH_IMAGE | default(False) }}
 
 ## The root path where the File Storage will try to find images
 ## Defaults to: /tmp/thumbor/storage
-FILE_STORAGE_ROOT_PATH = '/tmp/storage'
+FILE_STORAGE_ROOT_PATH = {{ FILE_STORAGE_ROOT_PATH | default("'/data/storage'") }}
 
 ################################################################################
 
@@ -225,31 +225,31 @@ FILE_STORAGE_ROOT_PATH = '/tmp/storage'
 ## Max size in Kb for images uploaded to thumbor
 ## Aliases: MAX_SIZE
 ## Defaults to: 0
-UPLOAD_MAX_SIZE = 30000000
+UPLOAD_MAX_SIZE = {{ UPLOAD_MAX_SIZE | default(0) }}
 
 ## Indicates whether thumbor should enable File uploads
 ## Aliases: ENABLE_ORIGINAL_PHOTO_UPLOAD
 ## Defaults to: False
-UPLOAD_ENABLED = True
+UPLOAD_ENABLED = {{ UPLOAD_ENABLED | default(False) }}
 
 ## The type of storage to store uploaded images with
 ## Aliases: ORIGINAL_PHOTO_STORAGE
 ## Defaults to: thumbor.storages.file_storage
-UPLOAD_PHOTO_STORAGE = 'thumbor.storages.file_storage'
+UPLOAD_PHOTO_STORAGE = {{ UPLOAD_PHOTO_STORAGE | default("'thumbor.storages.file_storage'") }}
 
 ## Indicates whether image deletion should be allowed
 ## Aliases: ALLOW_ORIGINAL_PHOTO_DELETION
 ## Defaults to: False
-UPLOAD_DELETE_ALLOWED = True
+UPLOAD_DELETE_ALLOWED = {{ UPLOAD_DELETE_ALLOWED | default(False) }}
 
 ## Indicates whether image overwrite should be allowed
 ## Aliases: ALLOW_ORIGINAL_PHOTO_PUTTING
 ## Defaults to: False
-UPLOAD_PUT_ALLOWED = True
+UPLOAD_PUT_ALLOWED = {{ UPLOAD_PUT_ALLOWED | default(False) }}
 
 ## Default filename for image uploaded
 ## Defaults to: image
-UPLOAD_DEFAULT_FILENAME = 'image'
+UPLOAD_DEFAULT_FILENAME = {{ UPLOAD_DEFAULT_FILENAME | default("'image'") }}
 
 ################################################################################
 
@@ -258,19 +258,19 @@ UPLOAD_DEFAULT_FILENAME = 'image'
 
 ## MongoDB storage server host
 ## Defaults to: localhost
-#MONGO_STORAGE_SERVER_HOST = 'localhost'
+MONGO_STORAGE_SERVER_HOST = {{ MONGO_STORAGE_SERVER_HOST | default("'localhost'") }}
 
 ## MongoDB storage server port
 ## Defaults to: 27017
-#MONGO_STORAGE_SERVER_PORT = 27017
+MONGO_STORAGE_SERVER_PORT = {{ MONGO_STORAGE_SERVER_PORT | default(27017) }}
 
 ## MongoDB storage server database name
 ## Defaults to: thumbor
-#MONGO_STORAGE_SERVER_DB = 'thumbor'
+MONGO_STORAGE_SERVER_DB = {{ MONGO_STORAGE_SERVER_DB | default("'thumbor'") }}
 
 ## MongoDB storage image collection
 ## Defaults to: images
-#MONGO_STORAGE_SERVER_COLLECTION = 'images'
+MONGO_STORAGE_SERVER_COLLECTION = {{ MONGO_STORAGE_SERVER_COLLECTION | default("'images'") }}
 
 ################################################################################
 
@@ -279,19 +279,19 @@ UPLOAD_DEFAULT_FILENAME = 'image'
 
 ## Redis storage server host
 ## Defaults to: localhost
-#REDIS_STORAGE_SERVER_HOST = 'localhost'
+REDIS_STORAGE_SERVER_HOST = {{ REDIS_STORAGE_SERVER_HOST | default("'localhost'") }}
 
 ## Redis storage server port
 ## Defaults to: 6379
-#REDIS_STORAGE_SERVER_PORT = 6379
+REDIS_STORAGE_SERVER_PORT = {{ REDIS_STORAGE_SERVER_PORT | default(6379) }}
 
 ## Redis storage database index
 ## Defaults to: 0
-#REDIS_STORAGE_SERVER_DB = 5
+REDIS_STORAGE_SERVER_DB = {{ REDIS_STORAGE_SERVER_DB | default(0) }}
 
 ## Redis storage server password
 ## Defaults to: None
-#REDIS_STORAGE_SERVER_PASSWORD = None
+REDIS_STORAGE_SERVER_PASSWORD = {{ REDIS_STORAGE_SERVER_PASSWORD | default(None) }}
 
 ################################################################################
 
@@ -300,9 +300,7 @@ UPLOAD_DEFAULT_FILENAME = 'image'
 
 ## List of Memcache storage server hosts
 ## Defaults to: ['localhost:11211']
-#MEMCACHE_STORAGE_SERVERS = #    [
-#        'localhost:11211',
-#    ]
+MEMCACHE_STORAGE_SERVERS = {{ MEMCACHE_STORAGE_SERVERS | default(['localhost:11211',]) }}
 
 
 ################################################################################
@@ -313,17 +311,17 @@ UPLOAD_DEFAULT_FILENAME = 'image'
 ## Mixed Storage file storage. This must be the full name of a python module
 ## (python must be able to import it)
 ## Defaults to: thumbor.storages.no_storage
-MIXED_STORAGE_FILE_STORAGE = 'thumbor.storages.file_storage'
+MIXED_STORAGE_FILE_STORAGE = {{ MIXED_STORAGE_FILE_STORAGE | default("'thumbor.storages.no_storage'") }}
 
 ## Mixed Storage signing key storage. This must be the full name of a python
 ## module (python must be able to import it)
 ## Defaults to: thumbor.storages.no_storage
-MIXED_STORAGE_CRYPTO_STORAGE = 'thumbor.storages.redis_storage'
+MIXED_STORAGE_CRYPTO_STORAGE = {{ MIXED_STORAGE_CRYPTO_STORAGE | default("'thumbor.storages.no_storage'") }}
 
 ## Mixed Storage detector information storage. This must be the full name of a
 ## python module (python must be able to import it)
 ## Defaults to: thumbor.storages.no_storage
-MIXED_STORAGE_DETECTOR_STORAGE = 'thumbor.storages.redis_storage'
+MIXED_STORAGE_DETECTOR_STORAGE = {{ MIXED_STORAGE_DETECTOR_STORAGE | default("'thumbor.storages.no_storage'") }}
 
 ################################################################################
 
@@ -333,7 +331,7 @@ MIXED_STORAGE_DETECTOR_STORAGE = 'thumbor.storages.redis_storage'
 ## The callback function name that should be used by the META route for JSONP
 ## access
 ## Defaults to: None
-#META_CALLBACK_NAME = None
+META_CALLBACK_NAME = {{ META_CALLBACK_NAME | default(None) }}
 
 ################################################################################
 
@@ -364,15 +362,13 @@ DETECTORS = {{ DETECTORS | default(['thumbor.detectors.face_detector','thumbor.d
 
 ## List of optimizers that thumbor will use to optimize images
 ## Defaults to: []
-OPTIMIZERS =     [
-#   'thumbor.optimizers.jpegtran'
-]
+OPTIMIZERS = {{ OPTIMIZERS | default(['thumbor.optimizers.jpegtran',]) }}
 
 
 ## Path for the jpegtran binary
 ## Defaults to: /usr/bin/jpegtran
-#JPEGTRAN_PATH = '/usr/bin/jpegtran'
-PROGRESSIVE_JPEG = True
+JPEGTRAN_PATH = {{ JPEGTRAN_PATH | default("'/usr/bin/jpegtran'") }}
+PROGRESSIVE_JPEG = {{ PROGRESSIVE_JPEG | default(True) }}
 
 ################################################################################
 
@@ -383,29 +379,7 @@ PROGRESSIVE_JPEG = True
 ## them must be full names of python modules (python must be able to import
 ## it)
 ## Defaults to: ['thumbor.filters.brightness', 'thumbor.filters.contrast', 'thumbor.filters.rgb', 'thumbor.filters.round_corner', 'thumbor.filters.quality', 'thumbor.filters.noise', 'thumbor.filters.watermark', 'thumbor.filters.equalize', 'thumbor.filters.fill', 'thumbor.filters.sharpen', 'thumbor.filters.strip_icc', 'thumbor.filters.frame', 'thumbor.filters.grayscale', 'thumbor.filters.rotate', 'thumbor.filters.format', 'thumbor.filters.max_bytes', 'thumbor.filters.convolution', 'thumbor.filters.blur', 'thumbor.filters.extract_focal', 'thumbor.filters.no_upscale']
-FILTERS = [
-'thumbor.filters.brightness',
-'thumbor.filters.contrast',
-'thumbor.filters.rgb',
-'thumbor.filters.round_corner',
-'thumbor.filters.quality',
-'thumbor.filters.noise',
-'thumbor.filters.watermark',
-'thumbor.filters.equalize',
-'thumbor.filters.fill',
-'thumbor.filters.sharpen',
-'thumbor.filters.strip_icc',
-'thumbor.filters.frame',
-'thumbor.filters.grayscale',
-'thumbor.filters.rotate',
-'thumbor.filters.format',
-'thumbor.filters.max_bytes',
-'thumbor.filters.convolution',
-'thumbor.filters.blur',
-'thumbor.filters.extract_focal',
-'thumbor.filters.no_upscale',
-]
-
+FILTERS = {{ FILTERS | default(['thumbor.filters.brightness', 'thumbor.filters.contrast', 'thumbor.filters.rgb', 'thumbor.filters.round_corner', 'thumbor.filters.quality', 'thumbor.filters.noise', 'thumbor.filters.watermark', 'thumbor.filters.equalize', 'thumbor.filters.fill', 'thumbor.filters.sharpen', 'thumbor.filters.strip_icc', 'thumbor.filters.frame', 'thumbor.filters.grayscale', 'thumbor.filters.rotate', 'thumbor.filters.format', 'thumbor.filters.max_bytes', 'thumbor.filters.convolution', 'thumbor.filters.blur', 'thumbor.filters.extract_focal', 'thumbor.filters.no_upscale']) }}
 
 ################################################################################
 
@@ -414,15 +388,15 @@ FILTERS = [
 
 ## Expiration in seconds of generated images in the result storage
 ## Defaults to: 0
-RESULT_STORAGE_EXPIRATION_SECONDS = 0
+RESULT_STORAGE_EXPIRATION_SECONDS = {{ RESULT_STORAGE_EXPIRATION_SECONDS | default(0) }}
 
 ## Path where the Result storage will store generated images
 ## Defaults to: /tmp/thumbor/result_storage
-RESULT_STORAGE_FILE_STORAGE_ROOT_PATH = '/tmp/result_storage'
+RESULT_STORAGE_FILE_STORAGE_ROOT_PATH = {{ RESULT_STORAGE_FILE_STORAGE_ROOT_PATH | default("'/data/result_storage'") }}
 
 ## Indicates whether unsafe requests should also be stored in the Result Storage
 ## Defaults to: False
-RESULT_STORAGE_STORES_UNSAFE = False
+RESULT_STORAGE_STORES_UNSAFE = {{ REDIS_QUEUE_SERVER_HOST | default("'localhost'") }}
 
 ################################################################################
 
@@ -431,19 +405,19 @@ RESULT_STORAGE_STORES_UNSAFE = False
 
 ## Server host for the queued redis detector
 ## Defaults to: localhost
-REDIS_QUEUE_SERVER_HOST = 'localhost'
+REDIS_QUEUE_SERVER_HOST = {{ REDIS_QUEUE_SERVER_HOST | default("'localhost'") }}
 
 ## Server port for the queued redis detector
 ## Defaults to: 6379
-REDIS_QUEUE_SERVER_PORT = 6379
+REDIS_QUEUE_SERVER_PORT = {{ REDIS_QUEUE_SERVER_PORT | default("'6379'") }}
 
 ## Server database index for the queued redis detector
 ## Defaults to: 0
-REDIS_QUEUE_SERVER_DB = 5
+REDIS_QUEUE_SERVER_DB = {{ REDIS_QUEUE_SERVER_DB | default("'0'") }}
 
 ## Server password for the queued redis detector
 ## Defaults to: None
-#REDIS_QUEUE_SERVER_PASSWORD = None
+REDIS_QUEUE_SERVER_PASSWORD = {{ REDIS_QUEUE_SERVER_PASSWORD | default(None) }}
 
 ################################################################################
 
@@ -452,15 +426,15 @@ REDIS_QUEUE_SERVER_DB = 5
 
 ## AWS key id
 ## Defaults to: None
-#SQS_QUEUE_KEY_ID = None
+SQS_QUEUE_KEY_ID = {{ SQS_QUEUE_KEY_ID | default(None) }}
 
 ## AWS key secret
 ## Defaults to: None
-#SQS_QUEUE_KEY_SECRET = None
+SQS_QUEUE_KEY_SECRET = {{ SQS_QUEUE_KEY_SECRET | default(None) }}
 
 ## AWS SQS region
 ## Defaults to: us-east-1
-#SQS_QUEUE_REGION = 'us-east-1'
+SQS_QUEUE_REGION = {{ SQS_QUEUE_REGION | default("'us-east-1'") }}
 
 ################################################################################
 
@@ -470,20 +444,20 @@ REDIS_QUEUE_SERVER_DB = 5
 ## This configuration indicates whether thumbor should use a custom error
 ## handler.
 ## Defaults to: False
-#USE_CUSTOM_ERROR_HANDLING = False
+USE_CUSTOM_ERROR_HANDLING = {{ USE_CUSTOM_ERROR_HANDLING | default(False) }}
 
 ## Error reporting module. Needs to contain a class called ErrorHandler with a
 ## handle_error(context, handler, exception) method.
 ## Defaults to: thumbor.error_handlers.sentry
-#ERROR_HANDLER_MODULE = 'thumbor.error_handlers.sentry'
+ERROR_HANDLER_MODULE = {{ ERROR_HANDLER_MODULE | default("'thumbor.error_handlers.sentry'") }}
 
 ## File of error log as json
 ## Defaults to: None
-#ERROR_FILE_LOGGER = None
+ERROR_FILE_LOGGER = {{ ERROR_FILE_LOGGER | default(None) }}
 
 ## File of error log name is parametrized with context attribute
 ## Defaults to: False
-#ERROR_FILE_NAME_USE_CONTEXT = False
+ERROR_FILE_NAME_USE_CONTEXT = {{ ERROR_FILE_NAME_USE_CONTEXT | default('False') }}
 
 ################################################################################
 
@@ -493,7 +467,7 @@ REDIS_QUEUE_SERVER_DB = 5
 ## Sentry thumbor project dsn. i.e.: http://5a63d58ae7b94f1dab3dee740b301d6a:73ee
 ## a45d3e8649239a973087e8f21f98@localhost:9000/2
 ## Defaults to:
-SENTRY_DSN_URL = ''
+SENTRY_DSN_URL = {{ SENTRY_DSN_URL | default("''") }}
 
 ################################################################################
 

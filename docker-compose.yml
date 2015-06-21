@@ -1,10 +1,16 @@
 thumbor:
-  build: .
+  build: thumbor
+  volumes:
+    - data:/data
+    - logs:/logs
   ports:
-    - "8000:8000"
-    - "8001:80"
+    - "8000:8000" # thumbor port
+    - "8001:80" # nginx port (cache)
   links:
     - redis:redis
-
+remotecv:
+  build: remotecv
+  links:
+    - redis:redis
 redis:
   image: redis:latest

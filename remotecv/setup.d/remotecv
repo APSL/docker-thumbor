@@ -1,0 +1,4 @@
+#!/bin/sh
+
+echo "---> Config circusd remotecv ..."
+envtpl /etc/circus.d/remotecv.ini.tpl --keep-template --allow-missing
