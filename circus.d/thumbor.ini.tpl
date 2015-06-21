@@ -1,5 +1,5 @@
 [watcher:thumbor]
-cmd = thumbor --port=8000 --conf=/tmp/thumbor.conf
+cmd = thumbor --port=8000 --conf=/code/thumbor.conf
 numprocesses = 1
 use_sockets = False
 uid = thumbor

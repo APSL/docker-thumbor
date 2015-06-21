@@ -13,6 +13,7 @@ ADD setup.d/nginx /etc/setup.d/30-nginx
 ADD conf/nginx.conf /etc/nginx/nginx.conf
 
 VOLUME /logs
+VOLUME /data
 
 # Things required for a python/pip environment
 RUN  \
@@ -33,8 +34,8 @@ RUN \
     chown thumbor.thumbor /data -R
 
 # thumbor conf
-ADD setup.d/thumbor /etc/setup.d/40-thumbor
-ADD circus.d/thumbor.ini.tpl /etc/circus.d/
+COPY setup.d/thumbor /etc/setup.d/40-thumbor
+COPY circus.d/thumbor.ini.tpl /etc/circus.d/
 
 # virtualenv
 RUN \
@@ -47,13 +48,16 @@ RUN \
 ENV HOME /code
 ENV SHELL bash
 ENV WORKON_HOME /code
-WORKDIR /code/src
+WORKDIR /code
 
+COPY requirements.txt /code/requirements.txt
 RUN su -c "pew-new env -i ipython" thumbor
+RUN su -c "pew-in env pip install -r /code/requirements.txt" thumbor
+COPY conf/thumbor.conf.tpl /code/thumbor.conf.tpl
 
-COPY thumbor.conf /tmp/thumbor.conf
-COPY requirements.txt /tmp/requirements.txt
-RUN su -c "pew-in env pip install -r /tmp/requirements.txt" thumbor
+# Include opencv in virtualenv
+RUN su -c "ln -s /usr/lib/python2.7/dist-packages/cv2.so /code/env/lib/python2.7/site-packages/cv2.so" thumbor
+RUN su -c "ln -s /usr/lib/python2.7/dist-packages/cv.py /code/env/lib/python2.7/site-packages/cv.py" thumbor
 
 # nginx thumbor
-EXPOSE 8001 80
+EXPOSE 80 8000

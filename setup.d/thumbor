@@ -2,3 +2,6 @@
 
 echo "---> Config circusd thumbor ..."
 envtpl /etc/circus.d/thumbor.ini.tpl --keep-template --allow-missing
+
+echo "---> Config thumbor ..."
+envtpl /code/thumbor.conf.tpl --keep-template --allow-missing
