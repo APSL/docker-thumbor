@@ -1,0 +1,18 @@
+thumbor:
+  image: apsl/thumbor
+  volumes:
+    - data:/data
+    - logs:/logs
+  ports:
+    - "8000:8000" # thumbor port
+    - "8001:80" # nginx port (cache)
+  environment:
+    DETECTORS: ['thumbor.detectors.queued_detector.queued_complete_detector',]
+  links:
+    - redis:redis
+remotecv:
+  image: apsl/remotecv
+  links:
+    - redis:redis
+redis:
+  image: redis:latest
