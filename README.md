@@ -25,7 +25,7 @@ Docker thumbor image
 Ports
 =====
 
-* 80: nginx django app, serving static
+* 80: nginx cache, check if the file exists in result_storage and serve, failover to thumbor auto
 * 8000: thumbor port directly, without nginx cache
 
 Docker-compose examples
