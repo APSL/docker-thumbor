@@ -349,7 +349,7 @@ META_CALLBACK_NAME = {{ META_CALLBACK_NAME | default(None) }}
 #'thumbor.detectors.feature_detector',
 #'thumbor.detectors.face_detector',
 #]
-DETECTORS = {{ DETECTORS | default(['thumbor.detectors.face_detector','thumbor.detectors.feature_detector',]) }}
+DETECTORS = {{ DETECTORS | default([]) }}
 
 ## The cascade file that opencv will use to detect faces
 ## Defaults to: haarcascade_frontalface_alt.xml
@@ -361,8 +361,8 @@ DETECTORS = {{ DETECTORS | default(['thumbor.detectors.face_detector','thumbor.d
 ################################## Optimizers ##################################
 
 ## List of optimizers that thumbor will use to optimize images
-## Defaults to: []
-OPTIMIZERS = {{ OPTIMIZERS | default(['thumbor.optimizers.jpegtran',]) }}
+## Defaults to: [] --> ['thumbor.optimizers.jpegtran',]
+OPTIMIZERS = {{ OPTIMIZERS | default([]) }}
 
 
 ## Path for the jpegtran binary
@@ -396,7 +396,7 @@ RESULT_STORAGE_FILE_STORAGE_ROOT_PATH = {{ RESULT_STORAGE_FILE_STORAGE_ROOT_PATH
 
 ## Indicates whether unsafe requests should also be stored in the Result Storage
 ## Defaults to: False
-RESULT_STORAGE_STORES_UNSAFE = {{ REDIS_QUEUE_SERVER_HOST | default("'localhost'") }}
+RESULT_STORAGE_STORES_UNSAFE = {{ RESULT_STORAGE_STORES_UNSAFE | default(False) }}
 
 ################################################################################
 
