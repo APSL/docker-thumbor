@@ -1,5 +1,5 @@
 [watcher:remotecv]
-cmd = remotecv --host {{ REDIS_HOST | default('redis')}} --port {{ REDIS_PORT | default('6379')}} --database {{ REDIS_DATABASE | default('0') -l {{ LOG_LEVEL | default('INFO')}}
+cmd = remotecv --host {{REDIS_HOST | default('redis')}} --port {{REDIS_PORT | default(6379)}} --database {{REDIS_DATABASE | default(0)}} -l {{LOG_LEVEL | default('INFO')}}
 numprocesses = 1
 use_sockets = False
 uid = remotecv

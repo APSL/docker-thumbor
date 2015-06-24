@@ -18,10 +18,11 @@ RUN  \
 # remotecv user and dirs
 RUN \
     addgroup --system --gid 500 remotecv;\
-    adduser --system --shell /bin/bash --gecos 'Remotecv app user' --uid 500 --gid 500 --disabled-password --home /code remotecv 
+    adduser --system --shell /bin/bash --gecos 'Remotecv app user' --uid 500 --gid 500 --disabled-password --home /code remotecv
 
 # remotecv conf
 COPY circus.d/remotecv.ini.tpl /etc/circus.d/
+COPY setup.d/remotecv /etc/setup.d/30-remotecv
 
 # virtualenv
 RUN \

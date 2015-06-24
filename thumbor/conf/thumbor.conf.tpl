@@ -392,7 +392,7 @@ RESULT_STORAGE_EXPIRATION_SECONDS = {{ RESULT_STORAGE_EXPIRATION_SECONDS | defau
 
 ## Path where the Result storage will store generated images
 ## Defaults to: /tmp/thumbor/result_storage
-RESULT_STORAGE_FILE_STORAGE_ROOT_PATH = {{ RESULT_STORAGE_FILE_STORAGE_ROOT_PATH | default("'/data/result_storage'") }}
+RESULT_STORAGE_FILE_STORAGE_ROOT_PATH = '{{ RESULT_STORAGE_FILE_STORAGE_ROOT_PATH | default('/data/result_storage') }}'
 
 ## Indicates whether unsafe requests should also be stored in the Result Storage
 ## Defaults to: False
@@ -405,7 +405,7 @@ RESULT_STORAGE_STORES_UNSAFE = {{ RESULT_STORAGE_STORES_UNSAFE | default(False) 
 
 ## Server host for the queued redis detector
 ## Defaults to: localhost
-REDIS_QUEUE_SERVER_HOST = {{ REDIS_QUEUE_SERVER_HOST | default("'localhost'") }}
+REDIS_QUEUE_SERVER_HOST = '{{ REDIS_QUEUE_SERVER_HOST | default('localhost') }}'
 
 ## Server port for the queued redis detector
 ## Defaults to: 6379

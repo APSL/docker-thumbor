@@ -8,9 +8,9 @@ RUN \
     apt-get install nginx-full && \
     apt-get clean
 
-ADD circus.d/nginx.ini.tpl /etc/circus.d/
-ADD setup.d/nginx /etc/setup.d/30-nginx
-ADD conf/nginx.conf /etc/nginx/nginx.conf
+COPY circus.d/nginx.ini.tpl /etc/circus.d/
+COPY setup.d/nginx /etc/setup.d/30-nginx
+COPY conf/nginx.conf /etc/nginx/nginx.conf
 
 VOLUME /logs
 VOLUME /data
