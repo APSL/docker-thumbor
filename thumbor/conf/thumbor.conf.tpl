@@ -409,11 +409,11 @@ REDIS_QUEUE_SERVER_HOST = {{ REDIS_QUEUE_SERVER_HOST | default("'localhost'") }}
 
 ## Server port for the queued redis detector
 ## Defaults to: 6379
-REDIS_QUEUE_SERVER_PORT = {{ REDIS_QUEUE_SERVER_PORT | default("'6379'") }}
+REDIS_QUEUE_SERVER_PORT = {{ REDIS_QUEUE_SERVER_PORT | default(6379) }}
 
 ## Server database index for the queued redis detector
 ## Defaults to: 0
-REDIS_QUEUE_SERVER_DB = {{ REDIS_QUEUE_SERVER_DB | default("'0'") }}
+REDIS_QUEUE_SERVER_DB = {{ REDIS_QUEUE_SERVER_DB | default(0) }}
 
 ## Server password for the queued redis detector
 ## Defaults to: None

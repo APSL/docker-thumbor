@@ -1,5 +1,6 @@
 thumbor:
-  image: apsl/thumbor
+  # image: apsl/thumbor:latest
+  build: thumbor
   volumes:
     - data:/data
     - logs:/logs
@@ -8,11 +9,18 @@ thumbor:
     - "8001:80" # nginx port (cache)
   environment:
     DETECTORS: ['thumbor.detectors.queued_detector.queued_complete_detector',]
+    REDIS_QUEUE_SERVER_HOST: "'redis'"
+    REDIS_QUEUE_SERVER_PORT: 6379
+    REDIS_QUEUE_SERVER_DB: 0
   links:
     - redis:redis
 remotecv:
   image: apsl/remotecv
   links:
     - redis:redis
+  environment:
+    REDIS_HOST: 'redis'
+    REDIS_PORT: 6379
+    REDIS_DATABASE: 0
 redis:
   image: redis:latest

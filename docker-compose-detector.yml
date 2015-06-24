@@ -1,5 +1,5 @@
 thumbor:
-  image: apsl/thumbor
+  image: apsl/thumbor:latest
   volumes:
     - data:/data
     - logs:/logs
