@@ -97,27 +97,26 @@ USE_BLACKLIST = {{ USE_BLACKLIST | default(False) }}
 ## The loader thumbor should use to load the original image. This must be the
 ## full name of a python module (python must be able to import it)
 ## Defaults to: thumbor.loaders.http_loader
-LOADER = {{ LOADER | default("'thumbor.loaders.http_loader'") }}
+LOADER = '{{ LOADER | default('thumbor.loaders.http_loader') }}'
 
 ## The file storage thumbor should use to store original images. This must be the
 ## full name of a python module (python must be able to import it)
 ## Defaults to: thumbor.storages.file_storage
-#STORAGE = 'thumbor.storages.mixed_storage'
-STORAGE = {{ STORAGE | default("'thumbor.storages.file_storage'") }}
-STORAGE_BUCKET = {{ STORAGE_BUCKET | default("''") }}
+STORAGE = '{{ STORAGE | default('thumbor.storages.file_storage') }}'
+STORAGE_BUCKET = '{{ STORAGE_BUCKET | default('') }}'
 
 
 ## The result storage thumbor should use to store generated images. This must be
 ## the full name of a python module (python must be able to import it)
 ## Defaults to: None
 
-RESULT_STORAGE = {{ RESULT_STORAGE | default("'thumbor.result_storages.file_storage'") }}
+RESULT_STORAGE = '{{ RESULT_STORAGE | default('thumbor.result_storages.file_storage') }}'
 
 
 ## The imaging engine thumbor should use to perform image operations. This must
 ## be the full name of a python module (python must be able to import it)
 ## Defaults to: thumbor.engines.pil
-ENGINE = {{ ENGINE | default("'thumbor.engines.pil'") }}
+ENGINE = '{{ ENGINE | default('thumbor.engines.pil') }}'
 
 ################################################################################
 
@@ -279,7 +278,7 @@ MONGO_STORAGE_SERVER_COLLECTION = {{ MONGO_STORAGE_SERVER_COLLECTION | default("
 
 ## Redis storage server host
 ## Defaults to: localhost
-REDIS_STORAGE_SERVER_HOST = {{ REDIS_STORAGE_SERVER_HOST | default("'localhost'") }}
+REDIS_STORAGE_SERVER_HOST = '{{ REDIS_STORAGE_SERVER_HOST | default('localhost') }}'
 
 ## Redis storage server port
 ## Defaults to: 6379
@@ -321,7 +320,7 @@ MIXED_STORAGE_CRYPTO_STORAGE = {{ MIXED_STORAGE_CRYPTO_STORAGE | default("'thumb
 ## Mixed Storage detector information storage. This must be the full name of a
 ## python module (python must be able to import it)
 ## Defaults to: thumbor.storages.no_storage
-MIXED_STORAGE_DETECTOR_STORAGE = {{ MIXED_STORAGE_DETECTOR_STORAGE | default("'thumbor.storages.no_storage'") }}
+MIXED_STORAGE_DETECTOR_STORAGE = '{{ MIXED_STORAGE_DETECTOR_STORAGE | default('thumbor.storages.no_storage') }}'
 
 ################################################################################
 
