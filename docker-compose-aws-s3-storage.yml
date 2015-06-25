@@ -9,8 +9,8 @@ thumbor:
     - "8001:80" # nginx port (cache)
   environment:
     DETECTORS: ['thumbor.detectors.feature_detector','thumbor.detectors.face_detector',]
-    AWS_ACCESS_KEY: 'AKIAJJFAC4RYF6PAWMRQ'
-    AWS_SECRET_KEY: 'FalQGXS9+WLBdfGR1Dx662lcdsvPUtEjBvgWnOl/'
+    AWS_ACCESS_KEY: '' # put your AWS_ACCESS_KEY here
+    AWS_SECRET_KEY: '' # put your AWS_SECRET_KEY here
     STORAGE_BUCKET: 'thumbor-docker'
     RESULT_STORAGE_BUCKET: 'thumbor-docker-result'
     STORAGE: 'thumbor_aws.storages.s3_storage'
