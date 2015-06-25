@@ -15,7 +15,7 @@ Docker thumbor image
 * All configuration via environment variables
 * Opencv detectors
 * Optimizer JPEG included
-* Nginx cache to optimize the server of optimized images
+* Nginx cache to optimize the server of result images
 * Separated remotecv docker image
 * A lot of docker-compose examples with tipical uses cases
 * See parent image https://registry.hub.docker.com/u/apsl/circusbase
