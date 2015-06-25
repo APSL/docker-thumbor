@@ -33,9 +33,9 @@ Docker-compose examples
 
 Check the docker-compose examples:
 
-* Simple detection
-* Lazy detection using redis
-* AWS S3 storage
+* [Simple detection](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-detector.yml)
+* [Lazy detection using redis](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-lazy-detector.yml)
+* [AWS S3 storage](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-aws-s3-storage.yml)
 
 Env vars and default value:
 =========
