@@ -33,9 +33,8 @@ Docker-compose examples
 
 Check the docker-compose examples:
 
-* File storage with detection
+* Simple detection
 * Lazy detection using redis
-* Optimization
 * AWS S3 storage
 
 Env vars and default value:
@@ -61,6 +60,7 @@ Env vars and default value:
     LOADER='thumbor.loaders.http_loader'
     STORAGE='thumbor.storages.file_storage'
     STORAGE_BUCKET=''
+    RESULT_STORAGE_BUCKET=''
     AWS_ACCESS_KEY=''
     AWS_SECRET_KEY=''
     RESULT_STORAGE='thumbor.result_storages.file_storage'

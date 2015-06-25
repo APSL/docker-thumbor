@@ -1,6 +1,6 @@
 thumbor:
-  # image: apsl/thumbor:latest
-  build: thumbor
+  image: apsl/thumbor:latest
+  #build: thumbor
   volumes:
     - data:/data
     - logs:/logs
