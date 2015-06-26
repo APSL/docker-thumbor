@@ -7,4 +7,4 @@ thumbor:
     - "8000:8000" # thumbor port
     - "8001:80" # nginx port (cache)
   environment:
-    DETECTORS: ['thumbor.detectors.feature_detector','thumbor.detectors.face_detector',]
+    DETECTORS: ['thumbor.detectors.face_detector','thumbor.detectors.feature_detector',]
