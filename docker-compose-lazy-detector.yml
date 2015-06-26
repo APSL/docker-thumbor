@@ -20,8 +20,8 @@ thumbor:
   links:
     - redis:redis
 remotecv:
-  # image: apsl/remotecv
-  build: remotecv
+  image: apsl/remotecv
+  #build: remotecv
   links:
     - redis:redis
   environment:
