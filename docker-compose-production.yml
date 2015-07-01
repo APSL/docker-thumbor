@@ -1,0 +1,40 @@
+thumbor:
+  image: apsl/thumbor:latest
+  volumes:
+    - data:/data
+    - logs:/logs
+  ports:
+    #- "8000:8000" # thumbor port
+    - "80:80" # nginx port (cache)
+  environment:
+    ALLOW_UNSAFE_URL: False
+    SECURITY_KEY: SECURIZE_ME
+    DETECTORS: ['thumbor.detectors.queued_detector.queued_complete_detector',]
+    AWS_ACCESS_KEY:  # put your AWS_ACCESS_KEY here
+    AWS_SECRET_KEY:  # put your AWS_SECRET_KEY here
+    STORAGE: thumbor.storages.mixed_storage
+    STORAGE_BUCKET: hipotels-thumbor-pre-storage
+    UPLOAD_PHOTO_STORAGE: thumbor_aws.storages.s3_storage
+    MIXED_STORAGE_FILE_STORAGE: thumbor_aws.storages.s3_storage
+    RESULT_STORAGE: thumbor.result_storages.file_storage
+    REDIS_STORAGE_SERVER_HOST: redis
+    REDIS_STORAGE_SERVER_PORT: 6379
+    REDIS_STORAGE_SERVER_DB: 0
+    REDIS_QUEUE_SERVER_HOST: redis
+    REDIS_QUEUE_SERVER_PORT: 6379
+    REDIS_QUEUE_SERVER_DB: 0
+    MIXED_STORAGE_DETECTOR_STORAGE: thumbor.storages.redis_storage
+    SENTRY_DSN_URL: # put your sentry enpoint here
+  links:
+    - redis:redis
+remotecv:
+  image: apsl/remotecv
+  links:
+    - redis:redis
+  environment:
+    REDIS_HOST: redis
+    REDIS_PORT: 6379
+    REDIS_DATABASE: 0
+redis:
+  image: redis:latest
+ 

@@ -36,6 +36,7 @@ Check the docker-compose examples:
 * [Simple detection](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-detector.yml)
 * [Lazy detection using redis](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-lazy-detector.yml)
 * [AWS S3 storage](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-aws-s3-storage.yml)
+* [Production use](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-production.yml)
 
 Env vars and default value:
 =========
