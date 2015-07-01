@@ -2,8 +2,8 @@
 Docker thumbor and remotecv
 ========================
 
-Docker image for thumbor, and separated one for remotecv, necessary for the lazy detection.
-All parameters of the thumbor config can be set with env vars.
+Docker image for thumbor, and separated one for remotecv, necessary for the lazy detection.  
+All parameters of the thumbor config can be set with env vars.  
 The thumbor docker expose two ports, the thumbor service and nginx cache. The nginx cache check if the file exists in the file_storage after to send the request to thumbor (automated failover).
 
 
