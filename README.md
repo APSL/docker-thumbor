@@ -25,8 +25,8 @@ Docker thumbor image
 Ports
 =====
 
-* 80: nginx cache, check if the file exists in result_storage and serve, failover to thumbor auto
-* 8000: thumbor port directly, without nginx cache
+* 80: nginx cache, check if the file exists in result_storage and serve, auto-failover to thumbor 
+* 8000: thumbor port, without nginx cache
 
 Docker-compose examples
 =======================
@@ -36,7 +36,7 @@ Check the docker-compose examples:
 * [Simple detection](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-detector.yml)
 * [Lazy detection using redis](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-lazy-detector.yml)
 * [AWS S3 storage](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-aws-s3-storage.yml)
-* [Production use](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-production.yml)
+* [Proposed use in production](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-production.yml)
 
 Env vars and default value:
 =========
