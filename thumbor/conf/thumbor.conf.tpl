@@ -134,7 +134,7 @@ ALLOW_UNSAFE_URL = {{ ALLOW_UNSAFE_URL | default(True) }}
 
 ## Indicates if encrypted (old style) URLs should be allowed
 ## Defaults to: True
-ALLOW_UNSAFE_URL = {{ ALLOW_UNSAFE_URL | default(True) }}
+ALLOW_OLD_URLS = {{ ALLOW_OLD_URLS | default(True) }}
 
 ## AWS access keys - used in thumbor_aws storage
 AWS_ACCESS_KEY = '{{ AWS_ACCESS_KEY | default('') }}'
