@@ -4,5 +4,5 @@ numpy==1.9.2
 pyremotecv==0.5.0
 remotecv==1.0.2
 redis==2.4.12
-thumbor==5.0.4
+thumbor==5.0.6
 git+https://github.com/APSL/thumbor_aws.git
