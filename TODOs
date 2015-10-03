@@ -1,0 +1,22 @@
+New requirements v2
+
+Thumbor
+    - Official python image
+    - Remove nginx
+    - Remove user app, use root instead
+    - No virtualenv
+    - ¿Remove circus?
+    - Securize critical env vars: thumbor key
+        - Env file
+    - Way to config the number of thumbor proceses running inside the container
+
+Remotecv
+    - Official python image
+    - ¿Remove circus?
+    - Update las version (change name)
+
+Nginx
+    - Volumes from thumbor
+    - Check image in volume and failover (possible?)
+
+Redis
