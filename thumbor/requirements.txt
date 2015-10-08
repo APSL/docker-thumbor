@@ -4,6 +4,7 @@ dateutils==0.6.6
 numpy==1.9.2
 pyremotecv==0.5.0
 remotecv==1.0.2
+opencv-engine==1.0.1
 redis==2.10.3
 thumbor==5.1.0
 git+https://github.com/APSL/thumbor_aws.git
