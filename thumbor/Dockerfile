@@ -19,8 +19,8 @@ ENV HOME /usr/src/app
 ENV SHELL bash
 ENV WORKON_HOME /usr/src/app
 WORKDIR /usr/src/app
-COPY requirements.txt /usr/src/app/requirements.txt
 
+COPY requirements.txt /usr/src/app/requirements.txt
 RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
 
 COPY conf/thumbor.conf.tpl /usr/src/app/thumbor.conf.tpl
