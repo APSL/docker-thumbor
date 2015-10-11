@@ -1,46 +1,27 @@
-FROM apsl/circusbase
-MAINTAINER Edu Herraiz <eherraiz@apsl.net>
+FROM python:2
+
+MAINTAINER Edu Herraiz <ghark@gmail.com>
 
 VOLUME /logs
+VOLUME /data
 
 # Things required for a python/pip environment
+COPY system-requirements.txt /usr/src/app/system-requirements.txt
 RUN  \
     apt-get update && \
     apt-get -y upgrade && \
-    apt-get -y -q install python-numpy python-opencv git \
-    mercurial curl build-essential libcurl4-openssl-dev \
-    python python-dev python-distribute python-pip \
-    libdc1394-22 libdc1394-22-dev libjpeg-dev \
-    libpng12-dev libtiff4-dev libjasper-dev \
-    libjpeg-turbo-progs && \
+    apt-get -y autoremove && \
+    xargs apt-get -y -q install < /usr/src/app/system-requirements.txt && \
     apt-get clean
 
-# remotecv user and dirs
-RUN \
-    addgroup --system --gid 500 remotecv;\
-    adduser --system --shell /bin/bash --gecos 'Remotecv app user' --uid 500 --gid 500 --disabled-password --home /code remotecv
-
-# remotecv conf
-COPY circus.d/remotecv.ini.tpl /etc/circus.d/
-COPY setup.d/remotecv /etc/setup.d/30-remotecv
-
-# virtualenv
-RUN \
-    pip --no-input install virtualenv==1.11.6 && \
-    pip --no-input install pew==0.1.14 && \
-    pip --no-input install chaussette==1.2 && \
-    pip --no-input install PyYAML==3.11 # needed for install_crons
-
-# create Virtualenv
-ENV HOME /code
+ENV HOME /usr/src/app
 ENV SHELL bash
-ENV WORKON_HOME /code
-WORKDIR /code
+ENV WORKON_HOME /usr/src/app
+WORKDIR /usr/src/app
 
-COPY requirements.txt /code/requirements.txt
-RUN su -c "pew-new env -i ipython" remotecv
-RUN su -c "pew-in env pip install -r /code/requirements.txt" remotecv
+COPY requirements.txt /usr/src/app/requirements.txt
+RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
 
-# Include opencv in virtualenv
-RUN su -c "ln -s /usr/lib/python2.7/dist-packages/cv2.so /code/env/lib/python2.7/site-packages/cv2.so" remotecv
-RUN su -c "ln -s /usr/lib/python2.7/dist-packages/cv.py /code/env/lib/python2.7/site-packages/cv.py" remotecv
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["remotecv"]

@@ -14,7 +14,6 @@ RUN  \
     xargs apt-get -y -q install < /usr/src/app/system-requirements.txt && \
     apt-get clean
 
-
 ENV HOME /usr/src/app
 ENV SHELL bash
 ENV WORKON_HOME /usr/src/app
@@ -25,7 +24,8 @@ RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
 
 COPY conf/thumbor.conf.tpl /usr/src/app/thumbor.conf.tpl
 
-ADD start.sh /bin/
-CMD ["/bin/start.sh"]
+COPY docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["thumbor"]
 
 EXPOSE 80

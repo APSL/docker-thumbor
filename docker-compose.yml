@@ -1,17 +1,17 @@
 thumbor:
-  build: thumbor-multiprocess
+  build: thumbor
   volumes:
     - data:/data
     - logs:/logs
   ports:
     - "8000:80" # thumbor port
-  environment:
-    THUMBOR_NUM_PROCESSES: 16
-#  links:
-#    - redis:redis
-#remotecv:
-#  build: remotecv
-#  links:
-#    - redis:redis
-#redis:
-#  image: redis:latest
+#  environment:
+#    THUMBOR_NUM_PROCESSES: 16
+  links:
+    - redis:redis
+remotecv:
+  build: remotecv
+  links:
+    - redis:redis
+redis:
+  image: redis:latest
