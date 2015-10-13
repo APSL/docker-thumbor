@@ -1,17 +1,30 @@
 thumbor:
   build: thumbor
+  environment:
+    RESULT_STORAGE: thumbor.result_storages.file_storage
+    RESULT_STORAGE_STORES_UNSAFE: True
   volumes:
     - data:/data
     - logs:/logs
-  ports:
-    - "8000:80" # thumbor port
-#  environment:
-#    THUMBOR_NUM_PROCESSES: 16
   links:
     - redis:redis
+  ports:
+    - "127.0.0.1:8001:80" # thumbor port
+nginx:
+  build: nginx
+  links:
+    - thumbor:thumbor
+  volumes_from:
+    - thumbor
+  ports:
+    - "127.0.0.1:8000:80" # thumbor port
+  hostname: nginx
 remotecv:
   build: remotecv
   links:
     - redis:redis
+  environment:
+    REDIS_HOST: redis
+    REDIS_PORT: 6379
 redis:
   image: redis:latest

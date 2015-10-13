@@ -20,3 +20,9 @@ Nginx
     - Check image in volume and failover (possible?)
 
 Redis
+
+# Stress test in localhost
+ab -n 1000 -c 5 http://localhost:8000/unsafe/600x500/static.goal.com/749100/749122_heroa.jpg
+Without result storage , without nginx: 32
+With result storage , without nginx: 748
+With result storage , with nginx: 5237

@@ -4,7 +4,11 @@ Docker thumbor and remotecv
 
 Docker image for thumbor, and separated one for remotecv, necessary for the lazy detection.  
 All parameters of the thumbor config can be set with env vars.  
-The thumbor docker expose two ports, the thumbor service and nginx cache. The nginx cache check if the file exists in the file_storage after to send the request to thumbor (automated failover).
+The thumbor's docker expose port 80 with the service.  
+Consider to use the docker-thumbor-nginx image to use nginx like a first cache.  
+The nginx cache check if the file exists in a shared volume (file_storage) after to send the request to thumbor (automated failover).  
+We propose two thumbor images aspl/thumbor and apsl/thumbor-multiprocess.  
+The first one (monoprocess) to use under a docker organization tool and the second one if you need to deploy in one host and scale up easy.  
 
 
 Description
@@ -15,8 +19,9 @@ Docker thumbor image
 * All configuration via environment variables
 * Opencv detectors
 * Optimizer JPEG included
-* Nginx cache to optimize the server of result images
+* Nginx cache to optimize the server of result images in a separated docker image
 * Separated remotecv docker image
+* Use the official python images and best practices
 * A lot of docker-compose examples with tipical uses cases
 * See parent image https://registry.hub.docker.com/u/apsl/circusbase
 * circus to control processes. http://circus.readthedocs.org/
@@ -25,8 +30,7 @@ Docker thumbor image
 Ports
 =====
 
-* 80: nginx cache, check if the file exists in result_storage and serve, auto-failover to thumbor 
-* 8000: thumbor port, without nginx cache
+* 80: thumbor
 
 Docker-compose examples
 =======================
