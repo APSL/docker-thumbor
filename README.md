@@ -24,7 +24,6 @@ Docker thumbor image
 * Separated remotecv docker image
 * Use the official python images and best practices
 * A lot of docker-compose examples with tipical uses cases
-* See parent image https://registry.hub.docker.com/u/apsl/circusbase
 * envtpl to setup config files on start time, based on environ vars. https://github.com/andreasjansson/envtpl
 
 Ports
