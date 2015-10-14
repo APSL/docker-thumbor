@@ -1,14 +1,9 @@
 python-numpy
 python-opencv
 git
-mercurial
 curl
 build-essential
 libcurl4-openssl-dev
-python
-python-dev
-python-distribute
-python-pip
 libdc1394-22
 libdc1394-22-dev
 libjpeg-dev

@@ -22,6 +22,10 @@ WORKDIR /usr/src/app
 COPY requirements.txt /usr/src/app/requirements.txt
 RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
 
+RUN \ 
+    ln /usr/lib/python2.7/dist-packages/cv2.x86_64-linux-gnu.so /usr/local/lib/python2.7/cv2.so && \
+    ln /usr/lib/python2.7/dist-packages/cv.py /usr/local/lib/python2.7/cv.py
+
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["remotecv"]
