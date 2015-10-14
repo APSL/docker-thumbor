@@ -18,7 +18,7 @@ thumbor:
   links:
     - redis:redis
 nginx:
-  image: apsl/nginx:latest
+  image: apsl/thumbor-nginx:latest
   links:
     - thumbor:thumbor
   volumes_from:

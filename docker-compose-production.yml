@@ -1,5 +1,5 @@
 thumbor:
-  image: apsl/thumbor:latest
+  image: apsl/thumbor-multiprocess:latest
   volumes:
     - data:/data
     - logs:/logs
@@ -24,10 +24,11 @@ thumbor:
     REDIS_QUEUE_SERVER_DB: 0
     MIXED_STORAGE_DETECTOR_STORAGE: thumbor.storages.redis_storage
     SENTRY_DSN_URL: # put your sentry enpoint here
+    THUMBOR_NUM_PROCESSES: 16
   links:
     - redis:redis
 nginx:
-  image: apsl/thumbor:latest
+  image: apsl/thumbor-nginx:latest
   links:
     - thumbor:thumbor
   volumes_from:
