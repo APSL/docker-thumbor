@@ -3,9 +3,8 @@ thumbor:
   volumes:
     - data:/data
     - logs:/logs
-  ports:
-    #- "8000:8000" # thumbor port
-    - "80:80" # nginx port (cache)
+  #ports:
+    #- "80:80" # thumbor port
   environment:
     ALLOW_UNSAFE_URL: False
     SECURITY_KEY: SECURIZE_ME
@@ -13,7 +12,7 @@ thumbor:
     AWS_ACCESS_KEY:  # put your AWS_ACCESS_KEY here
     AWS_SECRET_KEY:  # put your AWS_SECRET_KEY here
     STORAGE: thumbor.storages.mixed_storage
-    STORAGE_BUCKET: hipotels-thumbor-pre-storage
+    STORAGE_BUCKET: storage-bucket-name
     UPLOAD_PHOTO_STORAGE: thumbor_aws.storages.s3_storage
     MIXED_STORAGE_FILE_STORAGE: thumbor_aws.storages.s3_storage
     RESULT_STORAGE: thumbor.result_storages.file_storage
@@ -27,6 +26,15 @@ thumbor:
     SENTRY_DSN_URL: # put your sentry enpoint here
   links:
     - redis:redis
+nginx:
+  build: nginx
+  links:
+    - thumbor:thumbor
+  volumes_from:
+    - thumbor
+  ports:
+    - "80:80" # nginx cache port (with failover to thumbor)
+  hostname: nginx
 remotecv:
   image: apsl/remotecv
   links:

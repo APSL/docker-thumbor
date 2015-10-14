@@ -5,8 +5,7 @@ thumbor:
     - data:/data
     - logs:/logs
   ports:
-    - "8000:8000" # thumbor port
-    - "8001:80" # nginx port (cache)
+    - "80:80" # thumbor port
   environment:
     DETECTORS: ['thumbor.detectors.feature_detector','thumbor.detectors.face_detector',]
     AWS_ACCESS_KEY:  # put your AWS_ACCESS_KEY here

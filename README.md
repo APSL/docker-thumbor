@@ -8,7 +8,8 @@ The thumbor's docker expose port 80 with the service.
 Consider to use the docker-thumbor-nginx image to use nginx like a first cache.  
 The nginx cache check if the file exists in a shared volume (file_storage) after to send the request to thumbor (automated failover).  
 We propose two thumbor images aspl/thumbor and apsl/thumbor-multiprocess.  
-The first one (monoprocess) to use under a docker organization tool and the second one if you need to deploy in one host and scale up easy.  
+The first one (monoprocess) to use under a docker organization tool and the second one use circus to increase the number of thumbor processes. Use multiprocess if you need to deploy in one host and scale up.  
+The remotecv could be scaled increasing the number of docker images using the same redis queue.  
 
 
 Description
@@ -24,7 +25,6 @@ Docker thumbor image
 * Use the official python images and best practices
 * A lot of docker-compose examples with tipical uses cases
 * See parent image https://registry.hub.docker.com/u/apsl/circusbase
-* circus to control processes. http://circus.readthedocs.org/
 * envtpl to setup config files on start time, based on environ vars. https://github.com/andreasjansson/envtpl
 
 Ports

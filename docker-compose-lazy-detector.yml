@@ -1,12 +1,10 @@
 thumbor:
   image: apsl/thumbor:latest
-  #build: thumbor
   volumes:
     - data:/data
     - logs:/logs
-  ports:
-    - "8000:8000" # thumbor port
-    - "8001:80" # nginx port (cache)
+  #ports:
+    #- "80:80" # thumbor port
   environment:
     DETECTORS: ['thumbor.detectors.queued_detector.queued_complete_detector',]
     STORAGE: thumbor.storages.mixed_storage
@@ -19,9 +17,17 @@ thumbor:
     MIXED_STORAGE_DETECTOR_STORAGE: thumbor.storages.redis_storage
   links:
     - redis:redis
+nginx:
+  build: nginx
+  links:
+    - thumbor:thumbor
+  volumes_from:
+    - thumbor
+  ports:
+    - "80:80" # nginx cache port (with failover to thumbor)
+  hostname: nginx
 remotecv:
   image: apsl/remotecv
-  #build: remotecv
   links:
     - redis:redis
   environment:
