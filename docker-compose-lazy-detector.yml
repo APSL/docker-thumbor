@@ -18,7 +18,7 @@ thumbor:
   links:
     - redis:redis
 nginx:
-  build: nginx
+  image: apsl/nginx:latest
   links:
     - thumbor:thumbor
   volumes_from:
@@ -27,7 +27,7 @@ nginx:
     - "80:80" # nginx cache port (with failover to thumbor)
   hostname: nginx
 remotecv:
-  image: apsl/remotecv
+  image: apsl/remotecv:latest
   links:
     - redis:redis
   environment:
