@@ -1,7 +1,7 @@
 thumbor:
   image: apsl/thumbor:latest
   volumes:
-    - "/root:/data"
+    - "/tmp:/data"
   environment:
     ALLOW_UNSAFE_URL: True
     ALLOW_UNSAFE_URL: True # False if you are in prod
