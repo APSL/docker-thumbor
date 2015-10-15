@@ -1,11 +1,9 @@
 thumbor:
   image: apsl/thumbor:latest
   volumes:
-    - data:/data
-    - logs:/logs
-  #ports:
-    #- "80:80" # thumbor port
+    - "/root:/data"
   environment:
+    ALLOW_UNSAFE_URL: True
     ALLOW_UNSAFE_URL: True # False if you are in prod
     SECURITY_KEY: SECURIZE_ME # Change it 
     DETECTORS: ['thumbor.detectors.queued_detector.queued_complete_detector',]
@@ -17,26 +15,21 @@ thumbor:
     REDIS_QUEUE_SERVER_PORT: 6379
     REDIS_QUEUE_SERVER_DB: 0
     MIXED_STORAGE_DETECTOR_STORAGE: thumbor.storages.redis_storage
-    SENTRY_DSN_URL: # put your sentry enpoint here
-  links:
-    - redis:redis
 nginx:
   image: apsl/thumbor-nginx:latest
   links:
-    - thumbor:thumbor
+    - "thumbor:thumbor"
   volumes_from:
-    - thumbor
+    - "thumbor"
   ports:
-    - "80:80" # nginx cache port (with failover to thumbor)
-  hostname: nginx
+    - "80:80"
+redis:
+  image: redis:latest
 remotecv:
   image: apsl/remotecv:latest
   links:
-    - redis:redis
+    - "redis:redis"
   environment:
     REDIS_HOST: redis
     REDIS_PORT: 6379
     REDIS_DATABASE: 0
-redis:
-  image: redis:latest
- 
