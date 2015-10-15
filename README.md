@@ -41,6 +41,10 @@ Check the docker-compose examples:
 * [AWS S3 storage](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-aws-s3-storage.yml)
 * [Proposed use in production](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-production.yml)
 
+
+[![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
+
+
 Env vars and default value:
 =========
     THUMBOR_LOG_FORMAT='%(asctime)s %(name)s:%(levelname)s %(message)s'
