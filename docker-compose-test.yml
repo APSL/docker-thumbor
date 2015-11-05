@@ -8,7 +8,7 @@ thumbor:
   environment:
     ALLOW_UNSAFE_URL: True
     SECURITY_KEY: SECURIZE_ME
-    DETECTORS: ['thumbor.detectors.queued_detector.queued_complete_detector',]
+    DETECTORS: "['thumbor.detectors.queued_detector.queued_complete_detector',]"
     RESULT_STORAGE: thumbor.result_storages.file_storage
     REDIS_STORAGE_SERVER_HOST: redis
     REDIS_STORAGE_SERVER_PORT: 6379
