@@ -1,4 +1,11 @@
 ========================
+Minimal Usage
+================
+```
+$ docker run -p 8000:80 apsl/thumbor
+$ wget http://localhost:8000/unsafe/300x300/i.imgur.com/bvjzPct.jpg
+```
+
 Docker thumbor and remotecv
 ========================
 
@@ -9,8 +16,7 @@ Consider to use the docker-thumbor-nginx image to use nginx like a first cache.
 The nginx cache check if the file exists in a shared volume (file_storage) after to send the request to thumbor (automated failover).  
 We propose two thumbor images aspl/thumbor and apsl/thumbor-multiprocess.  
 The first one (monoprocess) to use under a docker organization tool and the second one use circus to increase the number of thumbor processes. Use multiprocess if you need to deploy in one host and scale up.  
-The remotecv could be scaled increasing the number of docker images using the same redis queue.  
-
+The remotecv could be scaled increasing the number of docker images using the same redis queue.
 
 Description
 ===========
