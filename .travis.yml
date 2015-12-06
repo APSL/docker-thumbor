@@ -7,6 +7,7 @@ script:
   - ls -lah
   - docker-compose up -d
   - docker-compose ps
+  - wget http://localhost:8001/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
 notifications:
   email:
     - gshark@gmail.com
