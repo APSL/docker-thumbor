@@ -1,13 +1,16 @@
-install:
-  - sudo apt-get install -y linux-image-virtual kernel linux-image-extra-virtual
-  - curl -sSL https://get.docker.com/ | sudo sh
-  - sudo pip install docker-compose
+sudo: required
+
+language: ruby
+
+services:
+  - docker
 
 script:
   - ls -lah
   - docker-compose up -d
   - docker-compose ps
   - wget http://localhost:8001/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
+
 notifications:
   email:
     - gshark@gmail.com
