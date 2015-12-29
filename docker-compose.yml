@@ -13,8 +13,8 @@ thumbor:
     REDIS_QUEUE_SERVER_DB: 0
     MIXED_STORAGE_DETECTOR_STORAGE: thumbor.storages.redis_storage
   volumes:
-    - data:/data
-    - logs:/logs
+    - ./data:/data
+    - ./logs:/logs
   links:
     - redis:redis
   ports:

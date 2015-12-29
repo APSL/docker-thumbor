@@ -2,8 +2,8 @@ thumbor:
   image: apsl/thumbor:latest
   #build: thumbor
   volumes:
-    - data:/data
-    - logs:/logs
+    - ./data:/data
+    - ./logs:/logs
   ports:
     - "80:80" # thumbor port
   environment:
