@@ -17,6 +17,8 @@ RUN  \
 ENV HOME /usr/src/app
 ENV SHELL bash
 ENV WORKON_HOME /usr/src/app
+ENV MAX_WIDTH 2048
+ENV MAX_HEIGHT 2048
 WORKDIR /usr/src/app
 
 COPY requirements.txt /usr/src/app/requirements.txt
