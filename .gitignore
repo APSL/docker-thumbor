@@ -1,3 +1,4 @@
 .directory
 data
 logs
+docker-compose-aws-s3-storage-test.yml
