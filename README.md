@@ -8,6 +8,8 @@ $ wget http://localhost:8000/unsafe/300x300/i.imgur.com/bvjzPct.jpg
 Docker thumbor and remotecv
 ========================
 
+[![Build Status](https://travis-ci.org/APSL/docker-thumbor.svg?branch=travis)](https://travis-ci.org/APSL/docker-thumbor)
+
 Docker image for thumbor, and separated one for remotecv, necessary for the lazy detection.  
 All parameters of the thumbor config can be set with env vars.  
 The thumbor's docker expose port 80 with the service.  
