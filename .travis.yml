@@ -19,11 +19,15 @@ env:
 after_success:
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $THUMBOR_VERSION; fi`
-- docker build -f thumbor/Dockerfile -t apsl/thumbor:$TAG thumbor/
+- docker build -f thumbor/Dockerfile -t apsl/thumbor thumbor/
+- docker tag apsl/thumbor apsl/thumbor:$TAG
 - docker push apsl/thumbor:$TAG
-- docker build -f thumbor-multiprocess/Dockerfile -t apsl/thumbor:$TAG thumbor-multiprocess/
+- docker build -f thumbor-multiprocess/Dockerfile -t apsl/thumbor-multiprocess thumbor-multiprocess/
+- docker tag apsl/thumbor-multiprocess apsl/thumbor-multiprocess:$TAG
 - docker push apsl/thumbor-multiprocess:$TAG
-- docker build -f nginx/Dockerfile -t apsl/thumbor-nginx:$TAG nginx/
+- docker build -f nginx/Dockerfile -t apsl/thumbor-nginx nginx/
+- docker tag apsl/thumbor-nginx apsl/thumbor-nginx:$TAG
 - docker push apsl/thumbor-nginx:$TAG
-- docker build -f remotecv/Dockerfile -t apsl/remotecv:$TAG remotecv/
+- docker build -f remotecv/Dockerfile -t apsl/remotecv remotecv/
+- docker tag apsl/remotecv apsl/remotecv:$TAG
 - docker push apsl/remotecv:$TAG
