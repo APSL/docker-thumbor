@@ -486,19 +486,19 @@ TC_AWS_RESULT_STORAGE_ROOT_PATH = '{{ TC_AWS_RESULT_STORAGE_ROOT_PATH | default(
 # put data into S3 using the Server Side Encryption functionality to
 # encrypt data at rest in S3
 # https://aws.amazon.com/about-aws/whats-new/2011/10/04/amazon-s3-announces-server-side-encryption-support/
-TC_AWS_STORAGE_SSE = '{{ TC_AWS_STORAGE_SSE | default(False) }}'
+TC_AWS_STORAGE_SSE = {{ TC_AWS_STORAGE_SSE | default(False) }}
 
 # put data into S3 with Reduced Redundancy
 # https://aws.amazon.com/about-aws/whats-new/2010/05/19/announcing-amazon-s3-reduced-redundancy-storage/
-TC_AWS_STORAGE_RRS = '{{ TC_AWS_STORAGE_RRS | default(False) }}'
+TC_AWS_STORAGE_RRS = {{ TC_AWS_STORAGE_RRS | default(False) }}
 
 
 # Enable HTTP Loader as well?
 # This would allow you to load watermarks in over your images dynamically through a URI
 # E.g.
 # http://your-thumbor.com/unsafe/filters:watermark(http://example.com/watermark.png,0,0,50)/s3_bucket/photo.jpg
-TC_AWS_ENABLE_HTTP_LOADER = '{{ TC_AWS_ENABLE_HTTP_LOADER | default(False) }}'
+TC_AWS_ENABLE_HTTP_LOADER = {{ TC_AWS_ENABLE_HTTP_LOADER | default(False) }}
 
-TC_AWS_ALLOWED_BUCKETS = '{{ TC_AWS_ALLOWED_BUCKETS | default(False) }}' # List of allowed bucket to be requested
-TC_AWS_STORE_METADATA = '{{ TC_AWS_STORE_METADATA | default(False) }}' # Store result with metadata (for instance content-type)
+TC_AWS_ALLOWED_BUCKETS = {{ TC_AWS_ALLOWED_BUCKETS | default(False) }} # List of allowed bucket to be requested
+TC_AWS_STORE_METADATA = {{ TC_AWS_STORE_METADATA | default(False) }} # Store result with metadata (for instance content-type)
 ################################################################################
