@@ -30,7 +30,7 @@ nginx:
   hostname: nginx
 remotecv:
   image: apsl/remotecv
-    links:
+  links:
     - redis:redis
   environment:
     REDIS_HOST: redis
