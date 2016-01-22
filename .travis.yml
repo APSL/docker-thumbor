@@ -1,38 +1,34 @@
 sudo: required
 language: ruby
 services:
-  - docker
+- docker
 script:
-  - ls -lah
-  - docker-compose up -d
-  - docker-compose ps
-  - wget http://localhost:8001/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
+- ls -lah
+- docker-compose up -d
+- docker-compose ps
+- wget http://localhost:8001/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
 notifications:
   email:
-    - gshark@gmail.com
+  - gshark@gmail.com
 env:
   global:
-    - COMMIT=${TRAVIS_COMMIT::8}
-    - secure: b1cPzcceliZcXBqs6OkyrLA7RltD10QK5tbqocSyhVlczjSsav8hWycU8430mPiXXRTiMDkvhmaUGZReC9gJ4jtedYVGFWRQSoy59FTpl7Gf4ExnK8W/5NLM50aj3ZO48oBaKybaU3Xc+adrVs0M7EOHclm3RYdB6KAr4AhL4kkpzarHcSZlZGOQ/b2R5IKVA2x23+1xEwgVwWC+6GjD2NIzXI6jlx4UdloUvzfMIeA3N2twMaPUdj08rSIgdrmqK7mKxYZ+9bVvXHuRzJH0ogh+9t5/y4tIdq6tJjEjXWLDpHz1Jh7q/PlFmjRO1W+kT5b5gEYsBue9YlFtTZZDyGB5hY/oaAz2bSizx7tw8m5GPCX/yF7f6l/yUzsm5pBbxzVH2NobF+VHyJYSeBmkB8b1g/LSg5YaGCIqB/WQEk8KdmHwzaSAdrsNAykBxfgZnpifxeaKhHhCjlc0gkbEpzcAjh/7MrryF3liQ/1Woyd+MKYkk34awuCDQTEBeOYUeR3kCsD7ZjbZ3fhZoHbjl6D7HCysKpYoT6iV3UX9jshOAkPlSot3p2aHXPAg808jb8KdFTk71UCjnscy2D462bpp4jENC78OC8m2ZB8dg3LV9dHxySVps+IYBmRl+624Rhqxv6GmpdWN1aosqS2CYfCXg1zk15tQr6FZSqV96B4=
-    - secure: Ea9ZPTvtOYqo/+UVFDUdWMpjKGB01XbDdGTfIQlXxtZ+rAFKPiA8wDnBIS8X3nVJvPv8fFl8X08CP95pmKnDrB9Az8hhhhuDnzjGchG+DbX2SuyXeVmPTcGbPyfastTz3A/jf9+VYRWZNpMKlOKN9k2vUNgOqjLH9YgWM8AC3rWVHYVMbV2rO1KM9GERngi4MWj91UQHeJAwDDs4paJrnktV6aSXpkaGkai6nXieu0pdVNbOVqnEI0YdGydslnflcZa5XZHUz9SdS7EPR2ZEohArD0kVqNr62yMd23ucH8J2xym8fYR6D8OYjroxI8dK7DaXLPs5UxjgAyK+lh+rbdeArMEJQ3Ikkbt2qzcGTGfqd+vTBbuBLFgRrw8vd4z7PPYcp+iTGTtRo6RA3A0i+8siAVwQh0iGxTCHVloLKOs3K2VZzsg9Ta0qO7YlrXYs+CNtcwzynjbHdkiiq25xGAQYCIzXJrfg4HVY3mvTvUmf0b8enPl+gC0Be0NijJla+lQmaod6dv+Ds4URqWhA7oGfST1TDfiWaQYhuTrRBnSqRN//iiDXAWdXWPtinpW73mHPJps+S6/0CNTtKONi8JfFXaxcr32CjxhY/iSdsu+FQTZg54bRhdYMgeyo2/YbTOKckxm/fyfy07i7ZZXViylAN7G//49d0l672alyPlA=
-    - secure: Lsp2kQga6uMolVwcCQh3aCEtOIzJZHmC1PzZCBXtDusiZGwjz6Y8VgOsY4FmtsgyFrwbBw6rz4DGSWilVxs2vxk4jqStkpXA4s/LSaZhMYsDZPHjN1AoOc49U9GvTUrjyQNXW5lSvGKlCUQtSh5IH2SXyPg1BscIfi0Pp9uRBRdPoRDchjHLyS30Vz1DfcZqPIb/G7SyQmKGSHc/37pEipf4LL2NBI8lJO5lohaBEXSl8aY2G2t454hQJ1NKjOSP5ig/CqoivGQeIgwq3j9BYEx+iNXXWIhgY4PEVZtJquW/yAc0Yim1i04qTLsSzYMHbRfVw71R+KL4LXL9OJbTATmuEBUJqcOlJNCz90vWS2A2nYlfzQJgiocRlOh5CTwtfL4PZqa3INf7D+mf545eRhnaRThXDtyBUOYRwlSeTyPyIunI+Rnre7uJA81ByfdUoNxCIQiaXIKru9L1THo/7uSu0kXbodYhrBbWsJy7OvgY+VsqEkPUpRzT/8Wue5Fezy0TzZWv8J0uOdc66VcT9iuNK9I/Y5ttTNi38bFBj7LXf6K4JV8qL+ONofS0x0DiW31H+5NCeOTbp0tOrZZ8Qq2X2odKXkpx4S7KJEMh98eLe9hMJDRuLWcTHDqWJ0OvnV2ppQVDt4m/T2zfluWBbZYk46NjXkAde9rjsfK9Reg=
+  - THUMBOR_VERSION=5.2.1-rc
+  - COMMIT=${TRAVIS_COMMIT::8}
+  - secure: LSNYgDagNJrEBIZtAMXgGNaza66WniJNWVYpeZ00bxrqF2AJ/NLt9FGGvySDwJHcgqgD0SbsxD7EAefuZlBNq/68qvHFtnNZb5FoU6gjXW9Kvdlvtt6r5zcTvrPDwAlaGUi6iDnTxNd1YK+dQ5M5QPk6Vr3yAU2Pd/SjQtDTZU9TIUPIU2PHkzf/3mOV2VXrwfN4SR1XDe15Dk/dofDc0GWfvSQUedUZzEYGOT4yg5CNa1Zps10tD5rEsGaYoiBfJyTNaaXPufGbytqrJ0OyLXtkKevcVGQcCZn2RrBqwMatuOMdlsx5UxHbxSCHngtwQgIE7nKsuSQupW4R8MK9RmSWPy34rbaBAb3qWYBrmEQxBSeVFDShML+wunMWwjJ2Spugc4ER71PX4O97GtQB/4H9EyEFuDO9MnEIHX6GpRCS21NHVXUVAdrAHXfTGZBIvrOcAHh9y1idHeCsF92X0qBNkC+MNaAxWV+gvCZ+sZpDKrfoUMDI+nxff5B/Cb33++9iv4gWz01GJDVmK6YyTT0/6+KzHNU0mp7ji7wgvlTUDYCSTR1+11R9Aoalt07KfMJS1gGG8HuMFcSCV7z1btxWZUWKpC6WydXwJuVyQZg7g6HYJEEHxtpP8z81FWLhGQWk3qMpi5kxZrqDQ7IES8ibK1o1tyFMUCn0Jdm6Uyo=
+  - secure: JHQ1g7ZWuO5IQhPd915so8pBPfMNp00rRRvNmewHaUXO33UnC6g1pFkTKsx5QpDi0QxdH0o0DYOXB1nvd1Y/cO3spW5P2dV0kfftr2GUTGKf6WTakZPfqowvZN6YKA+rI7eFaGnhrVLhzKhK5T5Gu9UHklPlndo6LvQxqQBuYI2uggSTK4M4zD5XWqEe6o0RJ89y6xX7DyqLKIkXF3N/RcoHLh7GSfNZNdaN/u/Nb1fQKTYIOiMVIPYYNm1DU4c/jsIxxJhxC60DgavC5rwCLQg5FXT5vQ6Ky41JRR0U3a23US3E0wMaHP1LvHP9o4jfFeA6pLG7zgceGkY+IKlsWPT2pr3nR71xCHEtZe2tPvAlwvgwIngliM06SIGrk0s5yuhD6Qvug9/DfAe96gD557WYEXXnT++ByW/+gGq3kiWBQlMqg9Z8N15WIA0qe+LUrkmw9MiuWkJyR3hP0Kidl/pv0AAM0oqqGuLiruPAsetk24lT2zh77t4wOI1jyGUwaqVHUlRHOegflXcRh9eAsBHFmXDJEkqLDs4yJ+oeMUnLyoLy24xJ1hvx41oVGbIQL0qTIikkN5i9qAU0hX8ZoBOwQN+WoffNC2+tEX0cDhTugKIg3YzHkHqYDmplCsElP8PAuCzxl0/P8W4CtHqn9F0FO+CgW3HLit9jJfHFYeA=
+  - secure: b1+J/WngVLdn37ubp7iJLGHY3X5j95Ewk60mYOy4FAfdb6ofK6dtOUXTGHNjqMNsZDoZShjuFvB3+Qrz5VSzx2JT/R+hgqdr08Ft8powZYUPJUOBih+mZAo1ACgxhn/jHQsp/OUkD4Qe0PGRVqva10HQP55+SINH605b9/HGQdQwGhI++kvsqLaQZVcdKtFyetF+RkY70rXAsite53zd++2FYScvsjuf0ie5BTmPTyoOs1Cq8w1/+xVSb911F5m1KIJg8Z3O1zXL1XJ2IXAHoVGxuoCeGNw61RKEMp3VGZPeX/TBvFSbQ5alShmxgS6GPAcZFsWX/Lv6CdYOWoXjDKCTfrgvoElcn8AvBoZiNDf9aegnHZooHskoA4Bi+Tj83TDoZvB1qQvLWhD/ldZl+/9gBj/f3zO8FECK+RTDeN5MNgKWs/eg8lU9D1JRYw2JkN+AADUZlJXGZiZHGQDh03rsSfb0C4LpwulZwEWCTB5s1y22WwI+1Ec+S4TajqPInojn45qUIyH0sf/JPVYpCYAbbQWugwz+rrvuv90rPYNI8m73Fv2jk5a57P5t4+UBGS6UNfq8Kyj5d/b/hRznT4lvE3hvPwRjo07C4m+hPAJgPuRnFCZhaJ4E6b9zgdgKitaz/xGiosn2O4Y2apT5mNcgbHEq1v0j+P19CxDqDHg=
 after_success:
-  - echo "$DOCKER_EMAIL"
-  - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-  - docker build -f thumbor/Dockerfile -t apsl/thumbor:$COMMIT thumbor/
-  - docker tag apsl/thumbor:$COMMIT apsl/thumbor:$TAG
-  - docker tag apsl/thumbor:$COMMIT apsl/thumbor:travis-$TRAVIS_BUILD_NUMBER
-  - docker push apsl/thumbor
-  - docker build -f thumbor-multiprocess/Dockerfile -t apsl/thumbor:$COMMIT thumbor-multiprocess/
-  - docker tag apsl/thumbor-multiprocess:$COMMIT apsl/thumbor-multiprocess:$TAG
-  - docker tag apsl/thumbor:$COMMIT apsl/thumbor-multiprocess:travis-$TRAVIS_BUILD_NUMBER
-  - docker push apsl/thumbor-multiprocess
-  - docker build -f nginx/Dockerfile -t apsl/thumbor-nginx:$COMMIT nginx/
-  - docker tag apsl/thumbor-nginx:$COMMIT apsl/thumbor-nginx:$TAG
-  - docker tag apsl/thumbor-nginx:$COMMIT apsl/thumbor-nginx:travis-$TRAVIS_BUILD_NUMBER
-  - docker push apsl/thumbor-nginx
-  - docker build -f remotecv/Dockerfile -t apsl/thumbor-nginx:$COMMIT remotecv/
-  - docker tag apsl/remotecv:$COMMIT apsl/remotecv:$TAG
-  - docker tag apsl/remotecv:$COMMIT apsl/remotecv:travis-$TRAVIS_BUILD_NUMBER
-  - docker push apsl/remotecv
+- docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $THUMBOR_VERSION; fi`
+- docker build -f thumbor/Dockerfile -t apsl/thumbor:$COMMIT thumbor/
+- docker tag apsl/thumbor:$COMMIT apsl/thumbor:$TAG
+- docker push apsl/thumbor:$TAG
+- docker build -f thumbor-multiprocess/Dockerfile -t apsl/thumbor:$COMMIT thumbor-multiprocess/
+- docker tag apsl/thumbor-multiprocess:$COMMIT apsl/thumbor-multiprocess:$TAG
+- docker push apsl/thumbor-multiprocess:$TAG
+- docker build -f nginx/Dockerfile -t apsl/thumbor-nginx:$COMMIT nginx/
+- docker tag apsl/thumbor-nginx:$COMMIT apsl/thumbor-nginx:$TAG
+- docker push apsl/thumbor-nginx:$TAG
+- docker build -f remotecv/Dockerfile -t apsl/remotecv:$COMMIT remotecv/
+- docker tag apsl/remotecv:$COMMIT apsl/remotecv:$TAG
+- docker push apsl/remotecv:$TAG
