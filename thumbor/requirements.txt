@@ -12,3 +12,4 @@ git+https://github.com/APSL/thumbor_aws.git
 tc-aws==2.1.1
 tc-core==0.3.0
 tc-shortener==0.2.2
+raven==5.10.1
