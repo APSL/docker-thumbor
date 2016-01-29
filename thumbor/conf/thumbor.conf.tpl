@@ -197,6 +197,11 @@ HTTP_LOADER_PROXY_USERNAME = {{ HTTP_LOADER_PROXY_USERNAME | default(None) }}
 ## Defaults to: None
 HTTP_LOADER_PROXY_PASSWORD = {{ HTTP_LOADER_PROXY_PASSWORD | default(None) }}
 
+
+## The maximum image size that will be fetched, in bytes
+## Defaults to: 104857600
+MAX_SOURCE_SIZE = {{ MAX_SOURCE_SIZE | default(104857600) }}
+
 ################################################################################
 
 

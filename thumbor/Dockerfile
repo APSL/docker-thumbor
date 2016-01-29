@@ -19,6 +19,8 @@ ENV SHELL bash
 ENV WORKON_HOME /usr/src/app
 ENV MAX_WIDTH 2048
 ENV MAX_HEIGHT 2048
+ENV MAX_SOURCE_SIZE 10485760
+ENV STORAGE_EXPIRATION_SECONDS 0
 WORKDIR /usr/src/app
 
 COPY requirements.txt /usr/src/app/requirements.txt
