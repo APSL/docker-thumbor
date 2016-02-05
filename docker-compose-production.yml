@@ -4,7 +4,7 @@ thumbor:
     - ./data:/data
     - ./logs:/logs
   #ports:
-    #- "80:80" # thumbor port
+    #- "80:8000" # thumbor port
   environment:
     ALLOW_UNSAFE_URL: False
     SECURITY_KEY: SECURIZE_ME

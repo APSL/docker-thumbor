@@ -18,7 +18,7 @@ thumbor:
   links:
     - redis:redis
   ports:
-    - "127.0.0.1:8001:80" # thumbor port
+    - "127.0.0.1:8001:8000" # thumbor port
 nginx:
   image: apsl/thumbor-nginx
   links:

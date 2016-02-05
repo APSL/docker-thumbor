@@ -9,4 +9,4 @@ autostart = True
 
 [socket:thumbor]
 host = 0.0.0.0
-port = {{ THUMBOR_PORT | default(80) }}
+port = {{ THUMBOR_PORT | default(8000) }}

@@ -8,7 +8,7 @@ fi
 
 # If not set we use thumbor port default value
 if [ -z ${THUMBOR_PORT+x} ]; then
-    THUMBOR_PORT=80
+    THUMBOR_PORT=8000
 fi
 
 # If not set we use 80 for nginx port

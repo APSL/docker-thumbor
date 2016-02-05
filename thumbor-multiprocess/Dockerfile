@@ -13,4 +13,4 @@ COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["circus"]
 
-EXPOSE 8888
+EXPOSE 8888 8000

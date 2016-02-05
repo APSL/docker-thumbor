@@ -32,4 +32,4 @@ COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["thumbor"]
 
-EXPOSE 80
+EXPOSE 8000

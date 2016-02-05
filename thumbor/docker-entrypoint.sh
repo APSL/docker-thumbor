@@ -9,7 +9,7 @@ fi
 
 # Check if thumbor port is defined -> (default port 80)
 if [ -z ${THUMBOR_PORT+x} ]; then
-    THUMBOR_PORT=80
+    THUMBOR_PORT=8000
 fi
 
 if [ "$1" = 'thumbor' ]; then
