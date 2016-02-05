@@ -24,7 +24,7 @@ nginx:
   volumes_from:
     - thumbor
   ports:
-    - "127.0.0.1:8000:8001" # thumbor port
+    - "8169:80" # thumbor port
   hostname: nginx
 remotecv:
   build: remotecv
