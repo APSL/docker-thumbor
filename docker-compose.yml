@@ -1,5 +1,5 @@
 thumbor:
-  build: thumbor-multiprocess
+  build: thumbor
   environment:
     RESULT_STORAGE: thumbor.result_storages.file_storage
     RESULT_STORAGE_STORES_UNSAFE: True

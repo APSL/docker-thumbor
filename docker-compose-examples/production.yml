@@ -1,20 +1,19 @@
 thumbor:
-  image: apsl/thumbor-multiprocess:latest
+  image: apsl/thumbor:latest
   volumes:
-    - ./data:/data
     - ./logs:/logs
-  #ports:
-    #- "80:8000" # thumbor port
+    - ./data:/data
   environment:
     ALLOW_UNSAFE_URL: False
+    DETECTORS: ['thumbor.detectors.queued_detector.queued_complete_detector',]
+    AWS_ACCESS_KEY_ID: # put your AWS_ACCESS_KEY here
+    AWS_SECRET_ACCESS_KEY: # put your AWS_SECRET_ACCESS_KEY here
+    TC_AWS_LOADER_BUCKET: bucket-name
+    LOADER: tc_aws.loaders.s3_loader
     SECURITY_KEY: SECURIZE_ME
-    DETECTORS: "['thumbor.detectors.queued_detector.queued_complete_detector',]"
-    AWS_ACCESS_KEY:  # put your AWS_ACCESS_KEY here
-    AWS_SECRET_KEY:  # put your AWS_SECRET_KEY here
+    #LOG_LEVEL: debug
     STORAGE: thumbor.storages.mixed_storage
-    STORAGE_BUCKET: storage-bucket-name
-    UPLOAD_PHOTO_STORAGE: thumbor_aws.storages.s3_storage
-    MIXED_STORAGE_FILE_STORAGE: thumbor_aws.storages.s3_storage
+    MIXED_STORAGE_FILE_STORAGE: thumbor.storages.file_storage
     RESULT_STORAGE: thumbor.result_storages.file_storage
     REDIS_STORAGE_SERVER_HOST: redis
     REDIS_STORAGE_SERVER_PORT: 6379
@@ -22,11 +21,13 @@ thumbor:
     REDIS_QUEUE_SERVER_HOST: redis
     REDIS_QUEUE_SERVER_PORT: 6379
     REDIS_QUEUE_SERVER_DB: 0
+    STORAGE_EXPIRATION_SECONDS: None
+    RESULT_STORAGE_EXPIRATION_SECONDS: None
     MIXED_STORAGE_DETECTOR_STORAGE: thumbor.storages.redis_storage
     SENTRY_DSN_URL: # put your sentry enpoint here
-    THUMBOR_NUM_PROCESSES: 16
   links:
     - redis:redis
+  restart: always
 nginx:
   image: apsl/thumbor-nginx:latest
   links:
@@ -44,6 +45,13 @@ remotecv:
     REDIS_HOST: redis
     REDIS_PORT: 6379
     REDIS_DATABASE: 0
+    SENTRY_URL: # put your sentry enpoint here
+    LOADER: remotecv_aws.loader
+    AWS_ACCESS_KEY_ID: # put your AWS_ACCESS_KEY here
+    AWS_SECRET_ACCESS_KEY: # put your AWS_SECRET_ACCESS_KEY here
+    AWS_LOADER_BUCKET: bucket-name
+    #LOG_LEVEL: DEBUG
+  restart: always
 redis:
   image: redis:latest
- 
+  restart: always

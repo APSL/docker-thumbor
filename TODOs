@@ -1,34 +1,12 @@
-New requirements v2
+New requirements v3
 
 Thumbor
-    - Official python image
-    - Remove nginx
-    - Remove user app, use root instead
-    - No virtualenv
-    - ¿Remove circus?
     - Securize critical env vars: thumbor key
-        - Env file
-    - Way to config the number of thumbor proceses running inside the container
+        - Secrets
 
-Remotecv
-    - Official python image
-    - ¿Remove circus?
-    - Update las version (change name)
-
-Nginx
-    - Volumes from thumbor
-    - Check image in volume and failover (possible?)
-
-Redis
-
+Document results analized of service with tests like:
 # Stress test in localhost
 ab -n 1000 -c 5 http://localhost:8000/unsafe/600x500/static.goal.com/749100/749122_heroa.jpg
 Without result storage , without nginx: 32
 With result storage , without nginx: 748
 With result storage , with nginx: 5237
-
-
-python
-python-dev
-python-distribute
-python-pip
