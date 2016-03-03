@@ -1,6 +1,6 @@
 argparse==1.2.1
 envtpl==0.4.1
-boto==2.38.0
+boto==2.39.0
 dateutils==0.6.6
 numpy==1.9.2
 pyremotecv==0.5.0
