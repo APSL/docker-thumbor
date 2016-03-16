@@ -8,6 +8,9 @@ thumbor:
     DETECTORS: ['thumbor.detectors.queued_detector.queued_complete_detector',]
     AWS_ACCESS_KEY_ID: # put your AWS_ACCESS_KEY here
     AWS_SECRET_ACCESS_KEY: # put your AWS_SECRET_ACCESS_KEY here
+    # Is needed for buckets that demand the new signing algorithm (v4)
+    # S3_USE_SIGV4: true
+    # TC_AWS_REGION: eu-central-1
     TC_AWS_LOADER_BUCKET: bucket-name
     LOADER: tc_aws.loaders.s3_loader
     SECURITY_KEY: SECURIZE_ME
