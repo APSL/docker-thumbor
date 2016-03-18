@@ -1,18 +1,18 @@
 Minimal Usage
 ================
 ```
-$ docker run -p 8000:80 apsl/thumbor
+$ docker run -p 8000:8000 apsl/thumbor
 $ wget http://localhost:8000/unsafe/300x300/i.imgur.com/bvjzPct.jpg
 ```
 
 Docker thumbor and remotecv
 ========================
 
-[![Build Status](https://travis-ci.org/APSL/docker-thumbor.svg?branch=travis)](https://travis-ci.org/APSL/docker-thumbor)
+[![Build Status](https://travis-ci.org/APSL/docker-thumbor.svg?branch=master)](https://travis-ci.org/APSL/docker-thumbor)
 
 Docker image for thumbor, and separated one for remotecv, necessary for the lazy detection.  
 All parameters of the thumbor config can be set with env vars.  
-The thumbor's docker expose port 80 with the service.  
+The thumbor's docker expose port 8000 with the service.  
 Consider to use the docker-thumbor-nginx image to use nginx like a first cache.  
 The nginx cache check if the file exists in a shared volume (file_storage) after to send the request to thumbor (automated failover).  
 We propose two thumbor images aspl/thumbor and apsl/thumbor-multiprocess.  
@@ -28,7 +28,7 @@ Docker thumbor image
 * Opencv detectors
 * Optimizer JPEG included
 * Nginx cache to optimize the server of result images in a separated docker image
-* Separated remotecv docker image
+* Separated remotecv docker image, with AWS S3 loader support.
 * Use the official python images and best practices
 * A lot of docker-compose examples with tipical uses cases
 * envtpl to setup config files on start time, based on environ vars. https://github.com/andreasjansson/envtpl
@@ -36,17 +36,17 @@ Docker thumbor image
 Ports
 =====
 
-* 80: thumbor
+* 8000: thumbor
 
 Docker-compose examples
 =======================
 
 Check the docker-compose examples:
 
-* [Simple detection](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-detector.yml)
-* [Lazy detection using redis](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-lazy-detector.yml)
-* [AWS S3 storage](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-aws-s3-storage.yml)
-* [Proposed use in production](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-production.yml)
+* [Simple detection](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-examples/detector.yml)
+* [Lazy detection using redis](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-examples/lazy-detector.yml)
+* [AWS S3 storage](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-examples/aws-s3-storage.yml)
+* [Proposed use in production, reading from a AWS S3 and local cache of storage/result_storage](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-examples/production.yml)
 
 
 [![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
@@ -74,10 +74,8 @@ Env vars and default value:
     USE_BLACKLIST=False
     LOADER='thumbor.loaders.http_loader'
     STORAGE='thumbor.storages.file_storage'
-    STORAGE_BUCKET=''
-    RESULT_STORAGE_BUCKET=''
-    AWS_ACCESS_KEY=''
-    AWS_SECRET_KEY=''
+    AWS_ACCESS_KEY_ID='' -> Note: New in version 5.2.1c
+    AWS_SECRET_ACCESS_KEY='' -> Note: New in version 5.2.1c
     RESULT_STORAGE='thumbor.result_storages.file_storage'
     ENGINE='thumbor.engines.pil'
     SECURITY_KEY='MY_SECURE_KEY'
@@ -89,7 +87,7 @@ Env vars and default value:
     HTTP_LOADER_FOLLOW_REDIRECTS=True
     HTTP_LOADER_MAX_REDIRECTS=5
     HTTP_LOADER_FORWARD_USER_AGENT=False
-    HTTP_LOADER_DEFAULT_USER_AGENT='Thumbor/5.0.3'
+    HTTP_LOADER_DEFAULT_USER_AGENT='Thumbor/5.2.1'
     HTTP_LOADER_PROXY_HOST=None
     HTTP_LOADER_PROXY_PORT=None
     HTTP_LOADER_PROXY_USERNAME=None
@@ -137,3 +135,15 @@ Env vars and default value:
     ERROR_FILE_LOGGER=None
     ERROR_FILE_NAME_USE_CONTEXT='False'
     SENTRY_DSN_URL=''
+    TC_AWS_REGION='eu-west-1'
+    TC_AWS_STORAGE_BUCKET=''
+    TC_AWS_STORAGE_ROOT_PATH=''
+    TC_AWS_LOADER_BUCKET=''
+    TC_AWS_LOADER_ROOT_PATH=''
+    TC_AWS_RESULT_STORAGE_BUCKET=''
+    TC_AWS_RESULT_STORAGE_ROOT_PATH=''
+    TC_AWS_STORAGE_SSE=False
+    TC_AWS_STORAGE_RRS=False
+    TC_AWS_ENABLE_HTTP_LOADER=False
+    TC_AWS_ALLOWED_BUCKETS=False
+    TC_AWS_STORE_METADATA=False

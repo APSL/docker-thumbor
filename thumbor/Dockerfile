@@ -35,6 +35,6 @@ RUN \
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["thumbor", "--port=28765"]
+CMD ["thumbor"]
 
 EXPOSE 28765
