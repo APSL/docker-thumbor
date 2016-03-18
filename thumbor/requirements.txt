@@ -7,7 +7,8 @@ pyremotecv==0.5.0
 remotecv==2.1.0
 opencv-engine==1.0.1
 redis==2.4.12
--e git://github.com/Smarp/thumbor.git@smarp_master#egg=thumbor
+Pillow==3.1.1
+-e git://github.com/Smarp/thumbor.git@3d7f7db#egg=thumbor
 tc-aws==2.1.2
 tc-core==0.3.0
 tc-shortener==0.2.2
