@@ -14,3 +14,10 @@ raven==5.15.0
 thumbor-memcached==5.1.0
 tc-mongodb==5.1.0
 tc-redis==1.0.1
+
+## Multiprocess
+circus==0.11.1
+circus-web==0.5
+
+# Remotecv
+remotecv-aws==0.1

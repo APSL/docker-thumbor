@@ -1,0 +1,14 @@
+python-numpy
+python-opencv
+git
+curl
+build-essential
+libcurl4-openssl-dev
+libdc1394-22
+libdc1394-22-dev
+libjpeg-dev
+libpng12-dev
+libtiff5-dev
+libjasper-dev
+libmemcached-dev
+libjpeg-turbo-progs
