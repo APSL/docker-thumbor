@@ -12,3 +12,10 @@ libtiff5-dev
 libjasper-dev
 libmemcached-dev
 libjpeg-turbo-progs
+graphicsmagick
+libgraphicsmagick++3 
+libgraphicsmagick3
+libgraphicsmagick++1-dev
+libgraphicsmagick1-dev
+python-dev
+libboost-python-dev

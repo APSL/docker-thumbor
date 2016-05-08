@@ -9,3 +9,5 @@ opencv-engine==1.0.1
 thumbor==6.0.1
 raven==5.15.0
 remotecv_aws==0.1
+pgmagick==0.6.1
+graphicsmagick-engine==0.1.1
