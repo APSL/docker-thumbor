@@ -1,40 +1,58 @@
-thumbor:
-  image: apsl/thumbor
-  environment:
-    RESULT_STORAGE: thumbor.result_storages.file_storage
-    RESULT_STORAGE_STORES_UNSAFE: True
-    DETECTORS: "['thumbor.detectors.queued_detector.queued_complete_detector',]"
-    STORAGE: thumbor.storages.mixed_storage
-    REDIS_STORAGE_SERVER_HOST: redis
-    REDIS_STORAGE_SERVER_PORT: 6379
-    REDIS_STORAGE_SERVER_DB: 0
-    REDIS_QUEUE_SERVER_HOST: redis
-    REDIS_QUEUE_SERVER_PORT: 6379
-    REDIS_QUEUE_SERVER_DB: 0
-    MIXED_STORAGE_DETECTOR_STORAGE: thumbor.storages.redis_storage
-  volumes:
-    - ./data:/data
-    - ./logs:/logs
-  links:
-    - redis:redis
-  ports:
-    - "127.0.0.1:8001:8000" # thumbor port
-nginx:
-  image: apsl/thumbor-nginx
-  links:
-    - thumbor:thumbor
-  volumes_from:
-    - thumbor
-  ports:
-    - "127.0.0.1:8000:80" # thumbor port
-  hostname: nginx
-remotecv:
-  image: apsl/remotecv
-  links:
-    - redis:redis
-  environment:
-    REDIS_HOST: redis
-    REDIS_PORT: 6379
-    REDIS_DATABASE: 0
-redis:
-  image: redis:latest
+version: '2'
+services:
+  thumbor:
+    image: apsl/thumbor
+    environment:
+      - RESULT_STORAGE=thumbor.result_storages.file_storage
+      - RESULT_STORAGE_STORES_UNSAFE=True
+      - STORAGE=thumbor.storages.mixed_storage
+      - DETECTORS=["thumbor.detectors.queued_detector.queued_complete_detector"]
+      - REDIS_STORAGE_SERVER_HOST=redis
+      - REDIS_STORAGE_SERVER_PORT=6379
+      - REDIS_STORAGE_SERVER_DB=0
+      - REDIS_QUEUE_SERVER_HOST=redis
+      - REDIS_QUEUE_SERVER_PORT=6379
+      - REDIS_QUEUE_SERVER_DB=0
+      - MIXED_STORAGE_DETECTOR_STORAGE=thumbor.storages.redis_storage
+    volumes:
+      - data:/data
+      - logs:/logs
+    links:
+      - redis:redis
+    ports:
+      - "127.0.0.1:8001:8000" # thumbor port
+    networks:
+      - app
+  nginx:
+    image: apsl/thumbor-nginx
+    links:
+      - thumbor:thumbor
+    volumes_from:
+      - thumbor:ro
+    ports:
+      - "127.0.0.1:8000:80" # thumbor port
+    hostname: nginx
+    networks:
+      - app
+  remotecv:
+    image: apsl/remotecv
+    links:
+      - redis:redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DATABASE=0
+    networks:
+      - app
+  redis:
+    image: redis:latest
+    networks:
+      - app
+volumes:
+  data:
+    driver: local
+  logs:
+    driver: local
+networks:
+  app:
+    driver: bridge
