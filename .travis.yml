@@ -4,10 +4,12 @@ services:
 - docker
 script:
 - ls -lah
+- docker version
 - docker build -f thumbor/Dockerfile -t apsl/thumbor thumbor/
 - docker build -f thumbor-multiprocess/Dockerfile -t apsl/thumbor-multiprocess thumbor-multiprocess/
 - docker build -f nginx/Dockerfile -t apsl/thumbor-nginx nginx/
 - docker build -f remotecv/Dockerfile -t apsl/remotecv remotecv/
+- docker-compose version
 - docker-compose -f docker-compose-travis.yml up -d
 - docker-compose -f docker-compose-travis.yml ps
 - wget http://localhost:8001/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
@@ -32,4 +34,3 @@ after_success:
 - docker tag apsl/thumbor-nginx apsl/thumbor-nginx:$TAG
 - docker push apsl/thumbor-nginx:$TAG
 - docker images -a
-
