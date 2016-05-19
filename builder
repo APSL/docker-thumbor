@@ -1,4 +1,5 @@
-#!/bin/sh
+#!/bin/bash
+
 # Build wheels for all projects
 export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $THUMBOR_VERSION; fi`
 echo "TAG: $TAG"
