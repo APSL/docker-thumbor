@@ -22,7 +22,7 @@ services:
       - "127.0.0.1:8001:8000" # thumbor port
     networks:
       - app
-  thumbor:
+  thumbormultiprocess:
     image: apsl/thumbor-multiprocess
     environment:
       - RESULT_STORAGE=thumbor.result_storages.file_storage
