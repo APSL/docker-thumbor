@@ -28,6 +28,7 @@ env:
   - DOCKER_COMPOSE_VERSION=1.7.1
 after_success:
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+- export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $THUMBOR_VERSION; fi`
 - docker push apsl/thumbor:$TAG
 - docker push apsl/remotecv:$TAG
 - docker push apsl/thumbor-multiprocess:$TAG
