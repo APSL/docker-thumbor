@@ -7,5 +7,5 @@ services:
     ports:
       - "8069:8000" # thumbor port
     environment:
-      DETECTORS: "['thumbor.detectors.face_detector','thumbor.detectors.feature_detector',]"
-      ENGINE: 'graphicsmagick_engine.engine'
+      - DETECTORS=['thumbor.detectors.face_detector','thumbor.detectors.feature_detector',]
+      - ENGINE=graphicsmagick_engine.engine

@@ -1,8 +1,10 @@
-thumbor:
-  image: apsl/thumbor:latest
-  volumes:
-    - data:/data
-  ports:
-    - "80:8000" # thumbor port
-  environment:
-    DETECTORS: ['thumbor.detectors.face_detector','thumbor.detectors.feature_detector',]
+version: '2'
+services:
+  thumbor:
+    image: apsl/thumbor:latest
+    volumes:
+      - ./data:/data
+    ports:
+      - "80:8000" # thumbor port
+    environment:
+      - DETECTORS=['thumbor.detectors.face_detector','thumbor.detectors.feature_detector',]
