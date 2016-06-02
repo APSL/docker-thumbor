@@ -295,6 +295,27 @@ REDIS_STORAGE_SERVER_PASSWORD = {{ REDIS_STORAGE_SERVER_PASSWORD | default(None)
 ################################################################################
 
 
+################################ Redis Result Storage #################################
+
+## Redis storage server host
+## Defaults to: localhost
+REDIS_RESULT_STORAGE_SERVER_HOST = '{{ REDIS_RESULT_STORAGE_SERVER_HOST | default('redis') }}'
+
+## Redis storage server port
+## Defaults to: 6379
+REDIS_RESULT_STORAGE_SERVER_PORT = {{ REDIS_RESULT_STORAGE_SERVER_PORT | default(6379) }}
+
+## Redis storage database index
+## Defaults to: 0
+REDIS_RESULT_STORAGE_SERVER_DB = {{ REDIS_RESULT_STORAGE_SERVER_DB | default(0) }}
+
+## Redis storage server password
+## Defaults to: None
+REDIS_RESULT_STORAGE_SERVER_PASSWORD = {{ REDIS_STORAGE_SERVER_PASSWORD | default(None) }}
+
+################################################################################
+
+
 ############################### Memcache Storage ###############################
 
 ## List of Memcache storage server hosts
