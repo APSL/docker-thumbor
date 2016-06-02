@@ -26,7 +26,7 @@ thumbor:
     REDIS_QUEUE_SERVER_DB: 0
     STORAGE_EXPIRATION_SECONDS: None
     RESULT_STORAGE_EXPIRATION_SECONDS: None
-    MIXED_STORAGE_DETECTOR_STORAGE: thumbor.storages.redis_storage
+    MIXED_STORAGE_DETECTOR_STORAGE: tc_redis.storages.redis_storage
     SENTRY_DSN_URL: # put your sentry enpoint here
   links:
     - redis:redis
