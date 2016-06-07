@@ -13,7 +13,7 @@ services:
       - REDIS_QUEUE_SERVER_HOST=redis
       - REDIS_QUEUE_SERVER_PORT=6379
       - REDIS_QUEUE_SERVER_DB=0
-      - MIXED_STORAGE_DETECTOR_STORAGE=thumbor.storages.redis_storage
+      - MIXED_STORAGE_DETECTOR_STORAGE=tc_redis.storages.redis_storage
     volumes:
       - data:/data
     links:
