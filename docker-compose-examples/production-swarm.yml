@@ -76,6 +76,6 @@ volumes:
     driver: local
 networks:
   frontend:
-    driver: overlay
+    driver: bridge
   backend:
-    driver: overlay
+    driver: bridge
