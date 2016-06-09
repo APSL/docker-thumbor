@@ -1,27 +1,39 @@
-thumbor:
-  image: apsl/thumbor:latest
-  #build: thumbor
-  volumes:
-    - ./data:/data
-    - ./logs:/logs
-  ports:
-    - "80:8000" # thumbor port
-  environment:
-    DETECTORS: ['thumbor.detectors.feature_detector','thumbor.detectors.face_detector',]
-    AWS_ACCESS_KEY_ID:  # put your AWS_ACCESS_KEY_ID here
-    AWS_SECRET_ACCESS_KEY:  # put your AWS_SECRET_ACCESS_KEY here
-    # Is needed for buckets that demand the new signing algorithm (v4)
-    # S3_USE_SIGV4: true
-    # TC_AWS_REGION: eu-central-1
-    TC_AWS_STORAGE_BUCKET: thumbor-docker
-    TC_AWS_STORAGE_ROOT_PATH: storage
-    TC_AWS_RESULT_STORAGE_BUCKET: thumbor-docker
-    TC_AWS_RESULT_STORAGE_ROOT_PATH: result_storage
-    STORAGE: tc_aws.storages.s3_storage
-    UPLOAD_PHOTO_STORAGE: tc_aws.storages.s3_storage
-    # Two options for result storage
-    RESULT_STORAGE: thumbor.result_storages.file_storage
-    # and if you want to share the result storage cache between docker-images:
-    # RESULT_STORAGE: tc_aws.result_storages.s3_storage
-    # it works without share it, but consider any docker-image will download
-    # and process the result_image
+version: '2'
+services:
+  thumbor:
+    image: apsl/thumbor:latest
+    #build: thumbor
+    volumes:
+      - data:/data
+      - logs:/logs
+    ports:
+      - "80:8000" # thumbor port
+    environment:
+      - DETECTORS=['thumbor.detectors.feature_detector','thumbor.detectors.face_detector']
+      - AWS_ACCESS_KEY_ID= # put your AWS_ACCESS_KEY_ID here
+      - AWS_SECRET_ACCESS_KEY= # put your AWS_SECRET_ACCESS_KEY here
+      # Is needed for buckets that demand the new signing algorithm (v4)
+      # - S3_USE_SIGV4=true
+      # - TC_AWS_REGION=eu-central-1
+      - TC_AWS_STORAGE_BUCKET=thumbor-docker
+      - TC_AWS_STORAGE_ROOT_PATH=storage
+      - TC_AWS_RESULT_STORAGE_BUCKET=thumbor-docker
+      - TC_AWS_RESULT_STORAGE_ROOT_PATH=result_storage
+      - STORAGE=tc_aws.storages.s3_storage
+      - UPLOAD_PHOTO_STORAGE=tc_aws.storages.s3_storage
+      # Two options for result storage
+      - RESULT_STORAGE=thumbor.result_storages.file_storage
+      # and if you want to share the result storage cache between docker-images:
+      # - RESULT_STORAGE=tc_aws.result_storages.s3_storage
+      # it works without share it, but consider any docker-image will download
+      # and process the result_image
+    networks:
+      - app
+volumes:
+  data:
+    driver: local
+  logs:
+    driver: local
+networks:
+  app:
+    driver: bridge

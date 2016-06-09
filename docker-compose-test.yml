@@ -3,7 +3,7 @@ services:
   thumbor:
     image: apsl/thumbor-multiprocess:latest
     volumes:
-      - ./data:/data
+      - data:/data
     #ports:
       #- "80:8000" # thumbor port
     environment:
@@ -51,8 +51,6 @@ services:
       - app
 volumes:
   data:
-    driver: local
-  logs:
     driver: local
 networks:
   app:

@@ -15,7 +15,7 @@ services:
       - REDIS_QUEUE_SERVER_DB=0
       - MIXED_STORAGE_DETECTOR_STORAGE=thumbor.storages.redis_storage
     volumes:
-      - ./data:/data
+      - data:/data
     links:
       - redis:redis
     ports:
@@ -71,8 +71,6 @@ services:
       - app
 volumes:
   data:
-    driver: local
-  logs:
     driver: local
 networks:
   app:

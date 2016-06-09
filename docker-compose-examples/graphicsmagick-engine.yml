@@ -1,11 +1,19 @@
-version: "2"
+version: '2'
 services:
   thumbor:
     image: apsl/thumbor:latest
     volumes:
-        - "./data:/data:rw"
+        - data:/data
     ports:
       - "8069:8000" # thumbor port
     environment:
-      DETECTORS: "['thumbor.detectors.face_detector','thumbor.detectors.feature_detector',]"
-      ENGINE: 'graphicsmagick_engine.engine'
+      - DETECTORS=['thumbor.detectors.face_detector','thumbor.detectors.feature_detector']
+      - ENGINE=graphicsmagick_engine.engine
+    networks:
+      - app
+volumes:
+  data:
+    driver: local
+networks:
+  app:
+    driver: bridge
