@@ -1,0 +1,50 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: remotecv-production
+  labels:
+    app: remotecv-production
+    version: "latest"
+spec:
+  replicas: 2
+  selector:
+    app: remotecv-production
+    version: "latest"
+  template:
+    metadata:
+      generateName: remotecv-production-pod-
+      labels:
+        app: remotecv-production
+        version: "latest"
+    spec:
+      containers:
+        - name: remotecv
+          image: apsl/remotecv:latest
+          env:
+          - name: REDIS_HOST
+            value: redis
+          - name: REDIS_PORT
+            value: "6379"
+          - name: REDIS_DATABASE
+            value: "11"
+          - name: AWS_ACCESS_KEY_ID
+            value: "MY_AWS_ACCESS_KEY_ID"
+          - name: AWS_SECRET_ACCESS_KEY
+            value: "MY_AWS_SECRET_ACCESS_KEY"
+          - name: AWS_LOADER_BUCKET
+            value: "thumbor-production"
+          - name: REMOTECV_LOADER
+            value: "remotecv_aws.loader"
+          #- name: LOG_LEVEL
+            #value: "DEBUG"
+          resources:
+            limits:
+              cpu: 600m
+              memory: 1200Mi
+            requests:
+              cpu: 10m
+              memory: 10Mi
+          imagePullPolicy: Always
+      restartPolicy: Always
+      dnsPolicy: ClusterFirst
+      
