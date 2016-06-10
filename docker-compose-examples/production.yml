@@ -1,11 +1,10 @@
 thumbor:
   image: apsl/thumbor:latest
   volumes:
-    - ./logs:/logs
     - ./data:/data
   environment:
     ALLOW_UNSAFE_URL: False
-    DETECTORS: ['thumbor.detectors.queued_detector.queued_complete_detector',]
+    DETECTORS: "['thumbor.detectors.queued_detector.queued_complete_detector',]"
     AWS_ACCESS_KEY_ID: # put your AWS_ACCESS_KEY here
     AWS_SECRET_ACCESS_KEY: # put your AWS_SECRET_ACCESS_KEY here
     # Is needed for buckets that demand the new signing algorithm (v4)
