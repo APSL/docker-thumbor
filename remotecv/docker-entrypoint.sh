@@ -9,7 +9,7 @@ set -e
 [[ -z $REDIS_PORT ]] && REDIS_PORT=6379
 [[ -z $REDIS_DATABASE ]] && REDIS_DATABASE=0
 [[ -z $LOG_LEVEL ]] && LOG_LEVEL=INFO
-[[ -z $LOADER ]] && LOADER=remotecv.http_loader
+[[ -z $REMOTECV_LOADER ]] && REMOTECV_LOADER=remotecv.http_loader
 [[ -z $STORE ]] && STORE=remotecv.result_store.redis_store
 if [ -n "$TIMEOUT" ]; then
     TIMEOUT_PARAMETER="-t $TIMEOUT"
@@ -19,7 +19,7 @@ if [ -n "$SENTRY_URL" ]; then
 fi
 
 if [ "$1" = 'remotecv' ]; then
-    exec remotecv --host $REDIS_HOST --port $REDIS_PORT --database $REDIS_DATABASE -l $LOG_LEVEL -o $LOADER -s $STORE $TIMEOUT_PARAMETER $SENTRY_URL_PARAMETER
+    exec remotecv --host $REDIS_HOST --port $REDIS_PORT --database $REDIS_DATABASE -l $LOG_LEVEL -o $REMOTECV_LOADER -s $STORE $TIMEOUT_PARAMETER $SENTRY_URL_PARAMETER
 fi
 
 exec "$@"
