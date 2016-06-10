@@ -1,37 +1,56 @@
-thumbor:
-  image: apsl/thumbor:latest
-  volumes:
-    - ./data:/data
-  #ports:
-    #- "80:8000" # thumbor port
-  environment:
-    DETECTORS: "['thumbor.detectors.queued_detector.queued_complete_detector',]"
-    STORAGE: thumbor.storages.mixed_storage
-    REDIS_STORAGE_SERVER_HOST: redis
-    REDIS_STORAGE_SERVER_PORT: 6379
-    REDIS_STORAGE_SERVER_DB: 0
-    REDIS_QUEUE_SERVER_HOST: redis
-    REDIS_QUEUE_SERVER_PORT: 6379
-    REDIS_QUEUE_SERVER_DB: 0
-    MIXED_STORAGE_DETECTOR_STORAGE: tc_redis.storages.redis_storage
-  links:
-    - redis:redis
-nginx:
-  image: apsl/thumbor-nginx:latest
-  links:
-    - thumbor:thumbor
-  volumes_from:
-    - thumbor
-  ports:
-    - "80:80" # nginx cache port (with failover to thumbor)
-  hostname: nginx
-remotecv:
-  image: apsl/remotecv:latest
-  links:
-    - redis:redis
-  environment:
-    REDIS_HOST: redis
-    REDIS_PORT: 6379
-    REDIS_DATABASE: 0
-redis:
-  image: redis:latest
+version: '2'
+services:
+  thumbor:
+    image: apsl/thumbor:latest
+    volumes:
+      - data:/data
+      - logs:/logs
+    #ports:
+      #- "80:8000" # thumbor port
+    environment:
+      - DETECTORS=['thumbor.detectors.queued_detector.queued_complete_detector']
+      - STORAGE=thumbor.storages.mixed_storage
+      - REDIS_STORAGE_SERVER_HOST=redis
+      - REDIS_STORAGE_SERVER_PORT=6379
+      - REDIS_STORAGE_SERVER_DB=0
+      - REDIS_QUEUE_SERVER_HOST=redis
+      - REDIS_QUEUE_SERVER_PORT=6379
+      - REDIS_QUEUE_SERVER_DB=0
+      - MIXED_STORAGE_DETECTOR_STORAGE=thumbor.storages.redis_storage
+    links:
+      - redis:redis
+    networks:
+      - app
+  nginx:
+    image: apsl/thumbor-nginx:latest
+    links:
+      - thumbor:thumbor
+    volumes_from:
+      - thumbor
+    ports:
+      - "80:80" # nginx cache port (with failover to thumbor)
+    hostname: nginx
+    networks:
+      - app
+  remotecv:
+    image: apsl/remotecv:latest
+    links:
+      - redis:redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DATABASE=0
+    networks:
+      - app
+  redis:
+    image: redis:latest
+    networks:
+      - app
+volumes:
+  data:
+    driver: local
+  logs:
+    driver: local
+networks:
+  app:
+    driver: bridge

@@ -6,7 +6,7 @@ services:
       - RESULT_STORAGE=thumbor.result_storages.file_storage
       - RESULT_STORAGE_STORES_UNSAFE=True
       - STORAGE=thumbor.storages.mixed_storage
-      - DETECTORS=["thumbor.detectors.queued_detector.queued_complete_detector"]     
+      - DETECTORS=["thumbor.detectors.queued_detector.queued_complete_detector"]
       - REDIS_STORAGE_SERVER_HOST=redis
       - REDIS_STORAGE_SERVER_PORT=6379
       - REDIS_STORAGE_SERVER_DB=0
@@ -47,8 +47,6 @@ services:
       - app
 volumes:
   data:
-    driver: local
-  logs:
     driver: local
 networks:
   app:
