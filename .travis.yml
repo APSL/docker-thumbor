@@ -35,7 +35,7 @@ after_success:
 - docker push apsl/remotecv:$THUMBOR_VERSION
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/remotecv:latest ; fi;
 - docker push apsl/thumbor-multiprocess:$THUMBOR_VERSION
-- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/multiprocess:latest ; fi;
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor-multiprocess:latest ; fi;
 - docker push apsl/thumbor-nginx:$THUMBOR_VERSION
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor-nginx:latest ; fi;
 - docker images -a
