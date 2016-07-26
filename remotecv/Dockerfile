@@ -18,10 +18,12 @@ ENV SHELL bash
 ENV WORKON_HOME /usr/src/app
 WORKDIR /usr/src/app
 
+ARG DOCKERHOST=172.17.0.1
+ENV DOCKERHOST ${DOCKERHOST}
 COPY requirements.txt /usr/src/app/requirements.txt
 RUN pip install --trusted-host None --no-cache-dir --use-wheel \
-   --extra-index-url http://172.17.0.1:9009/simple/ \
-   --trusted-host 172.17.0.1 \
+   --extra-index-url http://${DOCKERHOST}:9009/simple/ \
+   --trusted-host ${DOCKERHOST} \
    -r /usr/src/app/requirements.txt
 
 RUN \ 
