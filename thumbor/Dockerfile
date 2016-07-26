@@ -17,13 +17,12 @@ ENV HOME /usr/src/app
 ENV SHELL bash
 ENV WORKON_HOME /usr/src/app
 WORKDIR /usr/src/app
-ENV WHEELHOUSE=/wheelhouse
-ENV PIP_WHEEL_DIR=/wheelhouse
-ENV PIP_FIND_LINKS=/wheelhouse
 
-COPY wheelhouse /wheelhouse
 COPY requirements.txt /usr/src/app/requirements.txt
-RUN pip install --no-cache-dir --use-wheel --find-links /wheelhouse -r /usr/src/app/requirements.txt
+RUN pip install --trusted-host None --no-cache-dir --use-wheel \
+   --extra-index-url http://172.17.0.1:9009/simple/ \
+   --trusted-host 172.17.0.1 \
+   -r /usr/src/app/requirements.txt
 
 COPY conf/thumbor.conf.tpl /usr/src/app/thumbor.conf.tpl
 
@@ -31,8 +30,6 @@ RUN \
     ln /usr/lib/python2.7/dist-packages/cv2.x86_64-linux-gnu.so /usr/local/lib/python2.7/cv2.so && \
     ln /usr/lib/python2.7/dist-packages/cv.py /usr/local/lib/python2.7/cv.py
 
-RUN rm -Rf /wheelhouse
-    
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["thumbor"]

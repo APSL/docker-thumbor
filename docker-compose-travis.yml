@@ -1,5 +1,12 @@
 version: '2'
 services:
+  pypiserver:
+    image: jcsaaddupuy/pypiserver
+    #command: pypi-server -P '' -u ''
+    volumes: 
+      - "./wheelhouse:/data/packages"
+    ports:
+      - "0.0.0.0:9009:8080"
   thumbor:
     image: apsl/thumbor
     environment:
