@@ -43,10 +43,10 @@ Docker-compose examples
 
 Check the docker-compose examples:
 
-* [Simple detection](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-examples/detector.yml)
-* [Lazy detection using redis](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-examples/lazy-detector.yml)
-* [AWS S3 storage](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-examples/aws-s3-storage.yml)
-* [Proposed use in production, reading from a AWS S3 and local cache of storage/result_storage](https://github.com/APSL/docker-thumbor/blob/master/docker-compose-examples/production.yml)
+* [Simple detection](https://github.com/APSL/docker-thumbor/blob/master/configuration_examples/docker-compose/detector.yml)
+* [Lazy detection using redis](https://github.com/APSL/docker-thumbor/blob/master/configuration_examples/docker-compose/lazy-detector.yml)
+* [AWS S3 storage](https://github.com/APSL/docker-thumbor/blob/master/configuration_examples/docker-compose/aws-s3-storage.yml)
+* [Proposed use in production, reading from a AWS S3 and local cache of storage/result_storage](https://github.com/APSL/docker-thumbor/blob/master/configuration_examples/docker-compose/production.yml)
 
 
 [![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
