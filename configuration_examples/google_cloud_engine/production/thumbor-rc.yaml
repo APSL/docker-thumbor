@@ -55,7 +55,7 @@ spec:
         - name: STORAGE
           value: "thumbor.storages.mixed_storage"
         - name: MIXED_STORAGE_DETECTOR_STORAGE
-          value: "thumbor.storages.redis_storage"
+          value: "tc_redis.storages.redis_storage"
         - name: MIXED_STORAGE_FILE_STORAGE
           value: "thumbor.storages.file_storage"
         #- name: THUMBOR_NUM_PROCESSES
