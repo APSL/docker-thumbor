@@ -1,9 +1,9 @@
 #!/bin/bash
 
 echo "--> Wheelhousing requirements in /wheelhouse"
-docker build -t builder -f Dockerfile.build .
+docker build -t test/builder -f Dockerfile.build .
 mkdir -p wheelhouse
-docker run --rm -v "$(pwd)"/wheelhouse:/wheelhouse builder
+docker run --rm -v "$(pwd)"/wheelhouse:/wheelhouse test/builder
 
 echo "Launch Pypiserver"
 docker-compose -f docker-compose-travis.yml up -d pypiserver 
