@@ -19,6 +19,10 @@ fi
 sed -i -e "s/server thumbor_host:thumbor_port/server $THUMBOR_DEFAULT_HOST:$THUMBOR_DEFAULT_PORT/g"  /etc/nginx/nginx.conf
 sed -i -e "s/listen 80 default/listen $NGINX_DEFAULT_PORT default/g"  /etc/nginx/nginx.conf
 
+if [ "$THUMBOR_ALLOW_CORS" != "true" ]; then
+    sed -i "/.*Access-Control-Allow.*/d" /etc/nginx/nginx.conf
+fi
+
 if [ "$1" = 'nginx-daemon' ]; then
     exec nginx -g "daemon off;";
 fi
