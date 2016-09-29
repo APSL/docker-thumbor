@@ -19,6 +19,16 @@ if [ -n "$SENTRY_URL" ]; then
 fi
 
 if [ "$1" = 'remotecv' ]; then
+    echo "#####################"
+    echo "Starting remotecv"
+    echo "#####################"
+    echo "Redis -  Host: $REDIS_HOST Port: $REDIS_PORT Database: $REDIS_DATABASE"
+    echo "Log level: $LOG_LEVEL"
+    echo "Loader: $REMOTECV_LOADER"
+    echo "Store: $STORE"
+    echo "Timeout: $TIMEOUT"
+    echo "Sentry URL: $SENTRY_URL"
+    echo "#####################"
     exec remotecv --host $REDIS_HOST --port $REDIS_PORT --database $REDIS_DATABASE -l $LOG_LEVEL -o $REMOTECV_LOADER -s $STORE $TIMEOUT_PARAMETER $SENTRY_URL_PARAMETER
 fi
 

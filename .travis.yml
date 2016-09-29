@@ -31,11 +31,11 @@ env:
 after_success:
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 - docker push apsl/thumbor:$THUMBOR_VERSION
-- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor:latest ; fi;
+- if [ "$TRAVIS_BRANCH" == "master" ]; then echo "Pushing apsl/thumbor:latest"; docker push apsl/thumbor:latest ; fi;
 - docker push apsl/remotecv:$THUMBOR_VERSION
-- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/remotecv:latest ; fi;
+- if [ "$TRAVIS_BRANCH" == "master" ]; then echo "Pushing apsl/remotecv:latest"; docker push apsl/remotecv:latest ; fi;
 - docker push apsl/thumbor-multiprocess:$THUMBOR_VERSION
-- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor-multiprocess:latest ; fi;
+- if [ "$TRAVIS_BRANCH" == "master" ]; then echo "Pushing apsl/thumbor-multiprocess:latest"; docker push apsl/thumbor-multiprocess:latest ; fi;
 - docker push apsl/thumbor-nginx:$THUMBOR_VERSION
-- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor-nginx:latest ; fi;
+- if [ "$TRAVIS_BRANCH" == "master" ]; then echo "Pushing apsl/thumbor-nginx:latest"; docker push apsl/thumbor-nginx:latest ; fi;
 - docker images -a
