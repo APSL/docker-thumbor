@@ -68,17 +68,15 @@ spec:
         ports:
         - containerPort: 28765
 ---
-apiVersion: extensions/v1beta1
+apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: thumbor-hpa
   namespace: default
 spec:
-  scaleRef:
+  scaleTargetRef:
     kind: Deployment
     name: thumbor-deployment
-    subresource: scale
   minReplicas: 4
   maxReplicas: 50
-  cpuUtilization:
-    targetPercentage: 80
+  targetCPUUtilizationPercentage: 80
