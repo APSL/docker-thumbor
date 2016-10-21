@@ -60,7 +60,7 @@ spec:
     spec:
       containers:
       - name: master
-        image: smarp/thumbor:v1.0
+        image: smarp/thumbor:1.0.1
         resources:
           requests:
             cpu: 200m
