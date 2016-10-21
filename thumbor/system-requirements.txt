@@ -6,7 +6,9 @@ libdc1394-22
 libjpeg-turbo-progs
 graphicsmagick
 libgraphicsmagick++3
+libgraphicsmagick++1-dev
 libgraphicsmagick3
+libmemcached-dev
 libboost-python-dev
 gifsicle
 ffmpeg
