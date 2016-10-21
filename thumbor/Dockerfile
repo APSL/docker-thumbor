@@ -2,12 +2,12 @@ FROM python:2
 
 MAINTAINER Edu Herraiz <ghark@gmail.com>
 
-VOLUME /logs
 VOLUME /data
 
 # Things required for a python/pip environment
 COPY system-requirements.txt /usr/src/app/system-requirements.txt
 RUN  \
+    awk '$1 ~ "^deb" { $3 = $3 "-backports"; print; exit }' /etc/apt/sources.list > /etc/apt/sources.list.d/backports.list && \
     apt-get update && \
     apt-get -y upgrade && \
     apt-get -y autoremove && \
@@ -24,8 +24,13 @@ ENV STORAGE_EXPIRATION_SECONDS 0
 ENV DETECTORS  [\'thumbor.detectors.feature_detector\',\'thumbor.detectors.face_detector\']
 WORKDIR /usr/src/app
 
+ARG DOCKERHOST=172.17.0.1
+ENV DOCKERHOST ${DOCKERHOST}
 COPY requirements.txt /usr/src/app/requirements.txt
-RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+RUN pip install --trusted-host None --no-cache-dir --use-wheel \
+   --extra-index-url http://${DOCKERHOST}:9009/simple/ \
+   --trusted-host ${DOCKERHOST} \
+   -r /usr/src/app/requirements.txt
 
 COPY conf/thumbor.conf.tpl /usr/src/app/thumbor.conf.tpl
 

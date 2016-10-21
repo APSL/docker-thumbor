@@ -1,0 +1,111 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: thumbor-prod
+  labels:
+    app: thumbor-prod
+    version: "latest"
+spec:
+  replicas: 4
+  selector:
+    app: thumbor-prod
+    version: "latest"
+  template:
+    metadata:
+      name: thumbor-prod
+      labels:
+        app: thumbor-prod
+        version: "latest"
+        role: service
+        group: yourgroup
+    spec:
+      containers:
+      - name: thumbor-prod
+        image: apsl/thumbor:latest
+        resources:
+          limits:
+            cpu: 600m
+            memory: 1200Mi
+          requests:
+            cpu: 10m
+            memory: 10Mi
+        env:       
+        - name: LOG_LEVEL
+          value: "DEBUG"
+        - name: ALLOW_UNSAFE_URL
+          value: "False"
+        - name: SECURITY_KEY
+          value: "MY_SECURITY_KEY"
+        - name: DETECTORS
+          value: "['thumbor.detectors.queued_detector.queued_complete_detector',]"
+        - name: RESULT_STORAGE
+          value: "thumbor.result_storages.file_storage"
+        - name: REDIS_STORAGE_SERVER_HOST
+          value: redis
+        - name: REDIS_STORAGE_SERVER_PORT
+          value: "6379"
+        - name: REDIS_STORAGE_SERVER_DB
+          value: "11"
+        - name: REDIS_QUEUE_SERVER_HOST
+          value: redis
+        - name: REDIS_QUEUE_SERVER_PORT
+          value: "6379"
+        - name: REDIS_QUEUE_SERVER_DB
+          value: "11"
+        - name: STORAGE
+          value: "thumbor.storages.mixed_storage"
+        - name: MIXED_STORAGE_DETECTOR_STORAGE
+          value: "tc_redis.storages.redis_storage"
+        - name: MIXED_STORAGE_FILE_STORAGE
+          value: "thumbor.storages.file_storage"
+        #- name: THUMBOR_NUM_PROCESSES
+          #value: "8"
+        - name: LOADER
+          value: "tc_aws.loaders.s3_loader"
+        - name: AWS_ACCESS_KEY_ID
+          value: "MY_AWS_ACCESS_KEY_ID"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "MY_AWS_SECRET_ACCESS_KEY"
+        - name: TC_AWS_LOADER_BUCKET
+          value: "thumbor-production"
+        - name: THUMBOR_PORT
+          value: "8001"
+        - name: STORAGE_EXPIRATION_SECONDS
+          value: "None"
+        - name: RESULT_STORAGE_EXPIRATION_SECONDS
+          value: "None"
+        - name: RESPECT_ORIENTATION
+          value: "True"
+        volumeMounts:
+        - name: thumbor-prod-data
+          mountPath: /data
+          readOnly: False
+        imagePullPolicy: Always
+      - name: thumbor-prod-nginx
+        image: apsl/thumbor-nginx:latest
+        resources:
+          limits:
+            cpu: 100m
+            memory: 50Mi
+          requests:
+            cpu: 10m
+            memory: 5Mi
+        env:
+        - name: THUMBOR_DEFAULT_HOST
+          value: 127.0.0.1
+        - name: THUMBOR_DEFAULT_PORT
+          value: "8001"
+        ports:
+        - containerPort: 80
+          name: thumbor-prod
+        volumeMounts:
+        - name: thumbor-prod-data
+          mountPath: /data
+          readOnly: True
+        imagePullPolicy: Always
+      volumes:
+      - name: thumbor-prod-data
+        hostPath:
+          path: /var/thumbor-production
+      restartPolicy: Always
+      dnsPolicy: ClusterFirst

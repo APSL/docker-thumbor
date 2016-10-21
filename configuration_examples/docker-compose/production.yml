@@ -1,0 +1,81 @@
+version: '2'
+services:
+  thumbor:
+    image: apsl/thumbor:latest
+    volumes:
+      - logs:/logs
+      - data:/data
+    environment:
+      - ALLOW_UNSAFE_URL=False
+      - DETECTORS=['thumbor.detectors.queued_detector.queued_complete_detector']
+      - AWS_ACCESS_KEY_ID= # put your AWS_ACCESS_KEY here
+      - AWS_SECRET_ACCESS_KEY= # put your AWS_SECRET_ACCESS_KEY here
+      # Is needed for buckets that demand the new signing algorithm (v4)
+      # - S3_USE_SIGV4=true
+      # - TC_AWS_REGION=eu-central-1
+      - TC_AWS_LOADER_BUCKET=bucket-name
+      - LOADER=tc_aws.loaders.s3_loader
+      - SECURITY_KEY=SECURIZE_ME
+      # - LOG_LEVEL=debug
+      - STORAGE=thumbor.storages.mixed_storage
+      - MIXED_STORAGE_FILE_STORAGE=thumbor.storages.file_storage
+      - RESULT_STORAGE=thumbor.result_storages.file_storage
+      - REDIS_STORAGE_SERVER_HOST=redis
+      - REDIS_STORAGE_SERVER_PORT=6379
+      - REDIS_STORAGE_SERVER_DB=0
+      - REDIS_QUEUE_SERVER_HOST=redis
+      - REDIS_QUEUE_SERVER_PORT=6379
+      - REDIS_QUEUE_SERVER_DB=0
+      - STORAGE_EXPIRATION_SECONDS=None
+      - RESULT_STORAGE_EXPIRATION_SECONDS=None
+      - MIXED_STORAGE_DETECTOR_STORAGE=tc_redis.storages.redis_storage
+      - SENTRY_DSN_URL= # put your sentry enpoint here
+    links:
+      - redis:redis
+    restart: always
+    networks:
+      - frontend
+  nginx:
+    image: apsl/thumbor-nginx:latest
+    links:
+      - thumbor:thumbor
+    volumes_from:
+      - thumbor
+    ports:
+      - "80:80" # nginx cache port (with failover to thumbor)
+    hostname: nginx
+    networks:
+      - frontend
+  remotecv:
+    image: apsl/remotecv:latest
+    links:
+      - redis:redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - REDIS_DATABASE=0
+      - SENTRY_URL= # put your sentry enpoint here
+      - REMOTECV_LOADER=remotecv_aws.loader
+      - AWS_ACCESS_KEY_ID= # put your AWS_ACCESS_KEY here
+      - AWS_SECRET_ACCESS_KEY= # put your AWS_SECRET_ACCESS_KEY here
+      - AWS_LOADER_BUCKET=bucket-name
+      # - LOG_LEVEL: DEBUG
+    restart: always
+    networks:
+      - backend
+  redis:
+    image: redis:latest
+    restart: always
+    networks:
+      - frontend
+      - backend
+volumes:
+  data:
+    driver: local
+  logs:
+    driver: local
+networks:
+  frontend:
+    driver: overlay
+  backend:
+    driver: overlay
