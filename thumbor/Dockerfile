@@ -17,11 +17,6 @@ RUN  \
 ENV HOME /usr/src/app
 ENV SHELL bash
 ENV WORKON_HOME /usr/src/app
-ENV MAX_WIDTH 2048
-ENV MAX_HEIGHT 2048
-ENV MAX_SOURCE_SIZE 10485760
-ENV STORAGE_EXPIRATION_SECONDS 0
-ENV DETECTORS  [\'thumbor.detectors.feature_detector\',\'thumbor.detectors.face_detector\']
 WORKDIR /usr/src/app
 
 ARG DOCKERHOST=172.17.0.1
@@ -42,4 +37,4 @@ COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["thumbor"]
 
-EXPOSE 28765
+EXPOSE 8000
