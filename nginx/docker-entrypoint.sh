@@ -23,6 +23,10 @@ if [ "$THUMBOR_ALLOW_CORS" != "true" ]; then
     sed -i "/.*Access-Control-Allow.*/d" /etc/nginx/nginx.conf
 fi
 
+if [ "$THUMBOR_ALLOW_CONTENT_DISPOSITION" != "true" ]; then
+    sed -i "/.*Content-Disposition.*/d" /etc/nginx/nginx.conf
+fi
+
 if [ "$1" = 'nginx-daemon' ]; then
     exec nginx -g "daemon off;";
 fi
