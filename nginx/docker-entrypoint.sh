@@ -19,13 +19,39 @@ fi
 sed -i -e "s/server thumbor_host:thumbor_port/server $THUMBOR_DEFAULT_HOST:$THUMBOR_DEFAULT_PORT/g"  /etc/nginx/nginx.conf
 sed -i -e "s/listen 80 default/listen $NGINX_DEFAULT_PORT default/g"  /etc/nginx/nginx.conf
 
-if [ "$THUMBOR_ALLOW_CORS" != "true" ]; then
-    sed -i "/.*Access-Control-Allow.*/d" /etc/nginx/nginx.conf
-fi
+# Using this hack to case insensitive envars
+shopt -s nocasematch
 
-if [ "$THUMBOR_ALLOW_CONTENT_DISPOSITION" != "true" ]; then
-    sed -i "/.*Content-Disposition.*/d" /etc/nginx/nginx.conf
-fi
+case "$THUMBOR_ALLOW_CORS" in
+    "true")
+        echo "Configuring nginx: Enabling CORS"
+        ;;
+    *) 
+        echo "Configuring nginx: Disabling CORS"
+        sed -i "/.*THUMBOR_ALLOW_CORS.*/d" /etc/nginx/nginx.conf
+        ;;
+esac
+
+case "$THUMBOR_ALLOW_CONTENT_DISPOSITION" in
+    "true")
+        echo "Configuring nginx: Enabling Content-Disposition"
+        ;;
+    *) 
+        echo "Configuring nginx: Disabling Content-Disposition"
+        sed -i "/.*THUMBOR_ALLOW_CONTENT_DISPOSITION.*/d" /etc/nginx/nginx.conf
+        ;;
+esac
+
+case "$AUTO_WEBP" in
+    "true")
+        echo "Configuring nginx: Enabling WEBP "
+        sed -i "/.*DEFAULT_CASE_WITHOUT_WEBP.*/d" /etc/nginx/nginx.conf
+        ;;
+    *) 
+        echo "Configuring nginx: Disabling Enabling WEBP"
+        sed -i "/.*AUTO_WEBP.*/d" /etc/nginx/nginx.conf
+        ;;
+esac
 
 if [ "$1" = 'nginx-daemon' ]; then
     exec nginx -g "daemon off;";

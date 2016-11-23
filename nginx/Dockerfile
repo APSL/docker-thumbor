@@ -1,4 +1,4 @@
-FROM nginx:1.9
+FROM nginx:1.11.5
 MAINTAINER Edu Herraiz <ghark@gmail.com>
 
 COPY nginx.conf /etc/nginx/
