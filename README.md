@@ -8,6 +8,8 @@ $ wget http://localhost:8000/unsafe/300x300/i.imgur.com/bvjzPct.jpg
 Docker thumbor and remotecv
 ========================
 
+[![Docker Pulls](https://img.shields.io/docker/pulls/apsl/thumbor.svg)](https://hub.docker.com/r/apsl/thumbor/)
+[![Docker Stars](https://img.shields.io/docker/stars/apsl/thumbor.svg)](https://hub.docker.com/r/apsl/thumbor/)
 [![Build Status](https://travis-ci.org/APSL/docker-thumbor.svg?branch=master)](https://travis-ci.org/APSL/docker-thumbor)
 
 Docker image for thumbor, and separated one for remotecv, necessary for the lazy detection.  
