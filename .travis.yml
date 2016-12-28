@@ -39,7 +39,7 @@ after_success:
 - docker push apsl/thumbor:$THUMBOR_VERSION-simd-sse4
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor:latest-simd-sse4 ; fi;
 - docker push apsl/thumbor:$THUMBOR_VERSION-simd-avx2
-- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor:$THUMBOR_VERSION-simd-avx2 ; fi;
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor:latest-simd-avx2 ; fi;
 - docker push apsl/thumbor-multiprocess:$THUMBOR_VERSION
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor-multiprocess:latest ; fi;
 - docker push apsl/thumbor-multiprocess:$THUMBOR_VERSION-simd-sse4
