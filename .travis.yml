@@ -36,10 +36,18 @@ after_success:
 - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
 - docker push apsl/thumbor:$THUMBOR_VERSION
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor:latest ; fi;
-- docker push apsl/remotecv:$THUMBOR_VERSION
-- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/remotecv:latest ; fi;
+- docker push apsl/thumbor:$THUMBOR_VERSION-simd-sse4
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor:latest-simd-sse4 ; fi;
+- docker push apsl/thumbor:$THUMBOR_VERSION-simd-avx2
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor:$THUMBOR_VERSION-simd-avx2 ; fi;
 - docker push apsl/thumbor-multiprocess:$THUMBOR_VERSION
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor-multiprocess:latest ; fi;
+- docker push apsl/thumbor-multiprocess:$THUMBOR_VERSION-simd-sse4
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor-multiprocess:latest-simd-sse4 ; fi;
+- docker push apsl/thumbor-multiprocess:$THUMBOR_VERSION-simd-avx2
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor-multiprocess:latest-simd-avx2 ; fi;
 - docker push apsl/thumbor-nginx:$THUMBOR_VERSION
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor-nginx:latest ; fi;
+- docker push apsl/remotecv:$THUMBOR_VERSION
+- if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/remotecv:latest ; fi;
 - docker images -a
