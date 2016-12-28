@@ -14,9 +14,13 @@ script:
 - ./builder
 - docker-compose -f docker-compose-travis.yml up -d
 - docker-compose -f docker-compose-travis.yml ps
-- wget http://localhost:8001/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
-- wget http://localhost:8002/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
-- wget http://localhost:8003/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
+- wget http://localhost:8091/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
+- wget http://localhost:8092/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
+- wget http://localhost:8093/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
+- wget http://localhost:8094/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
+- wget http://localhost:8095/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
+- wget http://localhost:8096/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
+- wget http://localhost:8097/unsafe/200x100/www.apsl.net/static/apslweb/img/content/slider/rs-slider4-img15.png
 notifications:
   email:
   - gshark@gmail.com

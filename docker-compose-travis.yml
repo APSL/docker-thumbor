@@ -9,46 +9,68 @@ services:
       - "0.0.0.0:9009:8080"
   thumbor:
     image: apsl/thumbor
-    environment:
-      - RESULT_STORAGE=thumbor.result_storages.file_storage
-      - RESULT_STORAGE_STORES_UNSAFE=True
-      - STORAGE=thumbor.storages.mixed_storage
-      - DETECTORS=["thumbor.detectors.queued_detector.queued_complete_detector"]
-      - REDIS_STORAGE_SERVER_HOST=redis
-      - REDIS_STORAGE_SERVER_PORT=6379
-      - REDIS_STORAGE_SERVER_DB=0
-      - REDIS_QUEUE_SERVER_HOST=redis
-      - REDIS_QUEUE_SERVER_PORT=6379
-      - REDIS_QUEUE_SERVER_DB=0
-      - MIXED_STORAGE_DETECTOR_STORAGE=tc_redis.storages.redis_storage
-    volumes:
-      - data:/data
-    links:
-      - redis:redis
-    ports:
-      - "127.0.0.1:8001:8000" # thumbor port
-    networks:
-      - app
-  thumbormultiprocess:
-    image: apsl/thumbor-multiprocess
-    environment:
-      - RESULT_STORAGE=thumbor.result_storages.file_storage
-      - RESULT_STORAGE_STORES_UNSAFE=True
-      - STORAGE=thumbor.storages.mixed_storage
-      - DETECTORS=["thumbor.detectors.queued_detector.queued_complete_detector"]
-      - REDIS_STORAGE_SERVER_HOST=redis
-      - REDIS_STORAGE_SERVER_PORT=6379
-      - REDIS_STORAGE_SERVER_DB=0
-      - REDIS_QUEUE_SERVER_HOST=redis
-      - REDIS_QUEUE_SERVER_PORT=6379
-      - REDIS_QUEUE_SERVER_DB=0
-      - MIXED_STORAGE_DETECTOR_STORAGE=tc_redis.storages.redis_storage
+    env_file: .travis.env
     volumes:
       - ./data:/data
     links:
       - redis:redis
     ports:
-      - "127.0.0.1:8002:8000" # thumbor port
+      - "127.0.0.1:8091:8000" # thumbor port
+    networks:
+      - app
+  thumbormultiprocess:
+    image: apsl/thumbor-multiprocess
+    env_file: .travis.env
+    volumes:
+      - ./data:/data
+    links:
+      - redis:redis
+    ports:
+      - "127.0.0.1:8092:8000" # thumbor port
+    networks:
+      - app
+  thumborsimdss4:
+    image: apsl/thumbor:latest-simd-sse4
+    env_file: .travis.env
+    volumes:
+      - ./data:/data
+    links:
+      - redis:redis
+    ports:
+      - "127.0.0.1:8093:8000" # thumbor port
+    networks:
+      - app
+  thumbormultiprocesssimdss4:
+    image: apsl/thumbor-multiprocess:latest-simd-sse4
+    env_file: .travis.env
+    volumes:
+      - ./data:/data
+    links:
+      - redis:redis
+    ports:
+      - "127.0.0.1:8094:8000" # thumbor port
+    networks:
+      - app
+  thumborsimdavx2:
+    image: apsl/thumbor:latest-simd-avx2
+    env_file: .travis.env
+    volumes:
+      - ./data:/data
+    links:
+      - redis:redis
+    ports:
+      - "127.0.0.1:8095:8000" # thumbor port
+    networks:
+      - app
+  thumbormultiprocesssimdavx2:
+    image: apsl/thumbor-multiprocess:latest-simd-avx2
+    env_file: .travis.env
+    volumes:
+      - ./data:/data
+    links:
+      - redis:redis
+    ports:
+      - "127.0.0.1:8096:8000" # thumbor port
     networks:
       - app
   nginx:
@@ -58,7 +80,7 @@ services:
     volumes_from:
       - thumbor:ro
     ports:
-      - "127.0.0.1:8003:80" # thumbor port
+      - "127.0.0.1:8097:80" # thumbor port
     hostname: nginx
     networks:
       - app
