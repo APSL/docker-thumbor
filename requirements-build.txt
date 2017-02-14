@@ -8,8 +8,8 @@ pyremotecv==0.5.0
 #remotecv==2.2.1
 git+https://github.com/APSL/remotecv.git
 opencv-engine==1.0.1
-thumbor==6.2.0
-tc-aws==6.0.1
+thumbor==6.2.1
+tc-aws==6.0.2
 tc-core==0.4.0
 tc-shortener==0.2.2
 raven==5.15.0
