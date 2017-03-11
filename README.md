@@ -142,6 +142,7 @@ Env vars and default value:
     ERROR_FILE_NAME_USE_CONTEXT='False'
     SENTRY_DSN_URL=''
     TC_AWS_REGION='eu-west-1'
+    TC_AWS_ENDPOINT=None
     TC_AWS_STORAGE_BUCKET=''
     TC_AWS_STORAGE_ROOT_PATH=''
     TC_AWS_LOADER_BUCKET=''
