@@ -629,6 +629,8 @@ APP_CLASS = '{{ APP_CLASS | default('thumbor.app.ThumborServiceApp') }}'
 ############################## TC_AWS ##########################################
 TC_AWS_REGION = '{{ TC_AWS_REGION | default('eu-west-1') }}' # AWS Region
 
+TC_AWS_ENDPOINT = {{ TC_AWS_ENDPOINT if TC_AWS_ENDPOINT | default(None) else None }} # Custom S3 endpoint URL (for GCP, Minio, etc.)
+
 TC_AWS_STORAGE_BUCKET = '{{ TC_AWS_STORAGE_BUCKET | default('') }}' # S3 bucket for Storage
 TC_AWS_STORAGE_ROOT_PATH = '{{ TC_AWS_STORAGE_ROOT_PATH | default('') }}' # S3 path prefix for Storage bucket
 
