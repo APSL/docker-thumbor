@@ -76,6 +76,11 @@ PILLOW_RESAMPLING_FILTER = '{{ PILLOW_RESAMPLING_FILTER | default('LANCZOS') }}'
 ## Defaults to: None
 WEBP_QUALITY = {{ WEBP_QUALITY | default(None) }}
 
+
+## Compression level for generated PNG images.
+## Defaults to: 6
+PNG_COMPRESSION_LEVEL = = {{ PNG_COMPRESSION_LEVEL | default(6) }}
+
 ## Specifies whether WebP format should be used automatically if the request
 ## accepts it (via Accept header)
 ## Defaults to: False
@@ -136,6 +141,8 @@ USE_BLACKLIST = {{ USE_BLACKLIST | default(False) }}
 ## getting blocked (often indicated by your upstream HTTP requests timing out)
 ## Defaults to: 0
 ENGINE_THREADPOOL_SIZE = {{ ENGINE_THREADPOOL_SIZE | default(0) }}
+
+
 
 ################################################################################
 
@@ -301,6 +308,10 @@ HTTP_LOADER_PROXY_PASSWORD = {{ HTTP_LOADER_PROXY_PASSWORD | default(None) }}
 ## Defaults to: None
 HTTP_LOADER_CA_CERTS = {{ HTTP_LOADER_CA_CERTS | default(None) }}
 
+## Validate the server’s certificate for HTTPS requests
+## Defaults to: True
+HTTP_LOADER_VALIDATE_CERTS = {{ HTTP_LOADER_VALIDATE_CERTS | default(True) }}
+
 ## The filename for client SSL key
 ## Defaults to: None
 HTTP_LOADER_CLIENT_KEY = {{ HTTP_LOADER_CLIENT_KEY | default(None) }}
@@ -312,6 +323,7 @@ HTTP_LOADER_CLIENT_CERT = {{ HTTP_LOADER_CLIENT_CERT | default(None) }}
 ## If the CurlAsyncHTTPClient should be used
 ## Defaults to: False
 HTTP_LOADER_CURL_ASYNC_HTTP_CLIENT = {{ HTTP_LOADER_CURL_ASYNC_HTTP_CLIENT | default(False) }}
+
 
 ################################################################################
 
@@ -629,7 +641,7 @@ APP_CLASS = '{{ APP_CLASS | default('thumbor.app.ThumborServiceApp') }}'
 ############################## TC_AWS ##########################################
 TC_AWS_REGION = '{{ TC_AWS_REGION | default('eu-west-1') }}' # AWS Region
 
-TC_AWS_ENDPOINT = {{ TC_AWS_ENDPOINT if TC_AWS_ENDPOINT | default(None) else None }} # Custom S3 endpoint URL (for GCP, Minio, etc.)
+TC_AWS_ENDPOINT = {{ TC_AWS_ENDPOINT | default(None) }} # Custom S3 endpoint URL (for GCP, Minio, etc.)
 
 TC_AWS_STORAGE_BUCKET = '{{ TC_AWS_STORAGE_BUCKET | default('') }}' # S3 bucket for Storage
 TC_AWS_STORAGE_ROOT_PATH = '{{ TC_AWS_STORAGE_ROOT_PATH | default('') }}' # S3 path prefix for Storage bucket

@@ -51,9 +51,6 @@ Check the docker-compose examples:
 * [Proposed use in production, reading from a AWS S3 and local cache of storage/result_storage](https://github.com/APSL/docker-thumbor/blob/master/configuration_examples/docker-compose/production.yml)
 
 
-[![Deploy to Tutum](https://s.tutum.co/deploy-to-tutum.svg)](https://dashboard.tutum.co/stack/deploy/)
-
-
 Env vars and default value:
 =========
     THUMBOR_LOG_FORMAT='%(asctime)s %(name)s:%(levelname)s %(message)s'
@@ -65,6 +62,7 @@ Env vars and default value:
     ALLOWED_SOURCES=[]
     QUALITY=80
     WEBP_QUALITY=None
+    PNG_COMPRESSION_LEVEL=6
     AUTO_WEBP=False
     MAX_AGE=86400
     MAX_AGE_TEMP_IMAGE=0
@@ -94,6 +92,11 @@ Env vars and default value:
     HTTP_LOADER_PROXY_PORT=None
     HTTP_LOADER_PROXY_USERNAME=None
     HTTP_LOADER_PROXY_PASSWORD=None
+    HTTP_LOADER_CA_CERTS=None
+    HTTP_LOADER_VALIDATE_CERTS=True
+    HTTP_LOADER_CLIENT_KEY=None
+    HTTP_LOADER_CLIENT_CERT=None
+    HTTP_LOADER_CURL_ASYNC_HTTP_CLIENT=False
     STORAGE_EXPIRATION_SECONDS=2592000
     STORES_CRYPTO_KEY_FOR_EACH_IMAGE=False
     FILE_STORAGE_ROOT_PATH='/data/storage'
