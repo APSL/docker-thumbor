@@ -47,7 +47,7 @@ ALLOWED_SOURCES =  {{ ALLOWED_SOURCES | default([]) }}
 ## Defaults to: 80
 QUALITY = {{ QUALITY | default(80) }}
 
-## Exports JPEG images with the `progressive` flag set.
+## Exports JPEG images with the progressive flag set.
 ## Defaults to: True
 PROGRESSIVE_JPEG = {{ PROGRESSIVE_JPEG | default(True) }}
 
