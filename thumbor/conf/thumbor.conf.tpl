@@ -79,7 +79,7 @@ WEBP_QUALITY = {{ WEBP_QUALITY | default(None) }}
 
 ## Compression level for generated PNG images.
 ## Defaults to: 6
-PNG_COMPRESSION_LEVEL = = {{ PNG_COMPRESSION_LEVEL | default(6) }}
+PNG_COMPRESSION_LEVEL = {{ PNG_COMPRESSION_LEVEL | default(6) }}
 
 ## Specifies whether WebP format should be used automatically if the request
 ## accepts it (via Accept header)
@@ -308,7 +308,7 @@ HTTP_LOADER_PROXY_PASSWORD = {{ HTTP_LOADER_PROXY_PASSWORD | default(None) }}
 ## Defaults to: None
 HTTP_LOADER_CA_CERTS = {{ HTTP_LOADER_CA_CERTS | default(None) }}
 
-## Validate the server’s certificate for HTTPS requests
+## Validate the servers certificate for HTTPS requests
 ## Defaults to: True
 HTTP_LOADER_VALIDATE_CERTS = {{ HTTP_LOADER_VALIDATE_CERTS | default(True) }}
 
