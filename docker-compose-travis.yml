@@ -89,9 +89,9 @@ services:
     links:
       - redis:redis
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - REDIS_DATABASE=0
+      - REMOTECV_REDIS_HOST=redis
+      - REMOTECV_REDIS_PORT=6379
+      - REMOTECV_REDIS_DATABASE=0
     networks:
       - app
   redis:

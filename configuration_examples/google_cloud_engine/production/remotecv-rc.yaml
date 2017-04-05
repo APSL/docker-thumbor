@@ -21,11 +21,11 @@ spec:
         - name: remotecv
           image: apsl/remotecv:latest
           env:
-          - name: REDIS_HOST
+          - name: REMOTECV_REDIS_HOST
             value: redis
-          - name: REDIS_PORT
+          - name: REMOTECV_REDIS_PORT
             value: "6379"
-          - name: REDIS_DATABASE
+          - name: REMOTECV_REDIS_DATABASE
             value: "11"
           - name: AWS_ACCESS_KEY_ID
             value: "MY_AWS_ACCESS_KEY_ID"
