@@ -51,9 +51,9 @@ services:
     links:
       - redis:redis
     environment:
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
-      - REDIS_DATABASE=0
+      - REMOTECV_REDIS_HOST=redis
+      - REMOTECV_REDIS_PORT=6379
+      - REMOTECV_REDIS_DATABASE=0
       - SENTRY_URL= # put your sentry enpoint here
       - LOADER=remotecv_aws.loader
       - AWS_ACCESS_KEY_ID= # put your AWS_ACCESS_KEY here
