@@ -1,7 +1,7 @@
 argparse==1.2.1
 envtpl==0.4.1
 boto==2.42.0
-botocore==1.2.12
+git+https://github.com/APSL/botocore.git@b497766
 dateutils==0.6.6
 numpy==1.11.0
 pyremotecv==0.5.0
