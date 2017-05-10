@@ -1,12 +1,12 @@
 FROM nginx:1.13.0
 
-MAINTAINER Edu Herraiz <ghark@gmail.com>
+MAINTAINER Edu Herraiz <gshark@gmail.com>
 
 COPY nginx.conf /etc/nginx/
 COPY docker-entrypoint.sh /
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["nginx-daemon"]
+CMD ["nginx"]
 
 ENV \
   THUMBOR_DEFAULT_HOST= \

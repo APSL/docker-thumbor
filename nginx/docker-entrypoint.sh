@@ -55,10 +55,11 @@ esac
 
 # proxy cache settings
 # → #ENABLE_NGINX_CACHE_FILESYSTEM proxy_cache_path NGINX_CACHE_FILESYSTEM_PATH keys_zone=one:NGINX_CACHE_FILESYSTEM_SIZE_MBm;
-if [ -n $NGINX_CACHE_FILESYSTEM_SIZE_MB ]; then
-    if [ -n $NGINX_CACHE_FILESYSTEM_PATH ]; then
-        sed -i -e "s/NGINX_CACHE_FILESYSTEM_SIZE_MB/$NGINX_CACHE_FILESYSTEM_SIZE_MB/g"  /etc/nginx/nginx.conf
-        sed -i -e "s/NGINX_CACHE_FILESYSTEM_PATH/$NGINX_CACHE_FILESYSTEM_PATH/g"  /etc/nginx/nginx.conf
+if [ $NGINX_CACHE_FILESYSTEM_SIZE_MB ]; then
+    if [ $NGINX_CACHE_FILESYSTEM_PATH ]; then
+        echo "Configuring proxy_cache to ${NGINX_CACHE_FILESYSTEM_PATH} with ${NGINX_CACHE_FILESYSTEM_SIZE_MB}MB"
+        sed -i -e "s/NGINX_CACHE_FILESYSTEM_SIZE_MB/${NGINX_CACHE_FILESYSTEM_SIZE_MB}/g"  /etc/nginx/nginx.conf
+        sed -i -e "s/NGINX_CACHE_FILESYSTEM_PATH/${NGINX_CACHE_FILESYSTEM_PATH}/g"  /etc/nginx/nginx.conf
         sed -i -e "s/#ENABLE_NGINX_CACHE_FILESYSTEM //g"  /etc/nginx/nginx.conf
     fi
 fi
