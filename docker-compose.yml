@@ -1,7 +1,10 @@
 version: '2'
+
 services:
+
   thumbor:
-    build: thumbor
+    #build: thumbor
+    image: apsl/thumbor-multiprocess:6.2.0b
     environment:
       - RESULT_STORAGE=thumbor.result_storages.file_storage
       - RESULT_STORAGE_STORES_UNSAFE=True
@@ -20,8 +23,12 @@ services:
       - redis:redis
     networks:
       - app
+
   nginx:
     build: nginx
+    environment:
+      - NGINX_CACHE_FILESYSTEM_SIZE_MB=128
+      - NGINX_CACHE_FILESYSTEM_PATH=\/tmp\/nginx_cache\/
     links:
       - thumbor:thumbor
     volumes_from:
@@ -31,6 +38,7 @@ services:
     hostname: nginx
     networks:
       - app
+
   remotecv:
     build: remotecv
     links:
@@ -41,10 +49,12 @@ services:
       - REMOTECV_REDIS_DATABASE=0
     networks:
       - app
+
   redis:
     image: redis:latest
     networks:
       - app
+
 volumes:
   data:
     driver: local
