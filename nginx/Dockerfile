@@ -2,8 +2,8 @@ FROM nginx:1.13.0
 
 MAINTAINER Edu Herraiz <gshark@gmail.com>
 
-COPY nginx.conf /etc/nginx/
 COPY docker-entrypoint.sh /
+COPY nginx.conf /etc/nginx/
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["nginx"]
