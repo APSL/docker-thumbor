@@ -26,7 +26,7 @@ case "$THUMBOR_ALLOW_CORS" in
     "true")
         echo "Configuring nginx: Enabling CORS"
         ;;
-    *) 
+    *)
         echo "Configuring nginx: Disabling CORS"
         sed -i "/.*THUMBOR_ALLOW_CORS.*/d" /etc/nginx/nginx.conf
         ;;
@@ -36,7 +36,7 @@ case "$THUMBOR_ALLOW_CONTENT_DISPOSITION" in
     "true")
         echo "Configuring nginx: Enabling Content-Disposition"
         ;;
-    *) 
+    *)
         echo "Configuring nginx: Disabling Content-Disposition"
         sed -i "/.*THUMBOR_ALLOW_CONTENT_DISPOSITION.*/d" /etc/nginx/nginx.conf
         ;;
@@ -47,14 +47,20 @@ case "$AUTO_WEBP" in
         echo "Configuring nginx: Enabling WEBP "
         sed -i "/.*DEFAULT_CASE_WITHOUT_WEBP.*/d" /etc/nginx/nginx.conf
         ;;
-    *) 
+    *)
         echo "Configuring nginx: Disabling Enabling WEBP"
         sed -i "/.*AUTO_WEBP.*/d" /etc/nginx/nginx.conf
         ;;
 esac
 
-if [ "$1" = 'nginx-daemon' ]; then
-    exec nginx -g "daemon off;";
+# proxy cache settings
+# → #ENABLE_NGINX_CACHE_FILESYSTEM proxy_cache_path NGINX_CACHE_FILESYSTEM_PATH keys_zone=one:NGINX_CACHE_FILESYSTEM_SIZE_MBm;
+if [ -n $NGINX_CACHE_FILESYSTEM_SIZE_MB ]; then
+    if [ -n $NGINX_CACHE_FILESYSTEM_PATH ]; then
+        sed -i -e "s/NGINX_CACHE_FILESYSTEM_SIZE_MB/$NGINX_CACHE_FILESYSTEM_SIZE_MB/g"  /etc/nginx/nginx.conf
+        sed -i -e "s/NGINX_CACHE_FILESYSTEM_PATH/$NGINX_CACHE_FILESYSTEM_PATH/g"  /etc/nginx/nginx.conf
+        sed -i -e "s/#ENABLE_NGINX_CACHE_FILESYSTEM //g"  /etc/nginx/nginx.conf
+    fi
 fi
 
 exec "$@"
