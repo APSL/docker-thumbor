@@ -26,6 +26,8 @@ services:
 
   nginx:
     build: nginx
+    #image: apsl/thumbor-nginx:1.13-openshift
+    image: hub.apsl.net/library/thumbor-nginx:1.13-openshift
     environment:
       - NGINX_CACHE_FILESYSTEM_SIZE_MB=128
       - NGINX_CACHE_FILESYSTEM_PATH=\/tmp\/nginx_cache\/
