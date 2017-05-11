@@ -24,8 +24,14 @@ services:
     networks:
       - app
 
+
+  openshift:
+    build: thumbor-openshift
+    image: hub.apsl.net/library/thumbor-openshift:latest
+
   nginx:
     build: nginx
+    image: hub.apsl.net/library/thumbor-nginx:latest
     environment:
       - NGINX_CACHE_FILESYSTEM_SIZE_MB=128
       - NGINX_CACHE_FILESYSTEM_PATH=\/tmp\/nginx_cache\/
