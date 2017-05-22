@@ -646,7 +646,7 @@ TC_AWS_ENDPOINT = {{ TC_AWS_ENDPOINT | default(None) }} # Custom S3 endpoint URL
 TC_AWS_STORAGE_BUCKET = '{{ TC_AWS_STORAGE_BUCKET | default('') }}' # S3 bucket for Storage
 TC_AWS_STORAGE_ROOT_PATH = '{{ TC_AWS_STORAGE_ROOT_PATH | default('') }}' # S3 path prefix for Storage bucket
 
-TC_AWS_LOADER_BUCKET = '{{ TC_AWS_LOADER_BUCKET | default('') }}' #S3 bucket for loader
+TC_AWS_LOADER_BUCKET = '{{ TC_AWS_LOADER_BUCKET | default(None) }}' #S3 bucket for loader
 TC_AWS_LOADER_ROOT_PATH = '{{ TC_AWS_LOADER_ROOT_PATH | default('') }}' # S3 path prefix for Loader bucket
 
 TC_AWS_RESULT_STORAGE_BUCKET = '{{ TC_AWS_RESULT_STORAGE_BUCKET | default('') }}' # S3 bucket for result Storage
