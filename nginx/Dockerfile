@@ -1,4 +1,4 @@
-FROM nginx:1.11.5
+FROM nginx:1.13
 MAINTAINER Edu Herraiz <ghark@gmail.com>
 
 COPY nginx.conf /etc/nginx/
