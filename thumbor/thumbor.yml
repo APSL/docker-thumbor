@@ -80,6 +80,9 @@ spec:
         env:
         - name: USE_GIFSICLE_ENGINE
           value: True
+        env:
+        - name: HTTP_LOADER_CONNECT_TIMEOUT
+          value: 1
                 
         resources:
           requests:
