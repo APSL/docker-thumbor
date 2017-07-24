@@ -63,23 +63,24 @@ spec:
         image: smarp/thumbor:1.0.2
         # envvars
         env:
-        - name: MAX_WIDTH
-          value: 2048
-        env:
-        - name: MAX_HEIGHT
-          value: 2048
-        env:
-        - name: MAX_SOURCE_SIZE
-          value: 10485760
-        env:
-        - name: STORAGE_EXPIRATION_SECONDS
-          value: 0
-        env:
-        - name: DETECTORS
-          value: [\'thumbor.detectors.feature_detector\',\'thumbor.detectors.face_detector\']
-        env:
-        - name: USE_GIFSICLE_ENGINE
-          value: True
+        -
+          name: MAX_WIDTH
+          value: "2048"
+        -
+          name: MAX_HEIGHT
+          value: "2048"
+        -
+          name: MAX_SOURCE_SIZE
+          value: "10485760"
+        -
+          name: STORAGE_EXPIRATION_SECONDS
+          value: "0"
+        -
+          name: DETECTORS
+          value: "['thumbor.detectors.feature_detector','thumbor.detectors.face_detector']"
+        -
+          name: USE_GIFSICLE_ENGINE
+          value: "True"
                 
         resources:
           requests:
