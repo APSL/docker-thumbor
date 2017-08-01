@@ -60,7 +60,7 @@ spec:
     spec:
       containers:
       - name: master
-        image: smarp/thumbor:1.0.2
+        image: apsl/thumbor:6.3.0
         # envvars
         env:
         -
@@ -84,11 +84,19 @@ spec:
         -
           name: HTTP_LOADER_CONNECT_TIMEOUT
           value: "1"
-                
+        -
+          name: HTTP_LOADER_PROXY_HOST
+          value: "'10.132.0.8'"
+        -
+          name: HTTP_LOADER_PROXY_PORT
+          value: "8888"
+          
         resources:
           requests:
-            cpu: 200m
-            memory: 100Mi
+            cpu: 50m
+            memory: 64Mi
+          limits:
+            memory: 400Mi
         ports:
         - containerPort: 8000
 ---
@@ -101,6 +109,6 @@ spec:
   scaleTargetRef:
     kind: Deployment
     name: thumbor-deployment
-  minReplicas: 4
+  minReplicas: 10
   maxReplicas: 50
-  targetCPUUtilizationPercentage: 80
+  targetCPUUtilizationPercentage: 50
