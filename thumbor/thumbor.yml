@@ -85,18 +85,33 @@ spec:
           name: HTTP_LOADER_CONNECT_TIMEOUT
           value: "1"
         -
+          name: HTTP_LOADER_REQUEST_TIMEOUT
+          value: "5"
+        -
           name: HTTP_LOADER_PROXY_HOST
           value: "'10.132.0.8'"
         -
           name: HTTP_LOADER_PROXY_PORT
           value: "8888"
+        -
+          name: HTTP_LOADER_FOLLOW_REDIRECTS
+          value: "False"
           
         resources:
           requests:
-            cpu: 50m
-            memory: 64Mi
-          limits:
+            cpu: 100m
             memory: 400Mi
+          # limits:
+          #   memory: 500Mi
+        livenessProbe:
+          # an http probe
+          httpGet:
+            path: /unsafe/1000x1000/smart/https%3A%2F%2Fs3-eu-west-1.amazonaws.com%2Fpingdom-test%2Ftest-image.png
+            port: 8000
+          # length of time to wait for a pod to initialize
+          # after pod startup, before applying health checking
+          initialDelaySeconds: 30
+          timeoutSeconds: 1
         ports:
         - containerPort: 8000
 ---
@@ -110,5 +125,5 @@ spec:
     kind: Deployment
     name: thumbor-deployment
   minReplicas: 10
-  maxReplicas: 50
+  maxReplicas: 200
   targetCPUUtilizationPercentage: 50
