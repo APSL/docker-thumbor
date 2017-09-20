@@ -1,7 +1,7 @@
 #!/bin/bash
 if [ -z "$THUMBOR_VERSION" ]
 then
-  THUMBOR_VERSION="6.3.0"
+  THUMBOR_VERSION="6.3.2"
 fi
 
 echo "THUMBOR VERSION: $THUMBOR_VERSION"
@@ -12,7 +12,7 @@ mkdir -p wheelhouse
 docker run --rm -v "$(pwd)"/wheelhouse:/wheelhouse test/builder
 
 echo "Launch Pypiserver"
-docker-compose -f docker-compose-travis.yml up -d pypiserver 
+docker-compose -f docker-compose-travis.yml up -d pypiserver
 docker ps -a
 
 export DOCKERHOST=$(ip route | awk '/docker/ { print $NF }')
