@@ -15,6 +15,7 @@ echo "Launch Pypiserver"
 docker-compose -f docker-compose-travis.yml up -d pypiserver 
 docker ps -a
 
+#export DOCKERHOST="docker.for.mac.host.internal" # For building on OSX
 export DOCKERHOST=$(ip route | awk '/docker/ { print $NF }')
 
 echo "--> BUILDING apsl/thumbor"
