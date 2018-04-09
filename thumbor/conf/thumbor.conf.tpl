@@ -286,7 +286,7 @@ HTTP_LOADER_FORWARD_USER_AGENT = {{ HTTP_LOADER_FORWARD_USER_AGENT | default(Fal
 
 ## Default user agent for thumbor http loader requests
 ## Defaults to: Thumbor/6.4.0
-HTTP_LOADER_DEFAULT_USER_AGENT = '{{ HTTP_LOADER_DEFAULT_USER_AGENT | default('Thumbor/6.4.0') }}'
+HTTP_LOADER_DEFAULT_USER_AGENT = '{{ HTTP_LOADER_DEFAULT_USER_AGENT | default('Thumbor/6.4.2') }}'
 
 ## The proxy host needed to load images through
 ## Defaults to: None
