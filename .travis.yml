@@ -33,7 +33,7 @@ env:
   #- DOCKER_VERSION=1.11.1-0~trusty
   - DOCKER_COMPOSE_VERSION=1.8.0
 after_success:
-- docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+- echo "$DOCKER_PASS" | docker login --username "$DOCKER_USER" --password-stdin
 - docker push apsl/thumbor:$THUMBOR_VERSION
 - if [ "$TRAVIS_BRANCH" == "master" ]; then docker push apsl/thumbor:latest ; fi;
 - docker push apsl/thumbor:$THUMBOR_VERSION-simd-sse4
