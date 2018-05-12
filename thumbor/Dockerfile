@@ -19,19 +19,20 @@ ENV SHELL bash
 ENV WORKON_HOME /usr/src/app
 WORKDIR /usr/src/app
 
-ARG DOCKERHOST=172.17.0.1
-ENV DOCKERHOST ${DOCKERHOST}
 COPY requirements.txt /usr/src/app/requirements.txt
-RUN pip install --trusted-host None --no-cache-dir --use-wheel \
-   --extra-index-url http://${DOCKERHOST}:9009/simple/ \
-   --trusted-host ${DOCKERHOST} \
+RUN pip install -U pip==9.0.3
+RUN pip install --trusted-host None --no-cache-dir \
    -r /usr/src/app/requirements.txt
 
 COPY conf/thumbor.conf.tpl /usr/src/app/thumbor.conf.tpl
 
-RUN \ 
+RUN \
     ln /usr/lib/python2.7/dist-packages/cv2.x86_64-linux-gnu.so /usr/local/lib/python2.7/cv2.so && \
     ln /usr/lib/python2.7/dist-packages/cv.py /usr/local/lib/python2.7/cv.py
+
+ARG SIMD_LEVEL
+# pinning to 4.3.0 see https://github.com/uploadcare/pillow-simd/issues/17
+RUN if [ -n "$SIMD_LEVEL" ]; then pip uninstall -y pillow; CC="cc -m$SIMD_LEVEL" pip install --no-cache-dir -U --force-reinstall git+git://github.com/uploadcare/pillow-simd@d87f2d67ea62d03432f76e33d428e0b07768c94a#egg=Pillow==4.3.0; fi
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]

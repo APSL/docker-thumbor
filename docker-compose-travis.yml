@@ -1,12 +1,5 @@
-version: '2'
+version: '3'
 services:
-  pypiserver:
-    image: jcsaaddupuy/pypiserver
-    #command: pypi-server -P '' -u ''
-    volumes: 
-      - "./wheelhouse:/data/packages"
-    ports:
-      - "0.0.0.0:9009:8080"
   thumbor:
     image: apsl/thumbor
     env_file: .travis.env
@@ -29,7 +22,7 @@ services:
       - "127.0.0.1:8092:8000" # thumbor port
     networks:
       - app
-  thumborsimdss4:
+  thumborsimdsse4:
     image: apsl/thumbor:latest-simd-sse4
     env_file: .travis.env
     volumes:
@@ -40,7 +33,7 @@ services:
       - "127.0.0.1:8093:8000" # thumbor port
     networks:
       - app
-  thumbormultiprocesssimdss4:
+  thumbormultiprocesssimdsse4:
     image: apsl/thumbor-multiprocess:latest-simd-sse4
     env_file: .travis.env
     volumes:
@@ -77,8 +70,8 @@ services:
     image: apsl/thumbor-nginx
     links:
       - thumbor:thumbor
-    volumes_from:
-      - thumbor:ro
+    volumes:
+      - ./data:/data:ro
     ports:
       - "127.0.0.1:8097:80" # thumbor port
     hostname: nginx

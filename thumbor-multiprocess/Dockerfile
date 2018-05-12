@@ -1,13 +1,10 @@
-FROM apsl/thumbor
+ARG THUMBOR_TAG=latest
+FROM apsl/thumbor:$THUMBOR_TAG
 
 MAINTAINER Edu Herraiz <ghark@gmail.com>
 
-ARG DOCKERHOST=172.17.0.1
-ENV DOCKERHOST ${DOCKERHOST}
 COPY requirements.txt /usr/src/app/requirements.txt
-RUN pip install --trusted-host None --no-cache-dir --use-wheel \
-   --extra-index-url http://${DOCKERHOST}:9009/simple/ \
-   --trusted-host ${DOCKERHOST} \
+RUN pip install --trusted-host None --no-cache-dir \
    -r /usr/src/app/requirements.txt
 
 ADD conf/circus.ini.tpl /etc/
