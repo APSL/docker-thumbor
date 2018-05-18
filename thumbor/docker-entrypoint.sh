@@ -16,7 +16,7 @@ if [ -z ${THUMBOR_PORT+x} ]; then
 fi
 
 if [ "$1" = 'thumbor' ]; then
-    exec thumbor --port=$THUMBOR_PORT --conf=/usr/src/app/thumbor.conf $LOG_PARAMETER
+    exec python -m thumbor/server --port=$THUMBOR_PORT --conf=/usr/src/app/thumbor.conf $LOG_PARAMETER
 fi
 
 exec "$@"

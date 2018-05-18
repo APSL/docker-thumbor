@@ -20,6 +20,8 @@ ENV WORKON_HOME /usr/src/app
 WORKDIR /usr/src/app
 
 COPY requirements.txt /usr/src/app/requirements.txt
+# pinning to 9.0.3 because of tornado-botocore.
+# See https://github.com/nanvel/tornado-botocore/pull/14
 RUN pip install -U pip==9.0.3
 RUN pip install --trusted-host None --no-cache-dir \
    -r /usr/src/app/requirements.txt
@@ -32,7 +34,7 @@ RUN \
 
 ARG SIMD_LEVEL
 # pinning to 4.3.0 see https://github.com/uploadcare/pillow-simd/issues/17
-RUN if [ -n "$SIMD_LEVEL" ]; then pip uninstall -y pillow; CC="cc -m$SIMD_LEVEL" pip install --no-cache-dir -U --force-reinstall git+git://github.com/uploadcare/pillow-simd@d87f2d67ea62d03432f76e33d428e0b07768c94a#egg=Pillow==4.3.0; fi
+RUN if [ -n "$SIMD_LEVEL" ]; then pip uninstall -y pillow; CC="cc -m$SIMD_LEVEL" pip install --no-cache-dir -U --force-reinstall Pillow-SIMD==4.3.0.post0; fi
 
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
