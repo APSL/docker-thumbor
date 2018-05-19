@@ -1,35 +1,19 @@
-FROM python:2
+ARG THUMBOR_TAG=latest
+FROM apsl/thumbor:$THUMBOR_TAG
 
 MAINTAINER Edu Herraiz <ghark@gmail.com>
 
 VOLUME /data
-
-# Things required for a python/pip environment
-COPY system-requirements.txt /usr/src/app/system-requirements.txt
-RUN  \
-    apt-get update && \
-    apt-get -y upgrade && \
-    apt-get -y autoremove && \
-    xargs apt-get -y -q install < /usr/src/app/system-requirements.txt && \
-    apt-get clean
 
 ENV HOME /usr/src/app
 ENV SHELL bash
 ENV WORKON_HOME /usr/src/app
 WORKDIR /usr/src/app
 
-ARG DOCKERHOST=172.17.0.1
-ENV DOCKERHOST ${DOCKERHOST}
 COPY requirements.txt /usr/src/app/requirements.txt
-RUN pip install --trusted-host None --no-cache-dir --use-wheel \
-   --extra-index-url http://${DOCKERHOST}:9009/simple/ \
-   --trusted-host ${DOCKERHOST} \
+RUN pip install --trusted-host None --no-cache-dir \
    -r /usr/src/app/requirements.txt
 
-RUN \ 
-    ln /usr/lib/python2.7/dist-packages/cv2.x86_64-linux-gnu.so /usr/local/lib/python2.7/cv2.so && \
-    ln /usr/lib/python2.7/dist-packages/cv.py /usr/local/lib/python2.7/cv.py
-    
 COPY docker-entrypoint.sh /
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["remotecv"]
