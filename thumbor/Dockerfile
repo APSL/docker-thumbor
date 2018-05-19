@@ -20,9 +20,6 @@ ENV WORKON_HOME /usr/src/app
 WORKDIR /usr/src/app
 
 COPY requirements.txt /usr/src/app/requirements.txt
-# pinning to 9.0.3 because of tornado-botocore.
-# See https://github.com/nanvel/tornado-botocore/pull/14
-RUN pip install -U pip==9.0.3
 RUN pip install --trusted-host None --no-cache-dir \
    -r /usr/src/app/requirements.txt
 
