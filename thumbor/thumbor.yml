@@ -34,23 +34,8 @@ apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: thumbor-deployment
-  # these labels can be applied automatically
-  # from the labels in the pod template if not set
-  # labels:
-  #   app: redis
-  #   role: master
-  #   tier: backend
 spec:
-  # this replicas value is default
-  # modify it according to your case
   replicas: 1
-  # selector can be applied automatically
-  # from the labels in the pod template if not set
-  # selector:
-  #   matchLabels:
-  #     app: guestbook
-  #     role: master
-  #     tier: backend
   template:
     metadata:
       labels:
@@ -104,7 +89,7 @@ spec:
         livenessProbe:
           # an http probe
           httpGet:
-            path: /unsafe/20x20/smart/https%3A%2F%2Fs3-eu-west-1.amazonaws.com%2Fsmarpshareupload%2Fey%2FeyNordic-logo-onwhite.jpg
+            path: /unsafe/20x20/smart/https%3A%2F%2Fs3-eu-west-1.amazonaws.com%2Fpingdom-test%2Ftest-image.png
             port: 8000
           # length of time to wait for a pod to initialize
           # after pod startup, before applying health checking
@@ -123,9 +108,10 @@ metadata:
   namespace: default
 spec:
   scaleTargetRef:
+    apiVersion: apps/v1beta1
     kind: Deployment
     name: thumbor-deployment
-  minReplicas: 1
+  minReplicas: 2
   maxReplicas: 200
   targetCPUUtilizationPercentage: 60
 ---
