@@ -1,6 +1,6 @@
 FROM python:2
 
-MAINTAINER Edu Herraiz <ghark@gmail.com>
+LABEL maintainer="Edu Herraiz <ghark@gmail.com>"
 
 VOLUME /data
 
