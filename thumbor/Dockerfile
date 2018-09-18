@@ -1,6 +1,6 @@
 FROM python:2
 
-MAINTAINER Edu Herraiz <ghark@gmail.com>
+LABEL maintainer="Edu Herraiz <ghark@gmail.com>"
 
 VOLUME /data
 
@@ -22,7 +22,7 @@ WORKDIR /usr/src/app
 ARG DOCKERHOST=172.17.0.1
 ENV DOCKERHOST ${DOCKERHOST}
 COPY requirements.txt /usr/src/app/requirements.txt
-RUN pip install --trusted-host None --no-cache-dir --use-wheel \
+RUN pip install --trusted-host None --no-cache-dir \
    --extra-index-url http://${DOCKERHOST}:9009/simple/ \
    --trusted-host ${DOCKERHOST} \
    -r /usr/src/app/requirements.txt
