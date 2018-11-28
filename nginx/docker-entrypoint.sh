@@ -1,23 +1,11 @@
 #!/bin/bash
 set -e
 
-# If not set we use thumbor host default value
-if [ -z $THUMBOR_DEFAULT_HOST ]; then
-    THUMBOR_DEFAULT_HOST=thumbor
-fi
-
-# If not set we use thumbor port default value
-if [ -z $THUMBOR_DEFAULT_PORT ]; then
-    THUMBOR_DEFAULT_PORT=8000
-fi
-
-# If not set we use 80 for nginx port
-if [ -z $NGINX_DEFAULT_PORT ]; then
-    NGINX_DEFAULT_PORT=80
-fi
-
-sed -i -e "s/server thumbor_host:thumbor_port/server $THUMBOR_DEFAULT_HOST:$THUMBOR_DEFAULT_PORT/g"  /etc/nginx/nginx.conf
-sed -i -e "s/listen 80 default/listen $NGINX_DEFAULT_PORT default/g"  /etc/nginx/nginx.conf
+STORAGE_ROOT_PATH=$(echo $RESULT_STORAGE_FILE_STORAGE_ROOT_PATH | sed 's_/_\\/_g')
+sed -i -e "s/@UPSTREAM_THUMBOR_HOST/$THUMBOR_HOST/g"  /etc/nginx/nginx.conf
+sed -i -e "s/@UPSTREAM_THUMBOR_PORT/$THUMBOR_PORT/g"  /etc/nginx/nginx.conf
+sed -i -e "s/@DEFAULT_SERVER_PORT/$NGINX_PORT/g"  /etc/nginx/nginx.conf
+sed -i -e "s/@ROOT_STORAGE_PATH;/$STORAGE_ROOT_PATH\/$PATH_FORMAT_VERSION;/g"  /etc/nginx/nginx.conf
 
 # Using this hack to case insensitive envars
 shopt -s nocasematch

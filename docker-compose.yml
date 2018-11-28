@@ -1,53 +1,49 @@
 version: '2'
 services:
+
+  imageserver:
+    image: python:3
+    ports:
+      - "127.0.0.1:8080:8000"
+    volumes:
+      - ./tests/images/v1:/data
+    command: ["python3", "-m",  "http.server", "--directory=/data"]
+    networks:
+      - app
+
   thumbor:
     build: thumbor
-    environment:
-      - RESULT_STORAGE=thumbor.result_storages.file_storage
-      - RESULT_STORAGE_STORES_UNSAFE=True
-      - STORAGE=thumbor.storages.mixed_storage
-      - DETECTORS=["thumbor.detectors.queued_detector.queued_complete_detector"]
-      - REDIS_STORAGE_SERVER_HOST=redis
-      - REDIS_STORAGE_SERVER_PORT=6379
-      - REDIS_STORAGE_SERVER_DB=0
-      - REDIS_QUEUE_SERVER_HOST=redis
-      - REDIS_QUEUE_SERVER_PORT=6379
-      - REDIS_QUEUE_SERVER_DB=0
-      - MIXED_STORAGE_DETECTOR_STORAGE=tc_redis.storages.redis_storage
+    env_file: env
     volumes:
       - data:/data
     links:
       - redis:redis
     networks:
       - app
+
   nginx:
     build: nginx
     links:
       - thumbor:thumbor
+    env_file: env
     volumes_from:
       - thumbor
     ports:
-      - "8169:80" # thumbor port
+      - "8169:8000"
     hostname: nginx
     networks:
       - app
-  remotecv:
-    build: remotecv
-    links:
-      - redis:redis
-    environment:
-      - REMOTECV_REDIS_HOST=redis
-      - REMOTECV_REDIS_PORT=6379
-      - REMOTECV_REDIS_DATABASE=0
-    networks:
-      - app
+
   redis:
     image: redis:latest
     networks:
       - app
+
+
 volumes:
   data:
     driver: local
+
 networks:
   app:
     driver: bridge

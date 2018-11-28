@@ -1,0 +1,14 @@
+libssl-dev
+libcurl4-openssl-dev
+libdc1394-22-dev
+libjpeg-dev
+libpng-dev
+libtiff5-dev
+libgraphicsmagick1-dev
+libgraphicsmagick++1-dev
+libboost-python-dev
+python3-dev
+
+build-essential
+libjpeg-turbo-progs
+ffmpeg

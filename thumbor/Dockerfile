@@ -1,40 +1,36 @@
-FROM python:2
+FROM python:2.7-slim-stretch as builder
 
-MAINTAINER Edu Herraiz <ghark@gmail.com>
+COPY requirements/system-requirements.txt /srv/system-requirements.txt
+RUN apt-get update \
+    && xargs apt-get -y -q install < /srv/system-requirements.txt \
+    && apt-get clean
 
-VOLUME /data
+COPY requirements/requirements.txt /srv/requirements.txt
+RUN pip install -r /srv/requirements.txt
 
-# Things required for a python/pip environment
-COPY system-requirements.txt /usr/src/app/system-requirements.txt
-RUN  \
-    awk '$1 ~ "^deb" { $3 = $3 "-backports"; print; exit }' /etc/apt/sources.list > /etc/apt/sources.list.d/backports.list && \
-    apt-get update && \
-    apt-get -y upgrade && \
-    apt-get -y autoremove && \
-    xargs apt-get -y -q install < /usr/src/app/system-requirements.txt && \
-    apt-get clean
+
+FROM python:2.7-slim-stretch
+
+LABEL maintainer="Edu Herraiz <ghark@gmail.com>"
 
 ENV HOME /usr/src/app
 ENV SHELL bash
-ENV WORKON_HOME /usr/src/app
-WORKDIR /usr/src/app
+ENV WORKON_HOME $HOME
+ENV THUMBOR_VERSION 6.6.0
 
-ARG DOCKERHOST=172.17.0.1
-ENV DOCKERHOST ${DOCKERHOST}
-COPY requirements.txt /usr/src/app/requirements.txt
-RUN pip install --trusted-host None --no-cache-dir --use-wheel \
-   --extra-index-url http://${DOCKERHOST}:9009/simple/ \
-   --trusted-host ${DOCKERHOST} \
-   -r /usr/src/app/requirements.txt
+WORKDIR $HOME
 
-COPY conf/thumbor.conf.tpl /usr/src/app/thumbor.conf.tpl
+COPY --from=builder /usr/local/lib/python2.7/site-packages /usr/local/lib/python2.7/site-packages
+COPY --from=builder /usr/local/bin /usr/local/bin
+COPY --from=builder /usr/bin /usr/bin
 
-RUN \ 
-    ln /usr/lib/python2.7/dist-packages/cv2.x86_64-linux-gnu.so /usr/local/lib/python2.7/cv2.so && \
-    ln /usr/lib/python2.7/dist-packages/cv.py /usr/local/lib/python2.7/cv.py
+COPY thumbor.conf.template $HOME/thumbor.conf.tpl
 
 COPY docker-entrypoint.sh /
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["thumbor"]
+
+VOLUME /data
 
 EXPOSE 8000
