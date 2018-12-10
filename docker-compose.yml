@@ -21,6 +21,22 @@ services:
     networks:
       - app
 
+  thumbor-secure:
+    build: thumbor
+    env_file: env
+    environment:
+      STORAGE: thumbor.storages.file_storage
+      RESULT_STORAGE: thumbor.result_storages.file_storage
+      RESULT_STORAGE_STORES_UNSAFE: "False"
+      ALLOW_UNSAFE_URL: "False"
+      SECURITY_KEY: safetythumbor
+    volumes:
+      - data:/data
+    ports:
+      - "8000:8000"
+    networks:
+      - app
+
   nginx:
     build: nginx
     links:

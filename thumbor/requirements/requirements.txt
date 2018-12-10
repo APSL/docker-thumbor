@@ -1,7 +1,7 @@
 argparse==1.4.0
 envtpl==0.6.0
 boto==2.49.0
-botocore==1.12.51
+botocore==1.12.59
 raven==6.9.0
 thumbor==6.6.0
 opencv-engine==1.0.1
