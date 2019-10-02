@@ -1,6 +1,6 @@
 [watcher:thumbor]
 cmd = thumbor
-args = --conf=/usr/src/app/thumbor.conf --fd $(circus.sockets.thumbor)
+args = --conf=/usr/src/app/thumbor.conf --fd $(circus.sockets.thumbor) -l {{ LOG_LEVEL | default('info') }}
 numprocesses = {{ THUMBOR_NUM_PROCESSES | default(8) }}
 use_sockets = True
 working_dir = /usr/src/app

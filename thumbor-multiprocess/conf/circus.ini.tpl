@@ -6,3 +6,4 @@ httpd_port = 8888
 endpoint = tcp://127.0.0.1:5555
 pubsub_endpoint = tcp://127.0.0.1:5556
 include = /etc/circus.d/*.ini
+loglevel = {{ LOG_LEVEL | default('debug') }}
