@@ -51,9 +51,9 @@ push:
 	echo "Pushed"
 
 
-.PHONY: push-master # Push latest images to the registry.
-push-master:
-	echo "Pushing images to the registry..."
-	test "$${TRAVIS_BRANCH}" = "master" && docker tag apsl/thumbor:build apsl/thumbor:latest || true
-	test "$${TRAVIS_BRANCH}" = "master" && docker tag apsl/thumbor:build apsl/thumbor:nginx-latest || true
-	echo "Pushed"
+#.PHONY: push-master # Push latest images to the registry.
+#push-master:
+#	echo "Pushing images to the registry..."
+#	test "$${TRAVIS_BRANCH}" = "master" && docker tag apsl/thumbor:build apsl/thumbor:latest || true
+#	test "$${TRAVIS_BRANCH}" = "master" && docker tag apsl/thumbor:build apsl/thumbor:nginx-latest || true
+#	echo "Pushed"

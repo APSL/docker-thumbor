@@ -1,4 +1,4 @@
-FROM nginx:1.15.7-alpine
+FROM nginx:1.17.6-alpine
 
 LABEL maintainer="Edu Herraiz <ghark@gmail.com>"
 

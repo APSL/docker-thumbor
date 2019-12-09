@@ -16,7 +16,7 @@ LABEL maintainer="Edu Herraiz <ghark@gmail.com>"
 ENV HOME /usr/src/app
 ENV SHELL bash
 ENV WORKON_HOME $HOME
-ENV THUMBOR_VERSION 6.6.0
+ENV THUMBOR_VERSION 6.7.0
 
 WORKDIR $HOME
 

@@ -13,11 +13,14 @@ services:
 
   thumbor:
     build: thumbor
+    image: apsl/thumbor:6.3.0
     env_file: env
     volumes:
       - data:/data
     links:
       - redis:redis
+    ports:
+      - "8000:8000"      
     networks:
       - app
 
