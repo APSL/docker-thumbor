@@ -30,7 +30,7 @@ install:
 script:
   # build images and run tests
   - make builds
-  - make run-tests
+  #- make run-tests
 
 after_success:
   # login to the registry
