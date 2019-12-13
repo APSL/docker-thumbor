@@ -1,3 +1,0 @@
-circus==0.11.1
-circus-web==0.5
-envtpl==0.4.1

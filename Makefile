@@ -29,8 +29,10 @@ builds:
 .PHONY: tags # Tagging images by version THUMBOR_VERSION.
 tags:
 	echo "Tagging images using '$${THUMBOR_VERSION}' version..."
-	docker tag apsl/thumbor:build apsl/thumbor:$${THUMBOR_VERSION}
-	docker tag apsl/thumbor:build apsl/thumbor:base-$${THUMBOR_VERSION}
+	docker tag apsl/thumbor:build-base apsl/thumbor:base-$${THUMBOR_VERSION}
+	docker tag apsl/thumbor:build-full apsl/thumbor:full-$${THUMBOR_VERSION}
+	docker tag apsl/thumbor:build-multiprocess-base apsl/thumbor:multiprocess-base-$${THUMBOR_VERSION}	
+	docker tag apsl/thumbor:build-multiprocess-full apsl/thumbor:multiprocess-full-$${THUMBOR_VERSION}	
 	docker tag apsl/thumbor:nginx-build apsl/thumbor:nginx-$${THUMBOR_VERSION}
 
 
@@ -45,11 +47,12 @@ tags-master:
 .PHONY: push # Push images to the registry.
 push:
 	echo "Pushing images to the registry..."
-	docker push apsl/thumbor:$${THUMBOR_VERSION}
 	docker push apsl/thumbor:base-$${THUMBOR_VERSION}
+	docker push apsl/thumbor:full-$${THUMBOR_VERSION}
+	docker push apsl/thumbor:multiprocess-base-$${THUMBOR_VERSION}
+	docker push apsl/thumbor:multiprocess-full-$${THUMBOR_VERSION}
 	docker push apsl/thumbor:nginx-$${THUMBOR_VERSION}
 	echo "Pushed"
-
 
 #.PHONY: push-master # Push latest images to the registry.
 #push-master:

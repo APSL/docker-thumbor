@@ -1,4 +1,4 @@
-FROM python:2.7-slim-stretch as builder
+FROM python:2.7-slim-buster as builder
 
 COPY requirements/system-requirements.txt /srv/system-requirements.txt
 RUN apt-get update \
@@ -9,7 +9,7 @@ COPY requirements/requirements.txt /srv/requirements.txt
 RUN pip install -r /srv/requirements.txt
 
 
-FROM python:2.7-slim-stretch
+FROM python:2.7-slim-buster
 
 LABEL maintainer="Edu Herraiz <ghark@gmail.com>"
 

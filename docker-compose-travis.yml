@@ -11,9 +11,11 @@ services:
     networks:
       - app
 
-  thumbor:
-    build: thumbor
-    image: apsl/thumbor:build
+  thumbor-base:
+    build: 
+      dockerfile: thumbor-base.dockerfile
+      context: thumbor
+    image: apsl/thumbor:build-base
     env_file: .travis.env
     volumes:
       - ./data:/data
@@ -25,13 +27,73 @@ services:
     networks:
       - app
 
+  thumbor-full:
+    build: 
+      dockerfile: thumbor-full.dockerfile
+      context: thumbor
+      args:
+        - FROMTAG=build-base      
+    image: apsl/thumbor:build-full
+    env_file: .travis.env
+    volumes:
+      - ./data:/data
+    links:
+      - redis:redis
+      - imageserver:imageserver
+    ports:
+      - "127.0.0.1:8091:8000"
+    depends_on: 
+      - thumbor-base
+    networks:
+      - app      
+
+  thumbor-multiprocess-base:
+    build: 
+      dockerfile: thumbor-multiprocess-base.dockerfile
+      context: thumbor-multiprocess
+      args:
+        - FROMTAG=build-base      
+    image: apsl/thumbor:build-multiprocess-base
+    env_file: .travis.env
+    volumes:
+      - ./data:/data
+    links:
+      - redis:redis
+      - imageserver:imageserver
+    ports:
+      - "127.0.0.1:8091:8000"
+    depends_on: 
+      - thumbor-base      
+    networks:
+      - app
+
+  thumbor-multiprocess-full:
+    build: 
+      dockerfile: thumbor-multiprocess-full.dockerfile
+      context: thumbor-multiprocess
+      args:
+        - FROMTAG=build-multiprocess-base
+    image: apsl/thumbor:build-multiprocess-full
+    env_file: .travis.env
+    volumes:
+      - ./data:/data
+    links:
+      - redis:redis
+      - imageserver:imageserver
+    ports:
+      - "127.0.0.1:8091:8000"
+    depends_on: 
+      - thumbor-multiprocess-base      
+    networks:
+      - app
+
   nginx:
     build: nginx
     image: apsl/thumbor:nginx-build
     links:
-      - thumbor:thumbor
+      - thumbor-base:thumbor
     volumes_from:
-      - thumbor:ro
+      - thumbor-base:ro
     ports:
       - "127.0.0.1:8097:80"
     hostname: nginx

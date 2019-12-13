@@ -14,3 +14,4 @@ tc-mongodb==5.1.0
 thumbor-memcached
 tc_prometheus
 pgmagick==0.7.5
+opencv-python-headless

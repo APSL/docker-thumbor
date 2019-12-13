@@ -39,8 +39,8 @@ after_success:
   - make tags
   - make tags-master
   # push images and latest images if the current branch is master
-  - make push
-  - make push-master
+  #- make push
+  #- make push-master
   # show images created
   - docker images -a
 
