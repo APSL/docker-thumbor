@@ -23,7 +23,7 @@ spec:
   ports:
     # the port that this service should serve on
   - port: 28765
-    targetPort: 8000
+    targetPort: 80
   type: LoadBalancer
   selector:
     app: thumbor
@@ -45,7 +45,7 @@ spec:
     spec:
       containers:
       - name: master
-        image: apsl/thumbor:6.4.2
+        image: minimalcompact/thumbor:6.7.5
         # envvars
         env:
         -
@@ -93,7 +93,7 @@ spec:
           # an http probe
           httpGet:
             path: /unsafe/20x20/smart/https%3A%2F%2Fs3-eu-west-1.amazonaws.com%2Fpingdom-test%2Ftest-image.png
-            port: 8000
+            port: 80
           # length of time to wait for a pod to initialize
           # after pod startup, before applying health checking
           initialDelaySeconds: 10
@@ -105,7 +105,7 @@ spec:
           # an http probe
           httpGet:
             path: /unsafe/20x20/smart/https%3A%2F%2Fs3-eu-west-1.amazonaws.com%2Fpingdom-test%2Ftest-image.png
-            port: 8000
+            port: 80
           # length of time to wait for a pod to initialize
           # after pod startup, before applying health checking
           initialDelaySeconds: 10
@@ -114,7 +114,7 @@ spec:
           failureThreshold: 1
           periodSeconds: 10
         ports:
-        - containerPort: 8000
+        - containerPort: 80
 ---
 apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
