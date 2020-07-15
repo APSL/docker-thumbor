@@ -49,12 +49,6 @@ spec:
         # envvars
         env:
         -
-          name: MAX_WIDTH
-          value: "2048"
-        -
-          name: MAX_HEIGHT
-          value: "2048"
-        -
           name: MAX_SOURCE_SIZE
           value: "10485760"
         -
