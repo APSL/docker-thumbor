@@ -30,11 +30,14 @@ spec:
     tier: backend
     role: master
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: thumbor-deployment
 spec:
+  selector:
+    matchLabels:
+      app: thumbor
   replicas: 1
   template:
     metadata:
