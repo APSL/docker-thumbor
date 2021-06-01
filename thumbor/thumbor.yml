@@ -38,7 +38,7 @@ spec:
   selector:
     matchLabels:
       app: thumbor
-  replicas: 1
+  replicas: 6
   template:
     metadata:
       labels:
