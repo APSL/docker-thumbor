@@ -81,11 +81,13 @@ spec:
         -
           name: RESPECT_ORIENTATION
           value: "True"
-          
         resources:
           requests:
+            cpu: 500m
+            memory: 512Mi
+          limits:
             cpu: 1000m
-            memory: 1200Mi
+            # do not set memory limit, pods are OOMkilled upon memory usage spikes
         livenessProbe:
           # an http probe
           httpGet:
