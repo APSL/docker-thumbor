@@ -89,26 +89,26 @@ spec:
         livenessProbe:
           # an http probe
           httpGet:
-            path: /unsafe/20x20/smart/https%3A%2F%2Fs3-eu-west-1.amazonaws.com%2Fpingdom-test%2Ftest-image.png
+            path: /healthcheck
             port: 80
           # length of time to wait for a pod to initialize
           # after pod startup, before applying health checking
-          initialDelaySeconds: 10
-          timeoutSeconds: 10
+          initialDelaySeconds: 45
+          timeoutSeconds: 5
           successThreshold: 1
-          failureThreshold: 1
+          failureThreshold: 3
           periodSeconds: 30
         readinessProbe:
           # an http probe
           httpGet:
-            path: /unsafe/20x20/smart/https%3A%2F%2Fs3-eu-west-1.amazonaws.com%2Fpingdom-test%2Ftest-image.png
+            path: /healthcheck
             port: 80
           # length of time to wait for a pod to initialize
           # after pod startup, before applying health checking
           initialDelaySeconds: 10
-          timeoutSeconds: 10
+          timeoutSeconds: 5
           successThreshold: 1
-          failureThreshold: 1
+          failureThreshold: 3
           periodSeconds: 10
         ports:
         - containerPort: 80
