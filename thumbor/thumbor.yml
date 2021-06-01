@@ -134,7 +134,7 @@ kind: PodDisruptionBudget
 metadata:
   name: thumbor-pdb
 spec:
-  minAvailable: 1
+  minAvailable: 75%
   selector:
     matchLabels:
       app: thumbor
