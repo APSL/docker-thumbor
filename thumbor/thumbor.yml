@@ -64,12 +64,6 @@ spec:
           name: USE_GIFSICLE_ENGINE
           value: "True"
         -
-          name: HTTP_LOADER_CONNECT_TIMEOUT
-          value: "1"
-        -
-          name: HTTP_LOADER_REQUEST_TIMEOUT
-          value: "5"
-        -
           name: HTTP_LOADER_PROXY_HOST
           value: "'10.132.0.9'"
         -
