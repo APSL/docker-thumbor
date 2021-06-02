@@ -107,7 +107,7 @@ spec:
             port: 80
           # length of time to wait for a pod to initialize
           # after pod startup, before applying health checking
-          initialDelaySeconds: 10
+          initialDelaySeconds: 20
           timeoutSeconds: 5
           successThreshold: 1
           failureThreshold: 3
