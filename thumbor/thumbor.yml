@@ -51,29 +51,26 @@ spec:
         image: minimalcompact/thumbor:6.7.5
         # envvars
         env:
-        -
-          name: MAX_SOURCE_SIZE
+        - name: MAX_SOURCE_SIZE
           value: "10485760"
-        -
-          name: STORAGE_EXPIRATION_SECONDS
+        - name: STORAGE_EXPIRATION_SECONDS
           value: "0"
-        -
-          name: DETECTORS
+        - name: DETECTORS
           value: "['thumbor.detectors.feature_detector','thumbor.detectors.face_detector']"
-        -
-          name: USE_GIFSICLE_ENGINE
+        - name: USE_GIFSICLE_ENGINE
           value: "True"
-        -
-          name: HTTP_LOADER_PROXY_HOST
+        # Increase this (& CPU limit accordingly) if you are seeing your IOLoop getting blocked, often indicated by your upstream HTTP requests timing out
+        - name: ENGINE_THREADPOOL_SIZE
+          value: "2" # 2 x nproc
+        - name: GC_INTERVAL
+          value: "600" # in seconds
+        - name: HTTP_LOADER_PROXY_HOST
           value: "'10.132.0.9'"
-        -
-          name: HTTP_LOADER_PROXY_PORT
+        - name: HTTP_LOADER_PROXY_PORT
           value: "8888"
-        -
-          name: HTTP_LOADER_FOLLOW_REDIRECTS
+        - name: HTTP_LOADER_FOLLOW_REDIRECTS
           value: "False"
-        -
-          name: RESPECT_ORIENTATION
+        - name: RESPECT_ORIENTATION
           value: "True"
         resources:
           requests:
