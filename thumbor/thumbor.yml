@@ -70,6 +70,8 @@ spec:
           value: "8888"
         - name: HTTP_LOADER_FOLLOW_REDIRECTS
           value: "False"
+        - name: HTTP_LOADER_MAX_CLIENTS
+          value: "25"
         - name: RESPECT_ORIENTATION
           value: "True"
         resources:
