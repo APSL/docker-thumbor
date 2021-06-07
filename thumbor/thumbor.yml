@@ -46,6 +46,15 @@ spec:
         role: master
         tier: backend
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values: ["thumbor"]
+            topologyKey: "kubernetes.io/hostname"
       containers:
       - name: master
         image: minimalcompact/thumbor:6.7.5
