@@ -38,7 +38,7 @@ spec:
   selector:
     matchLabels:
       app: thumbor
-  replicas: 1
+  replicas: 4
   template:
     metadata:
       labels:
@@ -46,46 +46,50 @@ spec:
         role: master
         tier: backend
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values: ["thumbor"]
+            topologyKey: "kubernetes.io/hostname"
       containers:
       - name: master
         image: minimalcompact/thumbor:6.7.5
         # envvars
         env:
-        -
-          name: MAX_SOURCE_SIZE
+        - name: MAX_SOURCE_SIZE
           value: "10485760"
-        -
-          name: STORAGE_EXPIRATION_SECONDS
+        - name: STORAGE_EXPIRATION_SECONDS
           value: "0"
-        -
-          name: DETECTORS
+        - name: DETECTORS
           value: "['thumbor.detectors.feature_detector','thumbor.detectors.face_detector']"
-        -
-          name: USE_GIFSICLE_ENGINE
+        - name: USE_GIFSICLE_ENGINE
           value: "True"
-        -
-          name: HTTP_LOADER_CONNECT_TIMEOUT
-          value: "1"
-        -
-          name: HTTP_LOADER_REQUEST_TIMEOUT
-          value: "5"
-        -
-          name: HTTP_LOADER_PROXY_HOST
+        # Increase this (& CPU limit accordingly) if you are seeing your IOLoop getting blocked, often indicated by your upstream HTTP requests timing out
+        - name: ENGINE_THREADPOOL_SIZE
+          value: "4" # 2 x nproc
+        - name: GC_INTERVAL
+          value: "60" # in seconds
+        - name: HTTP_LOADER_PROXY_HOST
           value: "'10.132.0.9'"
-        -
-          name: HTTP_LOADER_PROXY_PORT
+        - name: HTTP_LOADER_PROXY_PORT
           value: "8888"
-        -
-          name: HTTP_LOADER_FOLLOW_REDIRECTS
+        - name: HTTP_LOADER_FOLLOW_REDIRECTS
           value: "False"
-        -
-          name: RESPECT_ORIENTATION
+        - name: HTTP_LOADER_MAX_CLIENTS
+          value: "25"
+        - name: RESPECT_ORIENTATION
           value: "True"
-          
         resources:
           requests:
             cpu: 1000m
-            memory: 1200Mi
+            memory: 1537Mi
+          limits:
+            cpu: 2000m
+            # do not set memory limit, pods are OOMkilled (even more, argh) upon memory usage spikes
         livenessProbe:
           # an http probe
           httpGet:
@@ -105,7 +109,7 @@ spec:
             port: 80
           # length of time to wait for a pod to initialize
           # after pod startup, before applying health checking
-          initialDelaySeconds: 10
+          initialDelaySeconds: 20
           timeoutSeconds: 5
           successThreshold: 1
           failureThreshold: 3
@@ -113,27 +117,45 @@ spec:
         ports:
         - containerPort: 80
 ---
-apiVersion: autoscaling/v1
+apiVersion: autoscaling/v2beta2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: thumbor-hpa
+  name: thumbor
   namespace: default
 spec:
   scaleTargetRef:
-    apiVersion: apps/v1beta1
+    apiVersion: apps/v1
     kind: Deployment
     name: thumbor-deployment
-  minReplicas: 2
-  maxReplicas: 200
-  targetCPUUtilizationPercentage: 60
+  minReplicas: 4
+  maxReplicas: 9
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  behavior:
+    scaleDown: # scale down max 1 pod every 1200 + 60 seconds
+      stabilizationWindowSeconds: 1200 # wait 20 min for the highest recommendation
+      policies: # limit scale down rate
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+    scaleUp: # scale up max 1 pods every 600 + 60 seconds
+      stabilizationWindowSeconds: 600 # wait 10 min for the lowest recommendation
+      policies: # limit scale up rate
+      - type: Pods
+        value: 1
+        periodSeconds: 60
 ---
 apiVersion: policy/v1beta1
 kind: PodDisruptionBudget
 metadata:
-  name: thumbor-pdb
+  name: thumbor
 spec:
-  minAvailable: 1
+  minAvailable: 75%
   selector:
     matchLabels:
       app: thumbor
-
