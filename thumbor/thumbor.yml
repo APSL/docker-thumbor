@@ -60,6 +60,8 @@ spec:
         image: minimalcompact/thumbor:6.7.5
         # envvars
         env:
+        - name: THUMBOR_NUM_PROCESSES # Normally this is set in connection with the number of CPU cores
+          value: "2"
         - name: MAX_SOURCE_SIZE
           value: "10485760"
         - name: STORAGE_EXPIRATION_SECONDS
