@@ -87,7 +87,7 @@ spec:
           value: "True"
         resources:
           requests:
-            cpu: 1000m
+            cpu: 1250m
             memory: 1537Mi
           limits:
             cpu: 2000m
