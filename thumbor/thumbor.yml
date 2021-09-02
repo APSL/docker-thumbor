@@ -88,7 +88,7 @@ spec:
         resources:
           requests:
             cpu: 1250m
-            memory: 1537Mi
+            memory: 5120Mi
           limits:
             cpu: 2000m
             # do not set memory limit, pods are OOMkilled (even more, argh) upon memory usage spikes
