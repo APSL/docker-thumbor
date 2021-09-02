@@ -38,7 +38,7 @@ spec:
   selector:
     matchLabels:
       app: thumbor
-  replicas: 4
+  replicas: 3
   template:
     metadata:
       labels:
@@ -88,7 +88,7 @@ spec:
         resources:
           requests:
             cpu: 1250m
-            memory: 1537Mi
+            memory: 5120Mi
           limits:
             cpu: 2000m
             # do not set memory limit, pods are OOMkilled (even more, argh) upon memory usage spikes
@@ -129,7 +129,7 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: thumbor-deployment
-  minReplicas: 4
+  minReplicas: 3
   maxReplicas: 9
   metrics:
   - type: Resource
