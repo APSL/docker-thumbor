@@ -1,7 +1,7 @@
 Minimal Usage
 ================
 ```
-$ docker run -p 8000:8000 apsl/thumbor
+$ docker run -p 8000:8000 apsl/thumbor:6.7.5
 $ wget http://localhost:8000/unsafe/300x300/i.imgur.com/bvjzPct.jpg
 ```
 

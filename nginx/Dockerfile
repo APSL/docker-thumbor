@@ -1,6 +1,6 @@
-FROM nginx:1.17.6-alpine
+FROM nginx:1.21.4-alpine
 
-LABEL maintainer="Edu Herraiz <ghark@gmail.com>"
+LABEL maintainer="Edu Herraiz <edu@eduherraiz.com>"
 
 ENV RESULT_STORAGE_FILE_STORAGE_ROOT_PATH /data/result_storage
 ENV PATH_FORMAT_VERSION v2
