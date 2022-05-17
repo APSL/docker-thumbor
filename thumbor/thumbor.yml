@@ -15,6 +15,9 @@ apiVersion: v1
 kind: Service
 metadata:
   name: thumbor-service
+  annotations:
+    networking.gke.io/load-balancer-type: "Internal"
+    networking.gke.io/internal-load-balancer-allow-global-access: "true"
   labels:
     app: thumbor
     tier: backend
@@ -70,15 +73,12 @@ spec:
           value: "['thumbor.detectors.feature_detector','thumbor.detectors.face_detector']"
         - name: USE_GIFSICLE_ENGINE
           value: "True"
-        # Increase this (& CPU limit accordingly) if you are seeing your IOLoop getting blocked, often indicated by your upstream HTTP requests timing out
+        # Increase this (& CPU limit accordingly) if you are seeing your IOLoop getting blocked,
+        # often indicated by your upstream HTTP requests timing out
         - name: ENGINE_THREADPOOL_SIZE
           value: "4" # 2 x nproc
         - name: GC_INTERVAL
           value: "60" # in seconds
-        - name: HTTP_LOADER_PROXY_HOST
-          value: "'10.132.0.9'"
-        - name: HTTP_LOADER_PROXY_PORT
-          value: "8888"
         - name: HTTP_LOADER_FOLLOW_REDIRECTS
           value: "False"
         - name: HTTP_LOADER_MAX_CLIENTS
@@ -91,7 +91,8 @@ spec:
             memory: 5120Mi
           limits:
             cpu: 2000m
-            # do not set memory limit, pods are OOMkilled (even more, argh) upon memory usage spikes
+            # do not set memory limit, pods are OOMkilled (even more, argh)
+            # upon memory usage spikes
         livenessProbe:
           # an http probe
           httpGet:
@@ -152,7 +153,7 @@ spec:
         value: 1
         periodSeconds: 60
 ---
-apiVersion: policy/v1beta1
+apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
   name: thumbor
